@@ -1,20 +1,17 @@
 package team13.bugme.controller;
 
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import team13.bugme.model.User;
 import team13.bugme.service.UserService;
-
 import java.util.List;
 
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1")
-@EnableSwagger2
+
 public class UserController {
 
     @Autowired
@@ -26,7 +23,6 @@ public class UserController {
 
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
     }
-
     @PostMapping("/users")
     public ResponseEntity<User> save(@RequestBody User user) {
         User userOne = userService.save(user);

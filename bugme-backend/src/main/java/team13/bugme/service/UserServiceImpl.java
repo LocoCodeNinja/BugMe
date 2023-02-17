@@ -6,10 +6,8 @@ import team13.bugme.model.User;
 import team13.bugme.repository.UserRepository;
 
 import java.util.List;
-
 @Service
 public class UserServiceImpl implements UserService{
-
     @Autowired
     UserRepository userRepository;
     @Override
