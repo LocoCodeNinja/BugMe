@@ -29,15 +29,15 @@ public class UserController {
         return new ResponseEntity<User>(userOne, HttpStatus.OK);
     }
 
-    @GetMapping("/expenses/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<User> get(@PathVariable("id") Long id) {
         User user = userService.findById(id);
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
-    @DeleteMapping("/expenses/{id}")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         userService.delete(id);
-        return new ResponseEntity<String>("Expense is deleted successfully.!", HttpStatus.OK);
+        return new ResponseEntity<String>("User deleted successfully.!", HttpStatus.OK);
     }
 }
