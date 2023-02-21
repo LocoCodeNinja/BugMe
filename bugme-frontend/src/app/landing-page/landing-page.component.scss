@@ -1,0 +1,55 @@
+:host{
+    .mainStoreBody{
+        height: auto; 
+        width: 98vw;
+        margin: 2vh auto; 
+        color: white;
+        display: flex;
+        padding-top: 1%;
+
+        // .mainProductRow{
+        //     width: 98vw;
+        //     margin: 2vh auto; 
+        //     border: 2px solid red; 
+        //     color: blue;
+        // }
+
+        // .productRow{
+        //     border: 2px solid black;
+        // }
+        .filterCol{
+            width: 20%;
+            height: auto;
+            //border: 2px solid black;
+
+            .innerFilterCol{
+                color: black;
+                padding: 1%;
+
+                .filterPanel{
+                    
+                }
+
+                mat-expansion-panel{
+                    background-color: whitesmoke;
+                    
+                }
+
+            }
+        }
+
+        .productCol{
+            width: 80%;
+            height: auto;
+            //border: 2px solid red;
+
+            .sortRow{
+                height: auto;
+                width: 100%;
+                //border: 2px solid green;
+                display: flex;
+                flex-direction: row-reverse;
+            }
+        }
+    }
+}
