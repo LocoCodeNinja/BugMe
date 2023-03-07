@@ -26,7 +26,7 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<User> save(@RequestBody User user) {
         User userOne = userService.save(user);
-        return new ResponseEntity<User>(userOne, HttpStatus.OK);
+        return new ResponseEntity<User>(userOne, HttpStatus.CREATED);
     }
 
     @GetMapping("/users/{id}")
