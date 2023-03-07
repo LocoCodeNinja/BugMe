@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:sqlserver://localhost:1433;encrypt=true;trustServerCertificate=true;databaseName=BugMeDB
     username: sa
-    password: admin123
+    password: Password1!
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
     show-sql: true

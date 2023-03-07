@@ -37,12 +37,24 @@
           margin: auto 0;
           padding-right: 1%;
         }
+
+        .buttonsBuffer {
+          margin: auto 0;
+          padding-left: 1%;
+        }
   
         .icon {
           transform: scale(2);
           color: rgb(68, 68, 68);
           vertical-align: middle;
         }
+
+        .iconBuffer {
+          transform: scale(2);
+          color: rgba(68, 68, 68, 0);
+          vertical-align: middle;
+        }
+
       }
     }
   }
