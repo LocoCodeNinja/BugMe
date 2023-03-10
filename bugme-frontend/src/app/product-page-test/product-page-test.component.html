@@ -1,0 +1,70 @@
+<app-web-banner></app-web-banner>
+<div class="container">
+    <mat-grid-list cols="2" rowHeight="2:1">
+        <mat-grid-tile>
+            <img class="gridImage" src="{{product.path}}" alt="My Image">
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="detailArea">
+                <mat-form-field appearance="fill" class="inputSet">
+                    <mat-label>{{product.productname}}</mat-label>
+                    <textarea matInput readonly cdkTextareaAutosize value="{{product.price}}"></textarea>
+                </mat-form-field>
+                <div style="display: flex;">
+                    <button class="buttonStyle" (click)="addToCart()" mat-stroked-button>Add to cart</button>
+                </div>
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="grid-container">
+                <div class="grid-item">
+                  <button>
+                    <img class="gridImage" src="{{product.path}}" alt="My Image">
+                  </button>
+                </div>
+                <div class="grid-item">
+                  <button>
+                    <img class="gridImage" src="{{product.path}}" alt="My Image">
+                  </button>
+                </div>
+                <div class="grid-item">
+                  <button>
+                    <img class="gridImage" src="{{product.path}}" alt="My Image">
+                  </button>
+                </div>
+                <div class="grid-item">
+                  <button>
+                    <img class="gridImage" src="{{product.path}}" alt="My Image">
+                  </button>
+                </div>
+                <div class="grid-item">
+                    <button>
+                        <img class="gridImage" src="{{product.path}}" alt="My Image">
+                    </button>
+                  </div>
+                  <div class="grid-item">
+                    <button>
+                        <img class="gridImage" src="{{product.path}}" alt="My Image">
+                    </button>
+                  </div>
+                  <div class="grid-item">
+                    <button>
+                        <img class="gridImage" src="{{product.path}}" alt="My Image">
+                    </button>
+                  </div>
+                  <div class="grid-item">
+                    <button>
+                        <img class="gridImage" src="{{product.path}}" alt="My Image">
+                    </button>
+                  </div>
+              </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <textarea matInput readonly cdkTextareaAutosize value="{{product.description}}"></textarea>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+

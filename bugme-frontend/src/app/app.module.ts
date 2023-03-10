@@ -23,6 +23,7 @@ import { WebBannerComponent } from './web-banner/web-banner.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductPageComponent } from './product-page/product-page.component';
+import { ProductPageTestComponent } from './product-page-test/product-page-test.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ProductPageComponent } from './product-page/product-page.component';
     WebBannerComponent,
     ProfileComponent,
     RegisterComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    ProductPageTestComponent
   ],
   imports: [
     BrowserModule,

@@ -9,12 +9,12 @@ import axios, { Axios } from 'axios';
   styleUrls: ['./product-page.component.scss']
 })
 export class ProductPageComponent {
-  public imagePath: string;
+
   selectedProduct: any;
   private token: any;
 
   constructor(private sanitizer: DomSanitizer) {
-    this.imagePath = "assets/images/plant.jpg";
+
   }
 
   async ngOnInit() {
@@ -26,8 +26,8 @@ export class ProductPageComponent {
     productname: 'Hosta',
     path: 'assets/StockPhotos/Hosta.jpg',
     price: 26,
-    description: 'A large plant with beautifully large leaves.'
-  };
+    description: 'A large plant with beautifully large leaves. A large plant with beautifully large leaves.'
+  }
 
   addToCart() {
     console.log('Added to cart:', this.product);

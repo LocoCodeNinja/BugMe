@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { ProductPageTestComponent } from './product-page-test/product-page-test.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { RegisterComponent } from './register/register.component';
 
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'product',
     component: ProductPageComponent
+  },
+  {
+    path: 'test',
+    component: ProductPageTestComponent
   }
 
 ];
