@@ -34,6 +34,6 @@ export class LandingPageComponent implements OnInit{
 
   saveItem(item: any){
     localStorage.setItem('selectedProduct', JSON.stringify(item));
-    this.appComponent.navigate('/gameDetails');
+    this.appComponent.navigate('/product');
   }
 }
