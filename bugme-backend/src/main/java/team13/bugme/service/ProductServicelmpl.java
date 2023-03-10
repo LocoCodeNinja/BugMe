@@ -32,7 +32,6 @@ public class ProductServicelmpl implements ProductService {
 
     @Override
     public void delete(Long id) {
-        Product product = findById(id);
-        productRepository.delete(product);
+        productRepository.deleteById(id);
     }
 }
