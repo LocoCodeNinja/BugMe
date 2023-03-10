@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import axios, { Axios } from 'axios';
 
 @Component({
   selector: 'app-product-page',
@@ -9,17 +10,23 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class ProductPageComponent {
   public imagePath: string;
+  selectedProduct: any;
+  private token: any;
 
   constructor(private sanitizer: DomSanitizer) {
-    // Set the image path
     this.imagePath = "assets/images/plant.jpg";
   }
 
+  async ngOnInit() {
+
+    this.selectedProduct = JSON.parse(localStorage.getItem('selectedProduct')!);
+  }
+
   product = {
-    name: 'Tiger Lilly',
-    path: '',
-    price: '10.99',
-    description: 'Good plant.'
+    productname: 'Hosta',
+    path: 'assets/StockPhotos/Hosta.jpg',
+    price: 26,
+    description: 'A large plant with beautifully large leaves.'
   };
 
   addToCart() {

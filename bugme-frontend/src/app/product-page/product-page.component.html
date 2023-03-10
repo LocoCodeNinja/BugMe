@@ -2,13 +2,13 @@
 <div class="container">
     <mat-grid-list cols="2" rowHeight="2:1">
         <mat-grid-tile>
-            <img class="gridImage" [src]="imagePath" alt="My Image">
+            <img class="gridImage" src="{{product.path}}" alt="My Image">
         </mat-grid-tile>
 
         <mat-grid-tile>
             <div class="detailArea">
                 <mat-form-field appearance="fill" class="inputSet">
-                    <mat-label>{{product.name}}</mat-label>
+                    <mat-label>{{product.productname}}</mat-label>
                     <textarea matInput readonly cdkTextareaAutosize value="{{product.price}}"></textarea>
                 </mat-form-field>
                 <div style="display: flex;">
@@ -21,42 +21,42 @@
             <div class="grid-container">
                 <div class="grid-item">
                   <button>
-                    <img class="gridImage" [src]="imagePath" alt="My Image">
+                    <img class="gridImage" src="{{product.path}}" alt="My Image">
                   </button>
                 </div>
                 <div class="grid-item">
                   <button>
-                    <img class="gridImage" [src]="imagePath" alt="My Image">
+                    <img class="gridImage" src="{{product.path}}" alt="My Image">
                   </button>
                 </div>
                 <div class="grid-item">
                   <button>
-                    <img class="gridImage" [src]="imagePath" alt="My Image">
+                    <img class="gridImage" src="{{product.path}}" alt="My Image">
                   </button>
                 </div>
                 <div class="grid-item">
                   <button>
-                    <img class="gridImage" [src]="imagePath" alt="My Image">
+                    <img class="gridImage" src="{{product.path}}" alt="My Image">
                   </button>
                 </div>
                 <div class="grid-item">
                     <button>
-                        <img class="gridImage" [src]="imagePath" alt="My Image">
+                        <img class="gridImage" src="{{product.path}}" alt="My Image">
                     </button>
                   </div>
                   <div class="grid-item">
                     <button>
-                        <img class="gridImage" [src]="imagePath" alt="My Image">
+                        <img class="gridImage" src="{{product.path}}" alt="My Image">
                     </button>
                   </div>
                   <div class="grid-item">
                     <button>
-                        <img class="gridImage" [src]="imagePath" alt="My Image">
+                        <img class="gridImage" src="{{product.path}}" alt="My Image">
                     </button>
                   </div>
                   <div class="grid-item">
                     <button>
-                        <img class="gridImage" [src]="imagePath" alt="My Image">
+                        <img class="gridImage" src="{{product.path}}" alt="My Image">
                     </button>
                   </div>
               </div>
