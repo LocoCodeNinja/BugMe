@@ -22,6 +22,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { WebBannerComponent } from './web-banner/web-banner.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
+import { ProductPageComponent } from './product-page/product-page.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { RegisterComponent } from './register/register.component';
     LandingPageComponent,
     WebBannerComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProductPageComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,32 @@
+mat-grid-tile {
+    //background: lightblue;
+}
+
+.container {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 0.25rem;
+    gap: 0.25rem;
+}
+
+.grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    border: none;
+    background: transparent;
+    padding: 0;
+}
+
+.gridImage {
+    width: 60%;
+    height: auto;
+  }
