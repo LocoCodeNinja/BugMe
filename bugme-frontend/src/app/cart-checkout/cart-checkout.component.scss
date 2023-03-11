@@ -1,0 +1,51 @@
+.mainCheckoutBody{
+    height: auto;
+    width: 30vw;
+    margin: 2vh auto;
+
+    padding-top: 1%;
+
+    .example-radio-group {
+        display: flex;
+        flex-direction: column;
+        margin: 15px 0;
+        align-items: flex-start;
+      }
+      
+      .example-radio-button {
+        margin: 5px;
+      }
+
+        .inputSection{
+            margin: 0 auto;
+            
+            .inputSet {
+                width: 100%;
+                margin: auto;
+                display: block;
+            }
+        }
+    
+        .buttonStyle {
+            width: 50%;
+            margin: auto;
+            display: block;
+        }
+    
+        .imgStyle {
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 2%;
+            margin-top: 2%;
+            height: 151px !important;
+            width: auto !important;
+            object-fit: contain;
+        }
+    
+        .buttonStyle {
+            width: 50%;
+            margin: 0 auto;
+            display: block;
+    
+        }
+}

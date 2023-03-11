@@ -14,6 +14,7 @@ import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
 
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -24,6 +25,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { ProductPageTestComponent } from './product-page-test/product-page-test.component';
+import { CartCheckoutComponent } from './cart-checkout/cart-checkout.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { ProductPageTestComponent } from './product-page-test/product-page-test.
     ProfileComponent,
     RegisterComponent,
     ProductPageComponent,
-    ProductPageTestComponent
+    ProductPageTestComponent,
+    CartCheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ import { ProductPageTestComponent } from './product-page-test/product-page-test.
     MatDividerModule,
     MatExpansionModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

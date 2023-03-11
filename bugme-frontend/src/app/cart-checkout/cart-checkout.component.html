@@ -1,0 +1,121 @@
+<app-web-banner></app-web-banner>
+<div class="mainCheckoutBody">
+  <h1 style="text-align: center; font-weight: bold">Checkout</h1>
+  <h2
+  style="text-align: center; font-weight: bold; color: red"
+  *ngIf="productsInCart.length == 0"
+>
+  No products in cart!
+</h2>
+  <section *ngIf="productsInCart.length != 0">
+    <h2
+      style="text-align: center; font-weight: bold; color: green"
+      *ngIf="productsPurchased"
+    >
+      Products successfully purchased!
+    </h2>
+    <h2
+      style="text-align: center; font-weight: bold; color: green"
+      *ngIf="cartCleared"
+    >
+      Cart cleared, routing to store page.
+    </h2>
+    <h2
+      style="text-align: center; font-weight: bold; color: red"
+      *ngIf="submitError"
+    >
+      Errors in payment inputs
+    </h2>
+    <br />
+
+    <h2>Subtotal: ${{ cartCost }}.00</h2>
+
+    <h2>Tax: ${{ taxCost }}</h2>
+
+    <h2>Full Cost: ${{ fullCost }}</h2>
+
+    <br />
+    <h2>Selected Products:</h2>
+
+    <div class="example-radio-group">
+      <mat-radio-button
+        class="example-radio-button"
+        *ngFor="let product of productsInCart"
+      >
+        {{ product.productname }} x1
+      </mat-radio-button>
+    </div>
+
+    <!-- <mat-grid-list cols="4" rowHeight="2:1" style="margin-right: 2%;">
+    <mat-grid-tile *ngFor="let item of productsInCart" class="productTile">
+        <img alt="{{game.productName}}" (click)="routeToDetails(game)" src="{{game.coverImgUrl}}"
+            class="imgStyle">
+    </mat-grid-tile>
+</mat-grid-list> -->
+
+    <h2>Payment Method:</h2>
+
+    <!-- <mat-error *ngIf="currentCards.length == 0">No payment methods saved! Please save one to complete checkout
+</mat-error>
+
+<mat-radio-button [color]="'primary'" class="radioStyle" value="i" (click)="setCurrentCard(card)"
+    *ngFor="let card of currentCards; let i = index;">Payment Option {{i + 1}}</mat-radio-button>
+-->
+
+    <div class="inputSection">
+      <form [formGroup]="cardGroup">
+        <mat-form-field appearance="fill" class="inputSet">
+          <mat-label>Card Number</mat-label>
+          <input [formControl]="creditCardNumCtrl" matInput />
+          <mat-error *ngIf="creditCardNumCtrl.hasError('required')"
+            >Credit card is required</mat-error
+          >
+          <mat-error *ngIf="creditCardNumCtrl.hasError('pattern')"
+            >Please check your credit card</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="inputSet">
+          <mat-label>Expiration Date</mat-label>
+          <input [formControl]="expiryCtrl" matInput />
+          <mat-hint>Format must be MM/YY</mat-hint>
+          <mat-error *ngIf="expiryCtrl.hasError('required')"
+            >Expiry is required</mat-error
+          >
+          <mat-error *ngIf="expiryCtrl.hasError('pattern')"
+            >Please check your expiry</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="inputSet">
+          <mat-label>CVC Number</mat-label>
+          <input matInput [formControl]="cvcCtrl" />
+          <mat-error *ngIf="cvcCtrl.hasError('required')"
+            >CVC Number is required</mat-error
+          >
+          <mat-error *ngIf="cvcCtrl.hasError('pattern')"
+            >Must be a 3 digit number</mat-error
+          >
+        </mat-form-field>
+        <br />
+      </form>
+    </div>
+
+    <div style="display: flex">
+      <button
+        mat-stroked-button
+        (click)="purchaseCart()"
+        style="flex: 1"
+        class="buttonStyle"
+      >
+        Purchase
+      </button>
+      <button
+        mat-stroked-button
+        (click)="clearCart()"
+        style="flex: 1"
+        class="buttonStyle"
+      >
+        Clear Cart
+      </button>
+    </div>
+  </section>
+</div>

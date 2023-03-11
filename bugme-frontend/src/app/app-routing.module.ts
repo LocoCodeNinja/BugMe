@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CartCheckoutComponent } from './cart-checkout/cart-checkout.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ProductPageTestComponent } from './product-page-test/product-page-test.component';
@@ -26,8 +27,11 @@ const routes: Routes = [
   {
     path: 'test',
     component: ProductPageTestComponent
+  },
+  {
+    path: 'checkout',
+    component: CartCheckoutComponent
   }
-
 ];
 
 @NgModule({

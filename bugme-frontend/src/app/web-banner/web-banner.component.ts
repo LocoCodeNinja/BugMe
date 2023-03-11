@@ -15,7 +15,7 @@ export class WebBannerComponent {
   cartSize: number = 0;
 
   navigateStore(){
-    this.appComponent.navigate("store");
+    this.appComponent.navigate("/landing");
   }
   
   routeToCart(){
@@ -27,15 +27,4 @@ export class WebBannerComponent {
     this.appComponent.navigate("");
   }
 
-  navigateSocial(){
-    this.appComponent.navigate("social");
-  }
-
-  navigatePreferences(){
-    this.appComponent.navigate("preferences");
-  }
-
-  navigateProfile(){
-    this.appComponent.navigate("profile");
-  }
 }

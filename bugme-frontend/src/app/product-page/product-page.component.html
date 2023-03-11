@@ -1,10 +1,12 @@
 <app-web-banner></app-web-banner>
 <div class="border">
+    <h3 style="text-align: center; color: green;" *ngIf="productAddedToCart">Product added to cart!</h3>
+    <h3 style="color:red; text-align: center;" *ngFor="let error of errors">{{error}}</h3>
     <mat-grid-list cols="2">
         <mat-grid-tile>
             <div class="product-image">
                 <div class="product-image-main">
-                    <img src="{{product.path}}" alt="" id="product-main-image">
+                    <img src="{{selectedProduct.path}}" alt="" id="product-main-image">
                 </div>
             </div>
         </mat-grid-tile>
@@ -12,16 +14,16 @@
             <div class="col-6">
                 <div class="product">
                     <div class="product-title">
-                        <h2>{{product.productname}}</h2>
+                        <h2>{{selectedProduct.productname}}</h2>
                     </div>
 
                     <div class="product-price">
-                        <span class="offer-price">${{product.price}}.00</span>
+                        <span class="offer-price">${{selectedProduct.price}}.00</span>
                     </div>
-
+                    <br>
                     <div class="product-details">
                         <h3>Description</h3>
-                        <p>{{product.description}}</p>
+                        <p>{{selectedProduct.description}}</p>
                     </div>
 
                     <span class="divider"></span>
