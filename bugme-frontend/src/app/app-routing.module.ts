@@ -25,10 +25,6 @@ const routes: Routes = [
     component: ProductPageComponent
   },
   {
-    path: 'test',
-    component: ProductPageTestComponent
-  },
-  {
     path: 'checkout',
     component: CartCheckoutComponent
   }

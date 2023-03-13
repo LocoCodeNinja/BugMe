@@ -24,7 +24,6 @@ import { WebBannerComponent } from './web-banner/web-banner.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductPageComponent } from './product-page/product-page.component';
-import { ProductPageTestComponent } from './product-page-test/product-page-test.component';
 import { CartCheckoutComponent } from './cart-checkout/cart-checkout.component';
 
 @NgModule({
@@ -36,7 +35,6 @@ import { CartCheckoutComponent } from './cart-checkout/cart-checkout.component';
     ProfileComponent,
     RegisterComponent,
     ProductPageComponent,
-    ProductPageTestComponent,
     CartCheckoutComponent
   ],
   imports: [
