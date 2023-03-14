@@ -26,13 +26,65 @@
                         <p>{{shownDescription}}</p>
                     </div>
 
-                    <span class="divider"></span>
 
+                    <span class="divider"></span>
+                    <!-- <div *ngIf="userData.role=='Employee'">
+                        <h1 style="text-align: center;">Employee Options</h1>      
+                    </div> -->
                     <div class="product-btn-group">
                         <button class="button add-cart" (click)="addToCart()" mat-stroked-button>Add to cart</button>
                     </div>
                 </div>
+                
             </div>
+
+            <!--Employee-->
+
+            
+            <!-- <div class="adminArea" *ngIf="userData.role=='Employee'">
+                <h1 style="text-align: center;">Employee Options</h1>
+                <h3 style="text-align: center; color: green;" *ngIf="deleted == true">Product Deleted</h3>
+                <h3 style="text-align: center; color: green;" *ngIf="updatedGame == true">Product Updated!</h3>
+                <div *ngIf="editingGame == true">
+                    <h3 style="text-align: center;">Update {{selectedProduct.productName}}</h3>
+                    <form [formGroup]="updateGroup">
+                        <mat-form-field appearance="fill" class="inputSet">
+                            <mat-label>Game Name</mat-label>
+                            <textarea [formControl]="gameNameCtrl" matInput cdkTextareaAutosize></textarea>
+                        <mat-error>Game Name is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="inputSet">
+                        <mat-label>Description</mat-label>
+                        <input matInput [formControl]="descriptionCtrl">
+                        <mat-error>Game Name is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="inputSet">
+                        <mat-label>Price</mat-label>
+                        <input matInput [formControl]="priceCtrl">
+                        <mat-error>Game Name is required</mat-error>
+                    </mat-form-field>
+                    </form>
+                    <div style="margin-left: 10%;">
+                        <h3>Categories</h3>
+                        <mat-checkbox [color]="'primary'" class="inputSet" [formControl]="categoryCtrl"
+                            (click)="addToCategories(item)" *ngFor="let item of categories">
+                            {{item.name}}
+                        </mat-checkbox>
+                    </div>
+                    <br>
+  
+                    <br>
+                </div>
+                <div style="display: flex;" *ngIf="editingGame == true">
+                    <button class="buttonStyle" (click)="updateGame()" mat-stroked-button>Submit Changes</button>
+                    <button class="buttonStyle" (click)="cancelEdits()" mat-stroked-button>Cancel Changes</button>
+                    <br><br>
+                </div>
+                <div style="display: flex;" *ngIf="editingGame == false">
+                    <button class="buttonStyle" (click)="editGame()" mat-stroked-button>Edit Game</button>
+                    <button class="buttonStyle" (click)="deleteGame()" mat-stroked-button>Delete Game</button>
+                </div>
+            </div> -->
         </mat-grid-tile>
       </mat-grid-list>
 </div>

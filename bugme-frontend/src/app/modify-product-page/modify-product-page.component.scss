@@ -1,0 +1,20 @@
+.inputSet {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .inputSet textarea {
+    width: 100%;
+    height: auto;
+    font-size: 14px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+
+  .border {
+    padding: 20px;
+    margin-top: 20px;
+}

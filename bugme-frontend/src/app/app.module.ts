@@ -26,6 +26,7 @@ import { RegisterComponent } from './register/register.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartCheckoutComponent } from './cart-checkout/cart-checkout.component';
 import { TeacherPanelComponent } from './teacher-panel/teacher-panel.component';
+import { ModifyProductPageComponent } from './modify-product-page/modify-product-page.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { TeacherPanelComponent } from './teacher-panel/teacher-panel.component';
     RegisterComponent,
     ProductPageComponent,
     CartCheckoutComponent,
-    TeacherPanelComponent
+    TeacherPanelComponent,
+    ModifyProductPageComponent
   ],
   imports: [
     BrowserModule,
