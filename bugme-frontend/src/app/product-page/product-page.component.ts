@@ -16,15 +16,31 @@ export class ProductPageComponent {
   productAddedToCart: boolean = false;
   errors: Array<any> = [];
 
+  //Bug variables
+  bugEnabled :boolean= true;
+  shownDescription: any = "";
+
   constructor(private sanitizer: DomSanitizer,
     private appComponent: AppComponent
     ) {
   }
 
   async ngOnInit() {
-
     this.selectedProduct = JSON.parse(localStorage.getItem('selectedProduct')!);
     this.productsInCart = JSON.parse(localStorage.getItem("productsInCart") || "[]");
+
+    //setting of displayed variable
+    this.shownDescription += this.selectedProduct.description;
+
+    //checking if the bug is enabled
+    
+    this.showDescriptionBug(false);
+  } 
+
+  showDescriptionBug(isEnabled: boolean){
+    if(isEnabled){
+      this.shownDescription += this.selectedProduct.description;
+    }
   }
 
   addToCart() {
