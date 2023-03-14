@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
 
 @Component({
@@ -6,12 +6,18 @@ import { AppComponent } from '../app.component';
   templateUrl: './web-banner.component.html',
   styleUrls: ['./web-banner.component.scss']
 })
-export class WebBannerComponent {
+export class WebBannerComponent implements OnInit {
+
   constructor(
     private appComponent: AppComponent
   ) { }
 
-  //gamesInCart: Array<any>; 
+  ngOnInit(): void {
+    this.currentUser = JSON.parse(localStorage.getItem("currentUser")!);
+  }
+
+  currentUser: any = {};
+
   cartSize: number = 0;
 
   navigateStore(){

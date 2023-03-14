@@ -30,7 +30,7 @@ export class ProductPageComponent {
     this.productsInCart = JSON.parse(localStorage.getItem("productsInCart") || "[]");
 
     //setting of displayed variable
-    this.shownDescription += this.selectedProduct.description;
+    this.shownDescription += this.selectedProduct.description_plant;
 
     //checking if the bug is enabled
     
@@ -39,7 +39,7 @@ export class ProductPageComponent {
 
   showDescriptionBug(isEnabled: boolean){
     if(isEnabled){
-      this.shownDescription += this.selectedProduct.description;
+      this.shownDescription += this.selectedProduct.description_plant;
     }
   }
 

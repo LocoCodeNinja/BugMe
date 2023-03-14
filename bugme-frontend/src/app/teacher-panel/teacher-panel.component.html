@@ -2,23 +2,15 @@
 <div class="mainPanelBody">
     <h1>Teacher Panel</h1>
     <br>
+    <p style="color:red; margin-left: 10%;" *ngFor="let error of errors">{{error}}</p>
     <div class="userSection">
-        <!-- <ul class="friend-list">
+        <ul class="friend-list">
             <li class="friend" *ngFor="let user of users">
               <img src="assets/user-icon.png" alt="icon Png" >
               <div class='name'>
-                <div class="friend-entry-left" (click)="enterProfile(record)">{{otherUser(record).username}}</div>
-                <button mat-raised-button color="warn" class="friend-entry-right" (click)="deleteFriend(otherUser(record).id)">Delete</button>
-                <button mat-raised-button color="primary" class="friend-entry-right friend-entry-family" mat-button [matMenuTriggerFor]="familyMenu">Family Options</button>
-                <mat-menu #familyMenu="matMenu">
-                  <button mat-menu-item *ngIf="showRequestFamily(record)" (click)="requestFamily(otherUser(record).id)">Request Family</button>
-                  <button mat-menu-item *ngIf="showAcceptFamily(record)" (click)="requestFamily(otherUser(record).id)">Accept</button>
-                  <button disabled mat-menu-item *ngIf="showPendingFamily(record)">Request Pending</button>
-                  <button mat-menu-item *ngIf="showRemoveFamily(record) || showPendingFamily(record)" (click)="removeFamily(otherUser(record).id)">Remove</button>
-                </mat-menu>
-                <div class="clear"></div>
+                <div class="friend-entry-left">{{user.username}}</div>
               </div>
             </li>
-          </ul> -->
+          </ul>
     </div>
 </div>
