@@ -5,6 +5,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { RegisterComponent } from './register/register.component';
+import { TeacherPanelComponent } from './teacher-panel/teacher-panel.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CartCheckoutComponent
+  },
+  {
+    path: 'teacher',
+    component: TeacherPanelComponent
   }
 ];
 

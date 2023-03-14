@@ -1,0 +1,105 @@
+:host {
+  .mainPanelBody {
+    height: auto;
+    width: 98vw;
+    margin: 2vh auto;
+    padding-top: 1%;
+    text-align: center;
+
+    .userSection{
+
+    }
+  }
+}
+
+.container{
+    width: 50%;
+    min-width: 400px;
+    margin: 3% auto;
+}
+
+.top {
+  text-align: center;
+  font-size: large;
+  height: 20px;
+}
+
+.top img {
+  width: 45px;
+  vertical-align: middle;
+  margin-right: 1%;
+  border: 2px solid blue;
+  border-radius: 5px;
+}
+
+.friend-list { 
+    display: block;
+    margin: 0;
+    padding: 0;
+    //width: 300px;
+    background: #EEE;
+    list-style-type: none;
+  }
+  
+  .friend {
+    //width: 300px;
+    height: 60px;
+    background: #EEE;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #DDD;
+    cursor: pointer;
+
+    .friend-entry-left {
+      width: 10%;
+      float: left;
+    }
+
+    .friend-entry-right {
+      width: 10%;
+      float: right;
+      text-align: center;
+      margin-right: 1%;
+      border-radius: 10px;
+    } 
+    .friend-entry-family {
+      width: 15%;
+    }
+
+
+  }
+  
+  .friend img {
+    width: 45px;
+    height: 45px;
+    border-radius: 30px;
+    border: 2px solid #AAA;
+    object-fit: cover;
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+  
+  .friend .name {
+    flex: 1;
+    font-size: 18px;
+    align-self: center;
+  }
+  
+  .friend.selected {
+    background: #43A047;
+    color: white;
+  }
+  
+  .friend.selected img {
+    border-color: white;
+  }
+  
+  .friend:not(.selected):hover {
+    background: #DDD;
+  }
+
+  .inputSet{
+    width: 80%;
+    margin: auto;
+    display: block;
+}

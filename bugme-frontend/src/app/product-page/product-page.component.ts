@@ -44,9 +44,6 @@ export class ProductPageComponent {
   }
 
   addToCart() {
-    console.log('Added to cart:', this.selectedProduct);
-    console.log(this.productsInCart);
-
     if(this.productsInCart.length != 0){
       let isInCart: boolean = false;
       for(let i: number = 0; i < this.productsInCart.length; i++){

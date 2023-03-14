@@ -27,4 +27,7 @@ export class WebBannerComponent {
     this.appComponent.navigate("");
   }
 
+  navigateTeacher(){
+    this.appComponent.navigate("/teacher");
+  }
 }

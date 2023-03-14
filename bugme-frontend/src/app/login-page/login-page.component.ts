@@ -44,15 +44,22 @@ export class LoginPageComponent {
           responseArray[i].password == this.passwdCtrl.value
         ) {
           loginSuccess = true;
+
+          let currentUser = {
+            username: this.usernameCtrl.value,
+            password: this.passwdCtrl.value,
+            role: responseArray[i].role
+          }
+  
+          localStorage.setItem("currentUser", JSON.stringify(currentUser));
           break;
         } else {
           continue;
         }
       }
 
-      console.log(loginSuccess);
-
       if (loginSuccess == true) {
+
         this.appComponent.navigate('landing');
       } else {
         this.errors.push("User not found, please try again");

@@ -25,6 +25,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartCheckoutComponent } from './cart-checkout/cart-checkout.component';
+import { TeacherPanelComponent } from './teacher-panel/teacher-panel.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CartCheckoutComponent } from './cart-checkout/cart-checkout.component';
     ProfileComponent,
     RegisterComponent,
     ProductPageComponent,
-    CartCheckoutComponent
+    CartCheckoutComponent,
+    TeacherPanelComponent
   ],
   imports: [
     BrowserModule,
