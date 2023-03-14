@@ -21,7 +21,7 @@
             <mat-icon class="icon">account_circle</mat-icon>
           </button>
           <mat-menu backdropClass="dropdown" #menu="matMenu" [overlapTrigger]="false">
-            <button mat-menu-item (click)="navigateTeacher()">Teacher Panel</button>
+            <button mat-menu-item *ngIf="currentUser.role == 'Teacher'" (click)="navigateTeacher()">Teacher Panel</button>
             <button mat-menu-item (click)="navigateLogin()">Log Out</button>
           </mat-menu>
         </div>

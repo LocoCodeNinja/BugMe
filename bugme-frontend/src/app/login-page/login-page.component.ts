@@ -47,7 +47,6 @@ export class LoginPageComponent {
 
           let currentUser = {
             username: this.usernameCtrl.value,
-            password: this.passwdCtrl.value,
             role: responseArray[i].role
           }
   
