@@ -40,17 +40,18 @@
     </div>
   </div>
   <div class="productCol">
-
     <div class="grid-container">
       <div
         class="grid-item"
         *ngFor="let item of productArray"
         (click)="saveItem(item)"
       >
-      <img src="{{ item.path }}"/>
-      <h2>{{ item.productname }}</h2>
-      <p>From ${{ item.price }}.00</p>
-    </div>
+        <button mat-button>
+          <img src="{{ item.path }}" />
+          <h2>{{ item.productname }}</h2>
+          <p>From ${{ item.price }}.00</p>
+        </button>
+      </div>
     </div>
   </div>
 </div>
