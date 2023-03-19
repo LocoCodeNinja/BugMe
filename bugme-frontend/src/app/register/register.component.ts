@@ -32,7 +32,7 @@ export class RegisterComponent {
           "password": this.passwdCtrl.value,
           "role": "User"
         }
-        const response = await axios.post('http://localhost:8080/api/v1/users', registerInfo);
+        const response = await axios.post('http://localhost:8080/api/users/all', registerInfo);
 
         if (response.status = 200) {
           this.showSuccess();

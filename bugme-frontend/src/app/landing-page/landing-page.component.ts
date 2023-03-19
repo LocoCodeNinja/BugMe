@@ -23,7 +23,7 @@ export class LandingPageComponent implements OnInit{
 
   async getProducts(){
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/products');
+      const response = await axios.get('http://localhost:8080/api/products/all');
   
       this.productArray = response.data;
 

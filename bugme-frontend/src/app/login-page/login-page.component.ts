@@ -32,7 +32,7 @@ export class LoginPageComponent {
 
   async logonCall() {
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/users');
+      const response = await axios.get('http://localhost:8080/api/users/all');
 
       let responseArray: Array<any> = response.data;
 
