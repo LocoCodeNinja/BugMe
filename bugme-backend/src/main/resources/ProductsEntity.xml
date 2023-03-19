@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="team13.bugme.entity.ProductsEntity">
+        <table name="products" schema="dbo" catalog="bugMe"/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="-1"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="50"/>
+            </basic>
+            <basic name="path">
+                <column name="path" length="50"/>
+            </basic>
+            <basic name="price">
+                <column name="price" precision="2"/>
+            </basic>
+            <basic name="descriptionPlant">
+                <column name="description_plant" nullable="false" length="50"/>
+            </basic>
+            <basic name="descriptionCare">
+                <column name="description_care" nullable="false" length="50"/>
+            </basic>
+            <basic name="category">
+                <column name="category" length="50"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="team13.bugme.entity.AccountBugsEntity">
+        <table name="accountBugs" schema="dbo" catalog="bugMe"/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="-1"/>
+            </id>
+            <basic name="bugId">
+                <column name="bug_id" precision="-1"/>
+            </basic>
+            <basic name="accountId">
+                <column name="account_id" precision="-1"/>
+            </basic>
+            <basic name="bugEnabled">
+                <column name="bug_enabled" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

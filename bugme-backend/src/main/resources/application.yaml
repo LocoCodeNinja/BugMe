@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:sqlserver://localhost:1433;encrypt=true;trustServerCertificate=true;databaseName=BugMeDB
+    url: jdbc:sqlserver://localhost:1433;encrypt=true;trustServerCertificate=true;databaseName=bugMe
     username: sa
     password: admin123
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
