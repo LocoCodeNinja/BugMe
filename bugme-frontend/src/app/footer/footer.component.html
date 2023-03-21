@@ -27,10 +27,12 @@
     <div class="subscribe" style="align-self: flex-start;">
         <h4>Subscribe to Our Newsletter</h4>
         <p>Sign up to receive the latest news and promotions</p>
-        <form>
-            <input type="email" placeholder="Enter your email">
-            <button type="submit">Subscribe</button>
-        </form>
+
+            <input matInput [formControl]="emailCtrl" type="email" placeholder="Enter your email">
+            <button (click)="showSuccessMessage()">Subscribe</button>
+
+        <p *ngIf="showSuccess" style="color: green;">Register success!</p>
+        <p *ngIf="showError" style="color: red;">Email is required!</p>
     </div>
 </div>
   

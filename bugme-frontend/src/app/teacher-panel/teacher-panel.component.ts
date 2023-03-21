@@ -11,16 +11,37 @@ import { AppComponent } from '../app.component';
 export class TeacherPanelComponent implements OnInit{
   errors: Array<any> = [];
   users: Array<any> = [];
+  currentUser: any = {};
+  isGood: boolean = false;
 
   constructor(private router: Router, private appComponent: AppComponent) {}
 
   ngOnInit(): void {
-    this.getUsers();
+    this.checkUser();
+    if(this.isGood){
+      this.getUsers();
+    }
   }
+  
+  checkUser(){
+    this.currentUser = JSON.parse(localStorage.getItem("currentUser")!);
+    if(this.currentUser != null){
+      if(this.currentUser.role != "Teacher"){
+        this.appComponent.navigate("/landing");
+      }
+      else{
+        this.isGood = true;
+      }
+    }
+    else{
+      this.appComponent.navigate("");
+    }
+  }
+  
 
   async getUsers() {
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/users');
+      const response = await axios.get('http://localhost:8080/api/users/all');
 
       let responseArray: Array<any> = response.data;
 
@@ -28,7 +49,7 @@ export class TeacherPanelComponent implements OnInit{
 
       for (let i: number = 0; i < responseArray.length; i++) {
         if (
-          responseArray[i].role == "User"
+          responseArray[i].role == "User" || responseArray[i].role == "Employee"
         ) {
           this.users.push(responseArray[i]);
         }
