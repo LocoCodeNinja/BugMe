@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @Component({
   selector: 'app-web-banner',

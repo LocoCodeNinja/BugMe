@@ -1,4 +1,11 @@
 :host {
+  .custom-icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
     .normalBanner {
       height: 10vh;
       width: auto;
@@ -6,7 +13,6 @@
   
       .websiteBannerContent {
         display: flex;
-  
         background-image: url('/../assets/BugMeBanner.jpg');
         background-position: top;
         background-size: cover;
@@ -47,6 +53,7 @@
           transform: scale(2);
           color: rgb(68, 68, 68);
           vertical-align: middle;
+          font-size: 90%;
         }
 
         .iconBuffer {
