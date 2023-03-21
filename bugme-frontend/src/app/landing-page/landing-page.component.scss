@@ -1,11 +1,11 @@
 :host {
   .mainStoreBody {
     height: auto;
-    width: 98vw;
-    margin: 2vh auto;
+
     color: white;
     display: flex;
     padding-top: 1%;
+    background-color: white;
 
     // .mainProductRow{
     //     width: 98vw;
@@ -30,7 +30,7 @@
         }
 
         mat-expansion-panel {
-          background-color: whitesmoke;
+          background-color: white;
         }
       }
     }
@@ -75,6 +75,14 @@
           max-height: 225px;
           align-items: center;
         }
+      }
+
+      .zoomable {
+        transition: transform 0.2s ease-out; /* Apply smooth transition effect */
+      }
+      
+      .zoomable:hover {
+        transform: scale(1.05); /* Increase size of image by 20% on hover */
       }
 
       .grid-container {

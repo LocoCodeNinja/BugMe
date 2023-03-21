@@ -28,7 +28,7 @@ export class RegisterComponent {
       try {
         let registerInfo = {
           "email": this.emailCtrl.value,
-          "username": this.usernameCtrl.value, 
+          "username": this.usernameCtrl.value,
           "password": this.passwdCtrl.value,
           "role": "User"
         }

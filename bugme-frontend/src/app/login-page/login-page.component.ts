@@ -49,7 +49,7 @@ export class LoginPageComponent {
             username: this.usernameCtrl.value,
             role: responseArray[i].role
           }
-  
+
           localStorage.setItem("currentUser", JSON.stringify(currentUser));
           break;
         } else {

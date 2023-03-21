@@ -27,6 +27,8 @@ import { ProductPageComponent } from './product-page/product-page.component';
 import { CartCheckoutComponent } from './cart-checkout/cart-checkout.component';
 import { TeacherPanelComponent } from './teacher-panel/teacher-panel.component';
 import { ModifyProductPageComponent } from './modify-product-page/modify-product-page.component';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { ModifyProductPageComponent } from './modify-product-page/modify-product
     ProductPageComponent,
     CartCheckoutComponent,
     TeacherPanelComponent,
-    ModifyProductPageComponent
+    ModifyProductPageComponent,
+    AboutPageComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

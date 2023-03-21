@@ -1,4 +1,79 @@
 :host {
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    //align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo img {
+    height: 40px;
+    margin-left: 40px;
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .nav-links li {
+    margin: 0 15px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .dropdown {
+    position: relative;
+  }
+  
+  .dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    min-width: 200px;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown-content a {
+    display: block;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .icons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .icons a {
+    margin-left: 20px;
+    color: #333;
+  }
+  
+  .icons i {
+    font-size: 20px;
+  }
+  
+
+
   .custom-icon {
     display: inline-block;
     width: 60px;
@@ -43,7 +118,11 @@
           margin: auto 0;
           padding-right: 1%;
         }
-
+          
+        .buttons button{
+          padding-left: 20px;
+          padding-right: 20px;
+        }
         .buttonsBuffer {
           margin: auto 0;
           padding-left: 1%;

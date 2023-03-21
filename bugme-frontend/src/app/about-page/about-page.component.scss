@@ -1,0 +1,26 @@
+.about-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    transition: height 0.5s ease;
+    background-color: rgb(246, 255, 246);
+  }
+
+  .about-container.minimized {
+    height: 50px;
+    overflow: hidden;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+
+  button {
+    padding-top: 20px ;
+    padding-bottom: 20px;
+    border: none;
+    background-color: transparent;
+    font-size: 1.2rem;
+    display: block;
+    padding-left: 60px;
+  }
+

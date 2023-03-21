@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import { MatSidenav } from '@angular/material/sidenav';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-web-banner',
@@ -8,7 +10,7 @@ import {MatBadgeModule} from '@angular/material/badge';
   styleUrls: ['./web-banner.component.scss']
 })
 export class WebBannerComponent implements OnInit {
-
+  @ViewChild('sidenav') sidenav: MatSidenav | undefined;
   constructor(
     private appComponent: AppComponent
   ) { }

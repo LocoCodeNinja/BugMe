@@ -46,12 +46,13 @@
         *ngFor="let item of productArray"
         (click)="saveItem(item)"
       >
-        <button mat-button>
-          <img src="{{ item.path }}" />
-          <h2>{{ item.product_name }}</h2>
-          <p>From ${{ item.price }}</p>
-        </button>
+      <button mat-button class="zoomable">
+        <img src="{{ item.path }}" />
+        <h2>{{ item.product_name }}</h2>
+        <p>From ${{ item.price }}</p>
+      </button>
       </div>
     </div>
   </div>
 </div>
+<app-footer></app-footer>
