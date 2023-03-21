@@ -1,121 +1,123 @@
 .product-details-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-background-color: whitesmoke;
-
-  }
-  
-  .product-added-message {
-    text-align: center;
-    color: #4caf50;
-    margin-bottom: 1rem;
-  }
-  
-  .error-messages {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-  }
-  
-  .error-messages h3 {
-    margin: 0 1rem;
-    color: #f44336;
-    font-size: 1.2rem;
-  }
-  
-  .product-details {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    width: 100%;
-  }
-  
-  .product-image-tile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    overflow: hidden;
-    border-radius: 0.5rem;
-  }
-  
-  .product-main-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-  
-  .product-details-tile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-
-    background-color: greymoke;
-  }
-  
-  .product-title {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-    text-align: center;
-  }
-  
-  .product-price {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-  }
-  
-  .offer-price {
-    color: #2196f3;
-    font-weight: bold;
-  }
-  
-  .product-description {
-    margin-bottom: 1rem;
-  }
-  
-  .description-title {
-    font-size: 1.6rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .description-content {
-    font-size: 1.2rem;
-    color: #212121;
-    text-align: justify;
-  }
-  
-  .product-btn-group {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .add-to-cart-button {
-    font-size: 1.6rem;
-    border-radius: 0.5rem;
-    color: black;
-    transition: all 0.2s ease-in-out;
-    text-transform: uppercase;
-
-    cursor: pointer;
-    border: none; /* remove the border */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: whitesmoke;
+  width: 90vw;
 }
-  
-  .add-to-cart-button:hover {
-    background-color: #0c7cd5;
+
+.product-added-message {
+  text-align: center;
+  color: #4caf50;
+  margin-bottom: 1rem;
+}
+
+.error-messages {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.error-messages h3 {
+  margin: 0 1rem;
+  color: #f44336;
+  font-size: 1.2rem;
+}
+
+.product-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.product-image-tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.product-main-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-left: 6vw;
+}
+
+.product-details-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+
+  background-color: greymoke;
+}
+
+.product-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  margin-left: 1vw;
+}
+
+.product-price {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  margin-left: 1vw;
+}
+
+.offer-price {
+  color: #2196f3;
+  font-weight: bold;
+}
+
+.product-description {
+  margin-bottom: 1rem;
+}
+
+.description-title {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  margin-left: 1vw;
+}
+
+.description-content {
+  font-size: 1.2rem;
+  color: #212121;
+  text-align: justify;
+  margin-left: 1vw;
+}
+
+.product-btn-group {
+  margin-top: 2rem;
+
+}
+
+.add-to-cart-button {
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+  color: black;
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  border: none; /* remove the border */
+}
+
+.add-to-cart-button:hover {
+  background-color: #0c7cd5;
+}
+
+@media screen and (max-width: 768px) {
+  .product-details {
+    grid-template-columns: 1fr;
   }
-  
-  @media screen and (max-width: 768px) {
-    .product-details {
-      grid-template-columns: 1fr;
-    }
-  
-    .product-image-tile {
-      height: 20rem;
-    }
+
+  .product-image-tile {
+    height: 20rem;
   }
-  
+}

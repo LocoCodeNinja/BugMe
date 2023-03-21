@@ -1,8 +1,8 @@
 <div class="websiteBannerContent">
   <nav class="navbar">
     <ul class="nav-links">
-      <li><a routerLink="/" class="logo"><img src="../assets/images/bmlogo.png" alt="Logo"></a></li>
-      <li><a routerLink="/">BugMe: The Plant Shop</a></li>
+      <li><img (click)="navigateStore()" class="logo" src="../assets/images/bmlogo.png" alt="Logo"></li>
+      <li><button mat-button><a (click)="navigateStore()" >BugMe: The Plant Shop</a></button></li>
       <!-- <li class="dropdown">
         <a href="#">Shop</a>
         <div class="dropdown-content">

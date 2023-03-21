@@ -10,9 +10,9 @@
     //background-image: url('/../assets/bg.jpg');
   }
   
-  .logo img {
-    height: 40px;
-    margin-left: 40px;
+  .logo {
+    max-height: 60px;
+    // transform: scale(.2);
   }
   
   .nav-links {
@@ -24,7 +24,7 @@
   }
   
   .nav-links li {
-    margin: 0 15px;
+    margin: 0 110x;
   }
   
   .nav-links a {
