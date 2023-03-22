@@ -15,6 +15,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -63,6 +64,7 @@ import { FooterComponent } from './footer/footer.component';
     MatCheckboxModule,
     MatRadioModule,
     FormsModule,
+    MatSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

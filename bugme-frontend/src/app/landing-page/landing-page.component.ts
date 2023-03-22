@@ -12,18 +12,33 @@ import { AppComponent } from '../app.component';
 export class LandingPageComponent implements OnInit {
   constructor(private router: Router, private appComponent: AppComponent) {}
   category = { Tiny: false, Small: false, Medium: false, Large: false };
-  //filteredProducts = [];
-  selectedPriceRange: string = 'All';
   searchQuery: string = '';
   filteredProducts!: any[];
   searchPerformed: boolean = false;
-  priceRanges: string[] = ['All', '$0-$10', '$10-$25', '$25-$50', '$50+'];
+  // priceRange = {
+  //   $0_100: false,
+  //   $100_500: false,
+  //   $500_1000: false,
+  // };
+
+  applyFilters() {
+    let products = this.productArray;
+
+    // Apply size filter
+    products = this.filterBySize(products);
+
+    // Apply price filter
+    //products = this.filterByPrice(products);
+
+    // Apply search filter
+    products = this.search(products);
+
+    this.filteredProducts = products;
+  }
 
   async ngOnInit() {
     await this.getProducts();
   }
-
-  sortCtrl: FormControl = new FormControl(null);
 
   productArray: Array<any> = [];
 
@@ -39,30 +54,49 @@ export class LandingPageComponent implements OnInit {
     }
   }
 
-  search() {
+  search(products: any[]) {
     if (this.searchQuery.trim().length > 0) {
       this.searchPerformed = true;
-      this.filteredProducts = this.productArray.filter((item) =>
+      return products.filter((item) =>
         item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     } else {
       this.searchPerformed = false;
+      return products;
     }
   }
 
-  filterBySize() {
+  filterBySize(products: any[]) {
     const selectedSizes = Object.entries(this.category)
       .filter(([category, selected]) => selected)
       .map(([category, selected]) => category);
     if (selectedSizes.length === 0) {
       // if no sizes are selected, show all products
-      this.filteredProducts = this.productArray;
+      return products;
     } else {
-      this.filteredProducts = this.productArray.filter((item) =>
-        selectedSizes.includes(item.category)
-      );
+      return products.filter((item) => selectedSizes.includes(item.category));
     }
   }
+
+  // filterByPrice(products: any[]) {
+  //   const selectedPriceRanges = Object.entries(this.priceRange).filter(
+  //     ([_, selected]) => selected
+  //   );
+
+  //   if (selectedPriceRanges.length === 0) {
+  //     // if no price ranges are selected, show all products
+  //     return products;
+  //   } else {
+  //     return products.filter((item) => {
+  //       return selectedPriceRanges.some(([priceRange, _]) => {
+  //         const [min, max] = priceRange
+  //           .split('_')
+  //           .map((x) => parseInt(x.replace(/\D/g, ''), 10));
+  //         return item.price >= min && item.price <= max;
+  //       });
+  //     });
+  //   }
+  // }
 
   isSizeFiltered() {
     return Object.values(this.category).some((size) => size);
