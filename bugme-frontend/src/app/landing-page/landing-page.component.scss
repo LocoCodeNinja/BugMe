@@ -35,6 +35,30 @@
       }
     }
 
+    .searchBox {
+      background-color: #f5f5f5;
+      border-radius: 5px;
+      padding: 8px 16px;
+      display: inline-block;
+      margin-left: 20px;
+    }
+    
+    .searchBox p {
+      margin: 0;
+    }
+    
+    .searchBox input {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 16px;
+    }
+    
+    .searchBox input::placeholder {
+      color: #999;
+    }
+    
     .productCol {
       width: 80%;
       height: auto;

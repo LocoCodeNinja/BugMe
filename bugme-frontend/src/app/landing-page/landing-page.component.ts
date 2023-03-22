@@ -7,32 +7,47 @@ import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.scss']
+  styleUrls: ['./landing-page.component.scss'],
 })
-export class LandingPageComponent implements OnInit{
-
+export class LandingPageComponent implements OnInit {
   constructor(private router: Router, private appComponent: AppComponent) {}
 
+  searchQuery: string = '';
+  filteredProducts!: any[];
+  searchPerformed: boolean = false;
+
   async ngOnInit() {
-    this.getProducts();
+    await this.getProducts();
   }
 
   sortCtrl: FormControl = new FormControl(null);
 
   productArray: Array<any> = [];
 
-  async getProducts(){
+  async getProducts() {
     try {
-      const response = await axios.get('http://localhost:8080/api/products/all');
-  
-      this.productArray = response.data;
+      const response = await axios.get(
+        'http://localhost:8080/api/products/all'
+      );
 
+      this.productArray = response.data;
     } catch (error) {
       console.log(error);
     }
   }
 
-  saveItem(item: any){
+  search() {
+    if (this.searchQuery.trim().length > 0) {
+      this.searchPerformed = true;
+      this.filteredProducts = this.productArray.filter((item) =>
+        item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    } else {
+      this.searchPerformed = false;
+    }
+  }
+
+  saveItem(item: any) {
     localStorage.setItem('selectedProduct', JSON.stringify(item));
     this.appComponent.navigate('/product');
   }
