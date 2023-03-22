@@ -15,19 +15,30 @@
         <mat-expansion-panel-header>Collections</mat-expansion-panel-header>
         <p><mat-checkbox>New Arrival</mat-checkbox></p>
         <p><mat-checkbox>Staff Picks</mat-checkbox></p>
-        <p><mat-checkbox>Easy Care</mat-checkbox></p>
-        <p><mat-checkbox>Low Light</mat-checkbox></p>
-        <p><mat-checkbox>Hanging Plants</mat-checkbox></p>
-        <p><mat-checkbox>Outdoor Plants</mat-checkbox></p>
       </mat-expansion-panel>
       <mat-divider></mat-divider>
       <mat-expansion-panel class="filterPanel mat-elevation-z0">
         <mat-expansion-panel-header>Size</mat-expansion-panel-header>
-        <p><mat-checkbox>XS / 2.5"</mat-checkbox></p>
-        <p><mat-checkbox>S / 3"-4"</mat-checkbox></p>
-        <p><mat-checkbox>M / 5"-6"</mat-checkbox></p>
-        <p><mat-checkbox>L / 8"-10"</mat-checkbox></p>
-        <p><mat-checkbox>XL / 12"+</mat-checkbox></p>
+        <p>
+          <mat-checkbox [(ngModel)]="category.Tiny" (change)="filterBySize()">
+            Tiny / 2.5"
+          </mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox [(ngModel)]="category.Small" (change)="filterBySize()">
+            Small / 3"-4"
+          </mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox [(ngModel)]="category.Medium" (change)="filterBySize()">
+            Medium / 5"-6"
+          </mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox [(ngModel)]="category.Large" (change)="filterBySize()">
+            Large / 8"-10"
+          </mat-checkbox>
+        </p>
       </mat-expansion-panel>
       <mat-divider></mat-divider>
     </div>
@@ -35,7 +46,7 @@
   <div class="productCol">
     <div class="grid-container">
       <!-- Load by default -->
-      <ng-container *ngIf="!searchPerformed">
+      <ng-container *ngIf="!searchPerformed && !isSizeFiltered()">
         <div
           class="grid-item"
           *ngFor="let item of productArray"
@@ -48,8 +59,8 @@
           </button>
         </div>
       </ng-container>
-      <!-- Show when search is used -->
-      <ng-container *ngIf="searchPerformed">
+      <!-- Show when search is used or size filter is used -->
+      <ng-container *ngIf="searchPerformed || isSizeFiltered()">
         <div
           class="grid-item"
           *ngFor="let item of filteredProducts"

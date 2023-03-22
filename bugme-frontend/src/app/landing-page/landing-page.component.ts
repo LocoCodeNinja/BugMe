@@ -11,10 +11,13 @@ import { AppComponent } from '../app.component';
 })
 export class LandingPageComponent implements OnInit {
   constructor(private router: Router, private appComponent: AppComponent) {}
-
+  category = { Tiny: false, Small: false, Medium: false, Large: false };
+  //filteredProducts = [];
+  selectedPriceRange: string = 'All';
   searchQuery: string = '';
   filteredProducts!: any[];
   searchPerformed: boolean = false;
+  priceRanges: string[] = ['All', '$0-$10', '$10-$25', '$25-$50', '$50+'];
 
   async ngOnInit() {
     await this.getProducts();
@@ -45,6 +48,24 @@ export class LandingPageComponent implements OnInit {
     } else {
       this.searchPerformed = false;
     }
+  }
+
+  filterBySize() {
+    const selectedSizes = Object.entries(this.category)
+      .filter(([category, selected]) => selected)
+      .map(([category, selected]) => category);
+    if (selectedSizes.length === 0) {
+      // if no sizes are selected, show all products
+      this.filteredProducts = this.productArray;
+    } else {
+      this.filteredProducts = this.productArray.filter((item) =>
+        selectedSizes.includes(item.category)
+      );
+    }
+  }
+
+  isSizeFiltered() {
+    return Object.values(this.category).some((size) => size);
   }
 
   saveItem(item: any) {
