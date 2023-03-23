@@ -16,7 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
-
+import { MatBadgeModule } from '@angular/material/badge';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,6 +31,7 @@ import { ModifyProductPageComponent } from './modify-product-page/modify-product
 import { AboutPageComponent } from './about-page/about-page.component';
 import { FooterComponent } from './footer/footer.component';
 import { EmployeePanelComponent } from './employee-panel/employee-panel.component';
+import { MatBadge } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { EmployeePanelComponent } from './employee-panel/employee-panel.componen
     MatRadioModule,
     FormsModule,
     MatSliderModule,
+    MatBadgeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
