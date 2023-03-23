@@ -30,6 +30,7 @@ import { TeacherPanelComponent } from './teacher-panel/teacher-panel.component';
 import { ModifyProductPageComponent } from './modify-product-page/modify-product-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { FooterComponent } from './footer/footer.component';
+import { EmployeePanelComponent } from './employee-panel/employee-panel.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { FooterComponent } from './footer/footer.component';
     ModifyProductPageComponent,
     AboutPageComponent,
     FooterComponent,
+    EmployeePanelComponent,
   ],
   imports: [
     BrowserModule,
