@@ -58,6 +58,13 @@
         >
           Teacher Panel
         </button>
+        <button
+          mat-menu-item
+          *ngIf="currentUser.role == 'Employee'"
+          (click)="navigateEmployee()"
+        >
+          Employee Panel
+        </button>
         <button mat-menu-item (click)="navigateLogin()">Log Out</button>
       </mat-menu>
     </div>
