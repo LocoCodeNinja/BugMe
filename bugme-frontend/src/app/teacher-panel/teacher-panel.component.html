@@ -1,16 +1,87 @@
 <app-web-banner></app-web-banner>
 <div class="mainPanelBody">
-    <h1>Teacher Panel</h1>
-    <br>
-    <p style="color:red; margin-left: 10%;" *ngFor="let error of errors">{{error}}</p>
-    <div class="userSection">
-        <ul class="friend-list">
-            <li class="friend" *ngFor="let user of users">
-              <img src="assets/user-icon.png" alt="icon Png" >
-              <div class='name'>
-                <div class="friend-entry-left">{{user.username}}</div>
+  <img src="assets/images/profileTeacher.png" alt="icon Png" />
+  <br />
+  <p style="color: red; margin-left: 10%;" *ngFor="let error of errors">
+    {{ error }}
+  </p>
+  <div class="userSection">
+    <ul class="friend-list">
+      <li
+        class="friend"
+        [class.highlighted]="isTeacher(user.role)"
+        *ngFor="let user of users"
+      >
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <ng-container *ngIf="user.role === 'User'; else notUser">
+              <img src="assets/images/profileUser.png" alt="icon Png" />
+            </ng-container>
+            <ng-template #notUser>
+              <ng-container *ngIf="user.role === 'Teacher'; else notTeacher">
+                <img src="assets/images/profileTeacher.png" alt="icon Png" />
+              </ng-container>
+            </ng-template>
+            <ng-template #notTeacher>
+              <ng-container *ngIf="user.role === 'Employee'; else notEmployee">
+                <img src="assets/images/profileEmployee.png" alt="icon Png" />
+              </ng-container>
+            </ng-template>
+            <ng-template #notEmployee>
+              <img src="assets/images/profileUser.png" alt="icon Png" />
+            </ng-template>
+            <div>
+              <h2>User ID: {{ user.id }}</h2>
+            </div>
+          </mat-expansion-panel-header>
+          <mat-card class="user-card">
+            <mat-card-header style="text-align: left;">
+              <mat-card-title>Username: {{ user.username }}</mat-card-title>
+              <mat-card-title>Role: {{ user.role }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="grid-container">
+                <div class="grid-row" *ngFor="let severity of severities">
+                  <div class="grid-item" *ngFor="let element of elements">
+                    <div class="bug-severity">{{ severity }}</div>
+                    <div class="bug-element">{{ element }}</div>
+                    <mat-slide-toggle class="bug-toggle"></mat-slide-toggle>
+                  </div>
+                </div>
               </div>
-            </li>
-          </ul>
-    </div>
+            </mat-card-content>
+          </mat-card>
+        </mat-expansion-panel>
+      </li>
+    </ul>
+  </div>
 </div>
+
+<!-- <div *ngIf="isTeacher(currentUser.role)" class="changeCredentials">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <h2>Change Username and Password</h2>
+    </mat-expansion-panel-header>
+    <form (submit)="changeCredentials()">
+      <div class="inputField">
+        <label for="newUsername">New Username:</label>
+        <input
+          type="text"
+          id="newUsername"
+          [(ngModel)]="newUsername"
+          name="newUsername"
+        />
+      </div>
+      <div class="inputField">
+        <label for="newPassword">New Password:</label>
+        <input
+          type="password"
+          id="newPassword"
+          [(ngModel)]="newPassword"
+          name="newPassword"
+        />
+      </div>
+      <button type="submit">Save Changes</button>
+    </form>
+  </mat-expansion-panel>
+</div> -->
