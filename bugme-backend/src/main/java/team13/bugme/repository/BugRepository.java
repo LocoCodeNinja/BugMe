@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import team13.bugme.entity.Bug;
 
 @Repository
-public interface BugRepository extends JpaRepository<Bug, Long> {
+public interface BugRepository extends JpaRepository<Bug, Integer> {
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BugDetailsComponent } from './bug-details/bug-details.component';
 import { CartCheckoutComponent } from './cart-checkout/cart-checkout.component';
 import { EmployeePanelComponent } from './employee-panel/employee-panel.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'employee',
     component: EmployeePanelComponent,
+  },
+  {
+    path: 'bugs',
+    component: BugDetailsComponent,
   },
 ];
 

@@ -33,6 +33,8 @@ import { FooterComponent } from './footer/footer.component';
 import { EmployeePanelComponent } from './employee-panel/employee-panel.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
+import { BugDetailsComponent } from './bug-details/bug-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     AboutPageComponent,
     FooterComponent,
     EmployeePanelComponent,
+    BugDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatBadgeModule,
     MatSlideToggleModule,
     MatDialogModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
