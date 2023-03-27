@@ -32,6 +32,7 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { FooterComponent } from './footer/footer.component';
 import { EmployeePanelComponent } from './employee-panel/employee-panel.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSliderModule,
     MatBadgeModule,
     MatSlideToggleModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

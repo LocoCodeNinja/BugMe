@@ -4,6 +4,12 @@ import axios from 'axios';
 import { AppComponent } from '../app.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
+interface ToggleValue {
+  severity: string;
+  bugId: number;
+  enabled: boolean;
+}
+
 @Component({
   selector: 'app-teacher-panel',
   templateUrl: './teacher-panel.component.html',
@@ -16,12 +22,46 @@ export class TeacherPanelComponent implements OnInit {
   isGood: boolean = false;
   newUsername: string = '';
   newPassword: string = '';
-  constructor(private router: Router, private appComponent: AppComponent) {}
+  constructor(private router: Router, private appComponent: AppComponent) {
+    this.initializeToggleValues();
+  }
 
+  initializeToggleValues() {
+    for (const severity of this.severity) {
+      for (const bugId of this.bugId) {
+        this.toggleValues.push({
+          severity,
+          bugId,
+          enabled: false,
+        });
+      }
+    }
+  }
+
+  generateScript(userId: number) {
+    let sqlScript = '';
+
+    for (const toggleValue of this.toggleValues) {
+      const enabledValue = toggleValue.enabled ? 1 : 0;
+      sqlScript += `UPDATE accountBugs SET bug_enabled = ${enabledValue} WHERE account_id = ${userId} AND bug_id = (SELECT id FROM bugs WHERE severity = '${toggleValue.severity}' AND id = '${toggleValue.bugId}');\n`;
+    }
+
+    this.downloadSQLScript(sqlScript, `update_accountBugs_user${userId}.sql`);
+  }
+
+  downloadSQLScript(script: string, fileName: string) {
+    const blob = new Blob([script], { type: 'text/plain;charset=utf-8' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    link.click();
+    window.URL.revokeObjectURL(url);
+  }
   //testing bugs
-  severities = ['Severity 1', 'Severity 2', 'Severity 3', 'Severity 4'];
-  elements = ['Bug 1', 'Bug 2', 'Bug 3', 'Bug 4', 'Bug 5'];
-
+  severity = ['Critical', 'High', 'Medium', 'Low'];
+  bugId = [1, 2, 3, 4, 5];
+  toggleValues: ToggleValue[] = [];
   ngOnInit(): void {
     this.checkUser();
     if (this.isGood) {
@@ -68,38 +108,26 @@ export class TeacherPanelComponent implements OnInit {
     return userRole === 'Teacher';
   }
 
-  // async changeCredentials() {
-  //   try {
-  //     // Check if both fields have values before proceeding
-  //     if (this.newUsername && this.newPassword) {
-  //       // Replace '{{user.id}}' with the correct user ID from 'this.currentUser'
-  //       const response = await axios.put(
-  //         `http://localhost:8080/api/users/${this.currentUser.id}`,
-  //         {
-  //           username: this.newUsername,
-  //           password: this.newPassword,
-  //         }
-  //       );
+  createNewUser() {
+    this.router.navigate(['/register']);
+  }
 
-  //       if (response.status === 200) {
-  //         // Update the local storage with the new user information
-  //         this.currentUser.username = this.newUsername;
-  //         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+  async deleteUser(userId: number) {
+    const confirmation = window.confirm(
+      'Are you sure you want to delete this user?'
+    );
 
-  //         // Clear the input fields after successfully updating the user's credentials
-  //         this.newUsername = '';
-  //         this.newPassword = '';
-
-  //         // Show a success message or any other action you'd like to perform
-  //       } else {
-  //         // Handle the error when the API call fails (e.g., show an error message)
-  //       }
-  //     } else {
-  //       // Handle the case when one or both fields are empty (e.g., show an error message)
-  //     }
-  //   } catch (error) {
-  //     this.errors.push(error);
-  //     console.log(this.errors);
-  //   }
-  // }
+    if (confirmation) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:8080/api/users/${userId}`
+        );
+        console.log('User deleted:', response.data);
+        // Remove the deleted user from the users array
+        this.users = this.users.filter((user) => user.id !== userId);
+      } catch (error) {
+        console.error('Error deleting user:', error);
+      }
+    }
+  }
 }

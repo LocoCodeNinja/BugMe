@@ -5,6 +5,9 @@
   <p style="color: red; margin-left: 10%;" *ngFor="let error of errors">
     {{ error }}
   </p>
+  <button mat-raised-button (click)="createNewUser()">
+    Create New User
+  </button>
   <div class="userSection">
     <ul class="friend-list">
       <li class="friend" *ngFor="let user of users">
@@ -38,16 +41,22 @@
 
           <mat-card-header style="text-align: left;">
             <mat-card-title>
-              <p>Username: {{ user.username }}</p>
-            </mat-card-title>
-            <mat-card-title>
               <p>Role: {{ user.role }}</p>
             </mat-card-title>
+            <mat-card-title>
+              <p>Username: {{ user.username }}</p>
+            </mat-card-title>
+            <ng-container *ngIf="user.role !== 'Teacher'; else noPassword">
+              <mat-card-title>
+                <p>Password: {{ user.password }}</p>
+              </mat-card-title>
+            </ng-container>
+            <ng-template #noPassword></ng-template>
           </mat-card-header>
           <mat-card-content>
             <div class="grid-container">
-              <div class="grid-row" *ngFor="let severity of severities">
-                <div class="grid-item" *ngFor="let element of elements">
+              <div class="grid-row" *ngFor="let severity of severity">
+                <div class="grid-item" *ngFor="let element of bugId">
                   <div class="bug-severity">{{ severity }}</div>
                   <div class="bug-element">{{ element }}</div>
                   <mat-slide-toggle class="bug-toggle"></mat-slide-toggle>
@@ -55,37 +64,22 @@
               </div>
             </div>
           </mat-card-content>
+          <div>
+            <button mat-icon-button (click)="generateScript(user.id)">
+              <mat-icon>get_app</mat-icon>
+            </button>
+          </div>
+          <div
+            class="delete-button"
+            style="margin-left: auto;"
+            *ngIf="user.id > 3"
+          >
+            <button mat-icon-button (click)="deleteUser(user.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </mat-expansion-panel>
       </li>
     </ul>
   </div>
 </div>
-
-<!-- <div *ngIf="isTeacher(currentUser.role)" class="changeCredentials">
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <h2>Change Username and Password</h2>
-    </mat-expansion-panel-header>
-    <form (submit)="changeCredentials()">
-      <div class="inputField">
-        <label for="newUsername">New Username:</label>
-        <input
-          type="text"
-          id="newUsername"
-          [(ngModel)]="newUsername"
-          name="newUsername"
-        />
-      </div>
-      <div class="inputField">
-        <label for="newPassword">New Password:</label>
-        <input
-          type="password"
-          id="newPassword"
-          [(ngModel)]="newPassword"
-          name="newPassword"
-        />
-      </div>
-      <button type="submit">Save Changes</button>
-    </form>
-  </mat-expansion-panel>
-</div> -->
