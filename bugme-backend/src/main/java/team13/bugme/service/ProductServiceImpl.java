@@ -2,30 +2,30 @@ package team13.bugme.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import team13.bugme.entity.ProductsEntity;
-import team13.bugme.repository.ProductsRepository;
+import team13.bugme.entity.Product;
+import team13.bugme.repository.ProductRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductServiceImpl implements ProductsService {
+public class ProductServiceImpl implements ProductService {
 
-    private final ProductsRepository productsRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductsRepository productsRepository) {
-        this.productsRepository = productsRepository;
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     @Override
-    public ProductsEntity createProduct(ProductsEntity product) {
-        return productsRepository.save(product);
+    public Product createProduct(Product product) {
+        return productRepository.save(product);
     }
 
     @Override
-    public ProductsEntity getProductById(int id) {
-        Optional<ProductsEntity> optionalProduct = productsRepository.findById(id);
+    public Product getProductById(int id) {
+        Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
             return optionalProduct.get();
         } else {
@@ -34,22 +34,22 @@ public class ProductServiceImpl implements ProductsService {
     }
 
     @Override
-    public List<ProductsEntity> getAllProducts() {
-        return productsRepository.findAll();
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 
     @Override
-    public ProductsEntity updateProductById(int id, ProductsEntity product) {
-        Optional<ProductsEntity> optionalProduct = productsRepository.findById(id);
+    public Product updateProductById(int id, Product product) {
+        Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
-            ProductsEntity existingProduct = optionalProduct.get();
+            Product existingProduct = optionalProduct.get();
             existingProduct.setName(product.getName());
             existingProduct.setPath(product.getPath());
             existingProduct.setPrice(product.getPrice());
             existingProduct.setDescriptionPlant(product.getDescriptionPlant());
             existingProduct.setDescriptionCare(product.getDescriptionCare());
             existingProduct.setCategory(product.getCategory());
-            return productsRepository.save(existingProduct);
+            return productRepository.save(existingProduct);
         } else {
             throw new RuntimeException("Product not found for id :: " + id);
         }
@@ -57,9 +57,9 @@ public class ProductServiceImpl implements ProductsService {
 
     @Override
     public void deleteProductById(int id) {
-        Optional<ProductsEntity> optionalProduct = productsRepository.findById(id);
+        Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
-            productsRepository.deleteById(id);
+            productRepository.deleteById(id);
         } else {
             throw new RuntimeException("Product not found for id :: " + id);
         }

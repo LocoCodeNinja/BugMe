@@ -3,8 +3,7 @@ package team13.bugme.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
-public class UsersEntity {
+public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
@@ -13,10 +12,10 @@ public class UsersEntity {
     @Column(name = "username", nullable = false, length = 50)
     private String username;
     @Basic
-    @Column(name = "password", nullable = false, length = 50)
+    @Column(name = "password", nullable = false, length = 255)
     private String password;
     @Basic
-    @Column(name = "role", nullable = false, length = 50)
+    @Column(name = "role", nullable = false, length = 20)
     private String role;
 
     public int getId() {

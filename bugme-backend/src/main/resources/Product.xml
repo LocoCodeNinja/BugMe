@@ -2,29 +2,29 @@
 <entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
                  version="3.0">
 
-    <entity class="team13.bugme.entity.ProductsEntity">
-        <table name="products" schema="dbo" catalog="bugMe"/>
+    <entity class="team13.bugme.entity.Product">
+        <table name="product" schema="dbo" catalog="Team13_BugMe"/>
         <attributes>
             <id name="id">
                 <column name="id" precision="-1"/>
             </id>
             <basic name="name">
-                <column name="name" length="50"/>
+                <column name="name" length="100"/>
             </basic>
             <basic name="path">
-                <column name="path" length="50"/>
+                <column name="path"/>
             </basic>
             <basic name="price">
                 <column name="price" precision="2"/>
             </basic>
             <basic name="descriptionPlant">
-                <column name="description_plant" nullable="false" length="50"/>
+                <column name="description_plant" nullable="false" length="2147483647"/>
             </basic>
             <basic name="descriptionCare">
-                <column name="description_care" nullable="false" length="50"/>
+                <column name="description_care" nullable="false" length="2147483647"/>
             </basic>
             <basic name="category">
-                <column name="category" length="50"/>
+                <column name="category" length="20"/>
             </basic>
         </attributes>
     </entity>
