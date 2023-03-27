@@ -12,12 +12,12 @@ GO
 
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[account]') AND type in (N'U'))
 BEGIN
-    CREATE TABLE account (
-        id INT IDENTITY(1,1) PRIMARY KEY,
-        username NVARCHAR(50) NOT NULL,
-        password NVARCHAR(255) NOT NULL,
-        role NVARCHAR(20) NOT NULL DEFAULT 'User'
-    );
+CREATE TABLE account (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    username NVARCHAR(50) NOT NULL UNIQUE,
+    password NVARCHAR(255) NOT NULL,
+    role NVARCHAR(20) NOT NULL DEFAULT 'User'
+);
 END
 GO
 
