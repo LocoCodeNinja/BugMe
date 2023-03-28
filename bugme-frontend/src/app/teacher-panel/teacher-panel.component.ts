@@ -69,28 +69,42 @@ export class TeacherPanelComponent implements OnInit {
     }
   }
 
-  async getUsers() {
+  async getUsers(): Promise<string> {
     try {
       const response = await axios.get('http://localhost:8080/api/users/all');
-
       let responseArray: Array<any> = response.data;
-
-      let loginSuccess: boolean = false;
-
+      let sqlQuery: string = '';
+  
       for (let i: number = 0; i < responseArray.length; i++) {
-        if (
-          responseArray[i].role == 'User' ||
-          responseArray[i].role == 'Employee' ||
-          responseArray[i].role == 'Teacher'
-        ) {
-          this.users.push(responseArray[i]);
+        const user = responseArray[i];
+        if (user.role === 'User' || user.role === 'Employee' || user.role === 'Teacher') {
+          const existingUser = this.users.find(u => u.username === user.username);
+          if (!existingUser) {
+            this.users.push(user);
+            sqlQuery += `\nINSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
+          }
         }
       }
+  
+      return sqlQuery;
     } catch (error) {
       this.errors.push(error);
       console.log(this.errors);
+      return '';
     }
   }
+  
+  async checkUserExists(username: string): Promise<boolean> {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/users?username=${username}`);
+      const user = response.data;
+      return user !== null;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+  
   isTeacher(userRole: string): boolean {
     return userRole === 'Teacher';
   }
@@ -118,7 +132,7 @@ export class TeacherPanelComponent implements OnInit {
     }
   }
 
-  generateScript(userId: number) {
+  async generateScript(userId: number) {
     let sqlFoundation = `USE master;
     GO
     
@@ -178,13 +192,6 @@ export class TeacherPanelComponent implements OnInit {
     END
     GO
     
-    INSERT INTO account (username, password, role)
-    VALUES
-        ('teacher', '!teacher123', 'Teacher'),
-        ('employee', 'employee123', 'Employee'),
-        ('customer', 'customer123', 'User');
-    GO
-    
     INSERT INTO product (name, path, price, description_plant, description_care, category)
     VALUES
         ('Succulent', 'assets/StockPhotos/Succulent.jpg', 14.99, 'Meet the succulent, the quirky plant that''s all the rage with millennials. With their plump leaves and spiky personalities, succulents add a fun touch of greenery to any space. Just be careful not to overwater them - they''re desert dwellers, after all.', 'Water your succulent every 2-3 weeks or when the soil is completely dry. Keep them in bright, indirect light and avoid exposing them to direct sunlight. Succulents prefer warmer temperatures but can survive in cooler conditions as well.', 'Tiny'),
@@ -217,14 +224,16 @@ export class TeacherPanelComponent implements OnInit {
         (44, 'Critical'),
         (45, 'Critical');\n\n`;
     let sqlScript = '';
+    const userSqlQuery = await this.getUsers();
 
     for (const toggleValue of this.toggleValues) {
       const enabledValue = toggleValue.enabled ? 1 : 0;
       sqlScript += `\nINSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (${toggleValue.bugId}, ${userId}, ${enabledValue});\n`;
       //sqlScript += `UPDATE accountBugs SET bug_enabled = ${enabledValue} WHERE account_id = ${userId} AND bug_id = (SELECT id FROM bugs WHERE severity = '${toggleValue.severity}' AND id = '${toggleValue.bugId}');\n`;
     }
-    
+    sqlFoundation += userSqlQuery;
     sqlFoundation += sqlScript;
+    console.log(sqlFoundation);
     this.downloadSQLScript(sqlFoundation, `update_accountBugs_user${userId}.sql`);
   }
 
