@@ -1,4 +1,4 @@
-package team13.bugme.service.impl;
+package team13.bugme.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import team13.bugme.entity.AccountBug;
 import team13.bugme.repository.AccountBugRepository;
-import team13.bugme.service.AccountBugService;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +22,7 @@ public class AccountBugServiceImpl implements AccountBugService {
 
     @Override
     public AccountBug getAccountBugById(int id) {
+        System.out.println(accountBugRepository.findById(id));
         return accountBugRepository.findById(id).orElse(null);
     }
 

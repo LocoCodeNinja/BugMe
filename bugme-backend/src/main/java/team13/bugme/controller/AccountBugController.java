@@ -9,7 +9,7 @@ import team13.bugme.service.AccountBugService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/account-bugs")
+@RequestMapping("/api/account-bugs")
 public class AccountBugController {
 
     @Autowired

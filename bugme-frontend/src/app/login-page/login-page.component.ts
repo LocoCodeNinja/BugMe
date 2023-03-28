@@ -46,6 +46,7 @@ export class LoginPageComponent {
           loginSuccess = true;
 
           let currentUser = {
+            id: responseArray[i].id,
             username: this.usernameCtrl.value,
             role: responseArray[i].role,
           };
