@@ -9,9 +9,8 @@
     Create New User
   </button>
   <div class="userSection">
-    <ul class="friend-list">
-      <li class="friend" *ngFor="let user of users">
-        <mat-expansion-panel>
+
+        <mat-expansion-panel *ngFor="let user of users">
           <mat-expansion-panel-header
             class="panel-head"
             [ngStyle]="{
@@ -79,7 +78,6 @@
             </button>
           </div>
         </mat-expansion-panel>
-      </li>
-    </ul>
+
   </div>
 </div>
