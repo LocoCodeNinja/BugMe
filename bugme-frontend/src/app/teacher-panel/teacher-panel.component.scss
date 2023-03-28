@@ -99,3 +99,144 @@
     }
   }
 }
+:host {
+  .mainPanelBody {
+    height: auto;
+    width: 60vw;
+    margin: 2vh auto;
+    padding-top: 1%;
+    text-align: center;
+  }
+}
+
+.container {
+  width: 50%;
+  min-width: 400px;
+  margin: 3% auto;
+}
+
+.top {
+  text-align: center;
+  font-size: large;
+  height: 20px;
+}
+
+.top img {
+  width: 45px;
+  vertical-align: middle;
+  margin-right: 1%;
+  border: 2px solid blue;
+  border-radius: 5px;
+}
+
+.friend-list {
+  display: block;
+  margin: 0;
+  padding: 0;
+  background: #eee;
+  list-style-type: none;
+}
+
+.friend {
+  height: auto;
+  background: #eee;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.friend.highlighted {
+  background-color: red;
+}
+
+.friend img {
+  width: 45px;
+  height: 45px;
+  //border-radius: 30px;
+  //border: 2px solid #aaa;
+  object-fit: cover;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+.changeCredentials {
+  width: 50%;
+  margin: 3% auto;
+  padding: 1rem;
+  //background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+.changeCredentials .inputField {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.changeCredentials label {
+  margin-bottom: 0.5rem;
+}
+.friend .name {
+  flex: 1;
+  font-size: 18px;
+  align-self: center;
+}
+
+.friend.selected {
+  background: #43a047;
+  color: white;
+}
+
+.friend.selected img {
+  border-color: white;
+}
+
+.friend:not(.selected):hover {
+  background: #ddd;
+}
+
+.inputSet {
+  width: 80%;
+  margin: auto;
+  display: block;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 1rem;
+  padding: 1rem;
+}
+
+.grid-row {
+  display: contents;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.bug-severity {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.bug-element {
+  margin-bottom: 0.5rem;
+}
+
+.bug-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+

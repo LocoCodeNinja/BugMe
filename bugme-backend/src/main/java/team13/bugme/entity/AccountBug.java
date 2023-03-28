@@ -3,8 +3,7 @@ package team13.bugme.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "accountBugs")
-public class AccountBugsEntity {
+public class AccountBug {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)

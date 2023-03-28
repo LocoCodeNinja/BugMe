@@ -1,8 +1,19 @@
 <div class="websiteBannerContent">
   <nav class="navbar">
     <ul class="nav-links">
-      <li><img (click)="navigateStore()" class="logo" src="../assets/images/bmlogo.png" alt="Logo"></li>
-      <li><button mat-button><a (click)="navigateStore()" >BugMe: The Plant Shop</a></button></li>
+      <li>
+        <img
+          (click)="navigateStore()"
+          class="logo"
+          src="../assets/images/bmlogo.png"
+          alt="Logo"
+        />
+      </li>
+      <li>
+        <button mat-button>
+          <a (click)="navigateStore()">BugMe: The Plant Shop</a>
+        </button>
+      </li>
       <!-- <li class="dropdown">
         <a href="#">Shop</a>
         <div class="dropdown-content">
@@ -14,25 +25,45 @@
       <li><a routerLink="/contact">Contact</a></li> -->
     </ul>
     <div class="icons">
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon class="icon">search</mat-icon>
-      </button>
       <button (click)="routeToCart()" mat-icon-button>
-        <mat-icon class="icon" matBadgePosition="before" matBadgeSize="small" *ngIf="cartSize != 0" >shopping_cart</mat-icon>
-        <mat-icon class="icon" matBadgePosition="before" matBadgeSize="small" *ngIf="cartSize == 0">shopping_basket</mat-icon>
+        <mat-icon
+          class="icon"
+          matBadgePosition="before"
+          matBadgeSize="small"
+          [matBadge]="cartSize"
+        >
+          shopping_cart
+        </mat-icon>
       </button>
+
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon class="icon">account_box</mat-icon>
       </button>
-      <mat-menu backdropClass="dropdown" #menu="matMenu" [overlapTrigger]="false">
-        <button mat-menu-item *ngIf="currentUser.role == 'Teacher'" (click)="navigateTeacher()">Teacher Panel</button>
+      <mat-menu
+        backdropClass="dropdown"
+        #menu="matMenu"
+        [overlapTrigger]="false"
+      >
+        <button
+          mat-menu-item
+          *ngIf="currentUser.role == 'Teacher'"
+          (click)="navigateTeacher()"
+        >
+          Teacher Panel
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="currentUser.role == 'Employee'"
+          (click)="navigateEmployee()"
+        >
+          Employee Panel
+        </button>
         <button mat-menu-item (click)="navigateLogin()">Log Out</button>
       </mat-menu>
     </div>
   </nav>
 </div>
 
-<app-about-page></app-about-page>
 <!--
 <div class="normalBanner">
     <section class="webBannerContainer">
@@ -59,7 +90,7 @@
             <mat-icon class="icon" matBadgePosition="before" matBadgeSize="small" *ngIf="cartSize == 0">shopping_basket</mat-icon>
             <img src="/assets/icons/cartEmpty.png" *ngIf="cartSize === 0">
             <img src="/assets/icons/cartFull.png" *ngIf="cartSize > 0" [matBadge]="cartSize" matBadgePosition="above before"> -->
-            <!-- <span  src="/assets/images/cartFull.png" *ngIf="cartSize != 0" ></span>
+<!-- <span  src="/assets/images/cartFull.png" *ngIf="cartSize != 0" ></span>
             <span  src="/assets/images/cartEmpty.png" *ngIf="cartSize == 0"></span>
           </button>
           <button mat-icon-button [matMenuTriggerFor]="menu">

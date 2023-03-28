@@ -1,19 +1,85 @@
 <app-web-banner></app-web-banner>
 <div class="mainPanelBody">
-    <h1>Teacher Panel</h1>
-    <br>
-    <p style="color:red; margin-left: 10%;" *ngFor="let error of errors">{{error}}</p>
-    <div class="userSection">
-        <ul class="friend-list">
-            <li class="friend" *ngFor="let user of users">
-              <img src="assets/user-icon.png" alt="icon Png" >
-              <div class='name'>
-                <div class="friend-entry-left">{{user.username}}</div>
-              </div>
-            </li>
-          </ul>
-    </div>
-    <div class="bugSection">
+  <img src="assets/images/profileTeacher.png" alt="icon Png" />
+  <br />
+  <p style="color: red; margin-left: 10%;" *ngFor="let error of errors">
+    {{ error }}
+  </p>
+  <button mat-raised-button (click)="createNewUser()">
+    Create New User
+  </button>
+  <div class="userSection">
+    <ul class="friend-list">
+      <li class="friend" *ngFor="let user of users">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header
+            class="panel-head"
+            [ngStyle]="{
+              'background-color': isTeacher(user.role) ? 'lightgrey' : ''
+            }"
+          >
+            <ng-container *ngIf="user.role === 'User'; else notUser">
+              <img src="assets/images/profileUser.png" alt="icon Png" />
+            </ng-container>
+            <ng-template #notUser>
+              <ng-container *ngIf="user.role === 'Teacher'; else notTeacher">
+                <img src="assets/images/profileTeacher.png" alt="icon Png" />
+              </ng-container>
+            </ng-template>
+            <ng-template #notTeacher>
+              <ng-container *ngIf="user.role === 'Employee'; else notEmployee">
+                <img src="assets/images/profileEmployee.png" alt="icon Png" />
+              </ng-container>
+            </ng-template>
+            <ng-template #notEmployee>
+              <img src="assets/images/profileUser.png" alt="icon Png" />
+            </ng-template>
+            <div>
+              <h2>User ID: {{ user.id }}</h2>
+            </div>
+          </mat-expansion-panel-header>
 
-    </div>
+          <mat-card-header style="text-align: left;">
+            <mat-card-title>
+              <p>Role: {{ user.role }}</p>
+            </mat-card-title>
+            <mat-card-title>
+              <p>Username: {{ user.username }}</p>
+            </mat-card-title>
+            <ng-container *ngIf="user.role !== 'Teacher'; else noPassword">
+              <mat-card-title>
+                <p>Password: {{ user.password }}</p>
+              </mat-card-title>
+            </ng-container>
+            <ng-template #noPassword></ng-template>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="grid-container">
+              <div class="grid-row" *ngFor="let severity of severity">
+                <div class="grid-item" *ngFor="let element of bugId">
+                  <div class="bug-severity">{{ severity }}</div>
+                  <div class="bug-element">{{ element }}</div>
+                  <mat-slide-toggle class="bug-toggle"></mat-slide-toggle>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+          <div>
+            <button mat-icon-button (click)="generateScript(user.id)">
+              <mat-icon>get_app</mat-icon>
+            </button>
+          </div>
+          <div
+            class="delete-button"
+            style="margin-left: auto;"
+            *ngIf="user.id > 3"
+          >
+            <button mat-icon-button (click)="deleteUser(user.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-expansion-panel>
+      </li>
+    </ul>
+  </div>
 </div>

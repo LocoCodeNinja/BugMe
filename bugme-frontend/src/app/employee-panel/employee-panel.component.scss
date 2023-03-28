@@ -1,0 +1,135 @@
+:host {
+    .mainPanelBody {
+      height: auto;
+      width: 60vw;
+      margin: 2vh auto;
+      padding-top: 1%;
+      text-align: center;
+  
+      .userSection{
+  
+      }
+    }
+  }
+  
+  .container{
+      width: 50%;
+      min-width: 400px;
+      margin: 3% auto;
+  }
+  
+  .top {
+    text-align: center;
+    font-size: large;
+    height: 20px;
+  }
+  
+  .top img {
+    width: 45px;
+    vertical-align: middle;
+    margin-right: 1%;
+    border: 2px solid blue;
+    border-radius: 5px;
+  }
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  mat-form-field .mat-form-field-infix {
+    padding: 0;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: none;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  textarea:focus {
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .friend-list { 
+      display: block;
+      margin: 0 auto;
+      padding: 0;
+      width: 100%;
+      background: #EEE;
+      list-style-type: none;
+    }
+    
+    .friend {
+      //width: 300px;
+      height: 400px;
+      background: #EEE;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #DDD;
+      cursor: pointer;
+  
+      .friend-entry-left {
+        width: 10%;
+        float: left;
+      }
+  
+      .friend-entry-right {
+        width: 10%;
+        float: right;
+        text-align: center;
+        margin-right: 1%;
+        border-radius: 10px;
+      } 
+      .friend-entry-family {
+        width: 15%;
+      }
+  
+  
+    }
+    
+    .friend img {
+      width: 80px;
+      height: 80px;
+      border-radius: 30px;
+      border: 2px solid #AAA;
+      object-fit: cover;
+      margin-left: 5px;
+      margin-right: 10px;
+    }
+    
+    .friend .name {
+      flex: 1;
+      font-size: 18px;
+      align-self: center;
+    }
+    
+    .friend.selected {
+      background: #43A047;
+      color: white;
+    }
+    
+    .friend.selected img {
+      border-color: white;
+    }
+    
+    .friend:not(.selected):hover {
+      background: #DDD;
+    }
+  
+    .inputSet{
+      width: 80%;
+      margin: auto;
+      display: block;
+  }

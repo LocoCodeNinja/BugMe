@@ -1,0 +1,173 @@
+<app-web-banner></app-web-banner>
+<div class="mainPanelBody">
+  <h1>Employee Panel</h1>
+  <br />
+  <p style="color: red; margin-left: 10%;" *ngFor="let error of errors">
+    {{ error }}
+  </p>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Create a New Product</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="newProduct.name"
+        name="name"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Path</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="newProduct.path"
+        name="path"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Price</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="newProduct.price"
+        name="price"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description (Plant)</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="newProduct.descriptionPlant"
+        name="description_plant"
+        required
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description (Care)</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="newProduct.descriptionCare"
+        name="description_care"
+        required
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select [(ngModel)]="newProduct.category" name="category" required>
+        <mat-option value="Tiny">Tiny</mat-option>
+        <mat-option value="Small">Small</mat-option>
+        <mat-option value="Medium">Medium</mat-option>
+        <mat-option value="Large">Large</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="form-actions">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="createProduct()"
+      >
+        Create Product
+      </button>
+    </div>
+  </mat-expansion-panel>
+
+  <div class="userSection">
+    <ul class="friend-list">
+      <li><p>Click image to edit.</p></li>
+      <li class="friend" *ngFor="let product of products">
+        <img
+          src="{{ product.path }}"
+          alt="icon Png"
+          (click)="toggleProductEditMode(product)"
+        />
+        <div class="product-entry-left">
+          <span *ngIf="!product.isEditMode">{{ product.name }}</span>
+          <input
+            *ngIf="product.isEditMode"
+            [(ngModel)]="product.name"
+            (keyup.enter)="saveProduct(product)"
+            (keyup.esc)="cancelEditProduct(product)"
+            aria-label="Name"
+            class="form-input"
+            style="margin: 5px;"
+          />
+          <input
+            *ngIf="product.isEditMode"
+            [(ngModel)]="product.path"
+            (keyup.enter)="saveProduct(product)"
+            (keyup.esc)="cancelEditProduct(product)"
+            aria-label="Path"
+            class="form-input"
+            style="margin: 5px;"
+          />
+          <input
+            *ngIf="product.isEditMode"
+            [(ngModel)]="product.price"
+            (keyup.enter)="saveProduct(product)"
+            (keyup.esc)="cancelEditProduct(product)"
+            aria-label="Price"
+            class="form-input"
+            style="margin: 5px;"
+            pattern="^[0-9]+(\.[0-9]{1,2})?$"
+            required
+          />
+          <select
+            [(ngModel)]="product.category"
+            *ngIf="product.isEditMode"
+            class="form-select"
+            style="margin: 5px;"
+          >
+            <option value="Tiny">Tiny</option>
+            <option value="Small">Small</option>
+            <option value="Medium">Medium</option>
+            <option value="Large">Large</option>
+          </select>
+          <textarea
+            *ngIf="product.isEditMode"
+            [(ngModel)]="product.descriptionPlant"
+            (keyup.enter)="saveProduct(product)"
+            (keyup.esc)="cancelEditProduct(product)"
+            aria-label="Description (Plant)"
+            class="form-input"
+            style="margin: 5px; resize: none;"
+            rows="4"
+          ></textarea>
+
+          <textarea
+            *ngIf="product.isEditMode"
+            [(ngModel)]="product.descriptionCare"
+            (keyup.enter)="saveProduct(product)"
+            (keyup.esc)="cancelEditProduct(product)"
+            aria-label="Description (Care)"
+            class="form-input"
+            style="margin: 5px; resize: none;"
+            rows="4"
+          ></textarea>
+        </div>
+        <div *ngIf="product.isEditMode" class="product-edit-buttons">
+          <button
+            (click)="saveProduct(product)"
+            class="form-input"
+            style="margin: 5px;"
+          >
+            Save
+          </button>
+          <button
+            (click)="cancelEditProduct(product)"
+            class="form-input"
+            style="margin: 5px;"
+          >
+            Cancel
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

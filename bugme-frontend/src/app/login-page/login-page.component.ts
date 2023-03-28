@@ -47,10 +47,10 @@ export class LoginPageComponent {
 
           let currentUser = {
             username: this.usernameCtrl.value,
-            role: responseArray[i].role
-          }
+            role: responseArray[i].role,
+          };
 
-          localStorage.setItem("currentUser", JSON.stringify(currentUser));
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
           break;
         } else {
           continue;
@@ -58,10 +58,9 @@ export class LoginPageComponent {
       }
 
       if (loginSuccess == true) {
-
         this.appComponent.navigate('landing');
       } else {
-        this.errors.push("User not found, please try again");
+        this.errors.push('Login fail, please try again');
         setTimeout(() => {
           this.errors = [];
         }, 3000);

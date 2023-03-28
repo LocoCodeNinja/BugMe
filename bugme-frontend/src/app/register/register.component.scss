@@ -1,35 +1,50 @@
-:host{
-
-    .loginBody{
-        height: auto;
-        width: 99%;
+:host {
+    .loginBody {
+      height: auto;
+      width: 99%;
+      margin: 0 auto;
+      margin-top: 5%;
+  
+      .loginCard {
         margin: 0 auto;
-        margin-top: 5%;
-
-        .loginCard{
-            margin: 0 auto;
-            color: gray;
-            width: 50%;
-            height: auto;
-            padding: 2%;
-
-            .imageStyle{
-                width: 30%;
-                margin: 0 auto;
-                display: block;
-            }
-
-            .inputSet{
-                width: 80%;
-                margin: auto;
-                display: block;
-            }
-
-            .buttonStyle{
-                width: 50%;
-                margin: auto;
-                display: block;
-            }
+        color: gray;
+        width: 50%;
+        height: auto;
+        padding: 2%;
+  
+        .imageStyle {
+          width: 30%;
+          margin: 0 auto;
+          display: block;
         }
-    }    
-}
+  
+        .inputSet {
+          width: 80%;
+          margin: auto;
+          display: block;
+          border-bottom: none;
+  
+          input {
+            border-bottom: none;
+          }
+        }
+  
+        .buttonStyle {
+          width: 50%;
+          margin: auto;
+          display: block;
+        }
+  
+        .errorStyle {
+          color: red;
+          margin-left: 10%;
+        }
+  
+        .successStyle {
+          color: green;
+          margin-left: 10%;
+        }
+      }
+    }
+  }
+  
