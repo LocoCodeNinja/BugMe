@@ -27,6 +27,7 @@ public class AccountBugController {
 
     @PostMapping("/add")
     public AccountBug addAccountBug(@RequestBody AccountBug accountBug) {
+
         return accountBugService.addAccountBug(accountBug);
     }
 
