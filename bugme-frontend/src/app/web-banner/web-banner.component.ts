@@ -35,7 +35,7 @@ export class WebBannerComponent implements OnInit {
       this.appComponent.navigate('/checkoutLoading');
     }
 
-    else if (bug[14] != true){
+    else if (bug[14] == true){
       this.appComponent.navigate('/checkoutLoad');
     }
 
