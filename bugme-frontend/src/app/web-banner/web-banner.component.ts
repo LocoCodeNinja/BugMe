@@ -26,7 +26,19 @@ export class WebBannerComponent implements OnInit {
   }
 
   routeToCart() {
-    this.appComponent.navigate('/checkout');
+    let bug: Array<any> = JSON.parse(localStorage.getItem('responseArray')!);
+
+    if(bug[9] == null){
+      this.appComponent.navigate('/checkout');
+    }
+    else if (bug[9] == true){
+      this.appComponent.navigate('/checkoutLoading');
+    }
+
+    else{
+      this.appComponent.navigate('/checkout');
+    }
+
   }
 
   navigateLogin() {
