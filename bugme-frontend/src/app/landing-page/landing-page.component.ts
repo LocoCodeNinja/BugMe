@@ -134,6 +134,12 @@ export class LandingPageComponent implements OnInit {
   }
 
   saveItem(item: any) {
+    
+
+    if(item == this.productArray[0]){
+
+    }
+
     localStorage.setItem('selectedProduct', JSON.stringify(item));
     this.appComponent.navigate('/product');
   }
