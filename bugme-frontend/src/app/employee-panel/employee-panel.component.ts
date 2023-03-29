@@ -16,12 +16,27 @@ export class EmployeePanelComponent {
   newProduct: any = {};
   constructor(private router: Router, private appComponent: AppComponent) {}
 
-  renderBug13: boolean = true;
+  renderBug13: boolean;
 
   ngOnInit(): void {
+    this.checkBug13();
     this.checkUser();
     if (this.isGood) {
       this.getProducts();
+    }
+  }
+
+  checkBug13(){
+    let bug: Array<any> = JSON.parse(localStorage.getItem('responseArray')!);
+
+    if(bug[2] == null){
+      this.renderBug13 = false;
+    }
+    else if(bug[2] == true){
+      this.renderBug13 = true;
+    }
+    else{
+      this.renderBug13 = false;
     }
   }
 
