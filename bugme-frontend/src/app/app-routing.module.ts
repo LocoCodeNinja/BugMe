@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BugDetailsComponent } from './bug-details/bug-details.component';
+import { BUG32Component } from './bug32/bug32.component';
 import { CartCheckoutComponent } from './cart-checkout/cart-checkout.component';
 import { EmployeePanelComponent } from './employee-panel/employee-panel.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -47,6 +48,10 @@ const routes: Routes = [
     path: 'bugs',
     component: BugDetailsComponent,
   },
+  {
+    path: 'checkoutLoading',
+    component: BUG32Component,
+  }
 ];
 
 @NgModule({

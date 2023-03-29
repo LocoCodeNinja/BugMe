@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -36,6 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BugDetailsComponent } from './bug-details/bug-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { BUG32Component } from './bug32/bug32.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FooterComponent,
     EmployeePanelComponent,
     BugDetailsComponent,
+    BUG32Component,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +81,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDialogModule,
     HttpClientModule,
     MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
