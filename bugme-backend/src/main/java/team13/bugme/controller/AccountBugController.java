@@ -31,8 +31,9 @@ public class AccountBugController {
         return accountBugService.addAccountBug(accountBug);
     }
 
-    @PostMapping("/getAllById")
-    public List<Boolean> getAllAccountBugById(@RequestBody int userId) {
+    @CrossOrigin
+    @PostMapping("/getAllById/{userId}")
+    public List<Boolean> getAllAccountBugById(@PathVariable int userId) {
         return accountBugService.getAllAccountBugById(userId);
     }
 

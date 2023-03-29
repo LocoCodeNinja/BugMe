@@ -21,6 +21,8 @@ export class LandingPageComponent implements OnInit {
   //   $500_1000: false,
   // };
 
+  currentUser: any = {};
+
   applyFilters() {
     let products = this.productArray;
 
@@ -37,7 +39,36 @@ export class LandingPageComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.getProducts();
+    this.getBugValues();
+  }
+
+  async getBugValues(){
+    let userId: string = '';
+
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
+    if (this.currentUser != null) {
+      userId = this.currentUser.id;
+    }
+
+    
+
+    try{
+      let result = await axios({
+        method: 'POST',
+        url: "http://localhost:8080/api/account-bugs/getAllById/" + userId,
+        withCredentials: false
+      });
+
+      let responseArray: Array<any> = result.data;
+
+      if(result.status == 200){
+        localStorage.setItem("responseArray",JSON.stringify(responseArray));
+        await this.getProducts();
+      }
+    }
+    catch(exeption){
+      console.error(exeption);
+    }
   }
 
   productArray: Array<any> = [];

@@ -18,18 +18,26 @@
     <p>Email: info@theplantstore.com</p>
   </div>
   <div class="store-hours" style="align-self: flex-start;">
-    <h4>Store Hours</h4>
-    <p>Mon - Fri: 9am - 6pm</p>
-    <p>Sat: 10am - 4pm</p>
-    <p>Sun: Closed</p>
+    <section *ngIf="bug11Enabled == false">
+      <h4>Store Hours</h4>
+      <p>Mon - Fri: 9am - 6pm</p>
+      <p>Sat: 10am - 4pm</p>
+      <p>Sun: Closed</p>
+    </section>
+    <section *ngIf="bug11Enabled == true">
+      <h4>Store Hours</h4>
+      <p>Mon - Fri: 900am - 1666pm</p>
+      <p>Sat: 33am - 2560pm</p>
+      <p>Sun: Sat</p>
+    </section>
   </div>
   <div class="links" style="align-self: flex-start;">
     <h4>Links</h4>
     <ul>
-      <li><a href="#">Shipping Policy</a></li>
-      <li><a href="#">Refund Policy</a></li>
-      <li><a href="#">Terms of Service</a></li>
-      <li><a href="#">Privacy Policy</a></li>
+      <li><a>Shipping Policy</a></li>
+      <li><a>Refund Policy</a></li>
+      <li><a>Terms of Service</a></li>
+      <li><a>Privacy Policy</a></li>
     </ul>
   </div>
   <div class="subscribe" style="align-self: flex-start;">
