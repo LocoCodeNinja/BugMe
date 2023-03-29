@@ -77,13 +77,8 @@ export class TeacherPanelComponent implements OnInit {
   
       for (let i: number = 0; i < responseArray.length; i++) {
         const user = responseArray[i];
-        if (user.role === 'User' || user.role === 'Employee' || user.role === 'Teacher') {
-          const existingUser = this.users.find(u => u.username === user.username);
-          if (!existingUser) {
-            this.users.push(user);
-            sqlQuery += `\nINSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
-          }
-        }
+        this.users.push(user);
+        sqlQuery += `\nINSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
       }
   
       return sqlQuery;
@@ -223,17 +218,16 @@ export class TeacherPanelComponent implements OnInit {
         (43, 'Critical'),
         (44, 'Critical'),
         (45, 'Critical');\n\n`;
+
     let sqlScript = '';
-    const userSqlQuery = await this.getUsers();
+    let sqlQuery = await this.getUsers();
 
     for (const toggleValue of this.toggleValues) {
       const enabledValue = toggleValue.enabled ? 1 : 0;
       sqlScript += `\nINSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (${toggleValue.bugId}, ${userId}, ${enabledValue});\n`;
-      //sqlScript += `UPDATE accountBugs SET bug_enabled = ${enabledValue} WHERE account_id = ${userId} AND bug_id = (SELECT id FROM bugs WHERE severity = '${toggleValue.severity}' AND id = '${toggleValue.bugId}');\n`;
     }
-    sqlFoundation += userSqlQuery;
+    sqlFoundation += sqlQuery;
     sqlFoundation += sqlScript;
-    console.log(sqlFoundation);
     this.downloadSQLScript(sqlFoundation, `update_accountBugs_user${userId}.sql`);
   }
 
