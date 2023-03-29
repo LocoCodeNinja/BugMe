@@ -66,12 +66,14 @@ export class TeacherPanelComponent implements OnInit {
       this.getUsers();
     }
 
-    this.http
+    setTimeout(() => {
+      this.http
       .get<any[]>('http://localhost:8080/api/bugs/all')
       .subscribe((data) => {
         this.bugs = data;
         this.initializeToggleValues();
       });
+    }, 1000);
   }
 
   checkUser() {
