@@ -54,16 +54,179 @@
 
         <div class="grid-container">
           <ng-container *ngIf="user.id !== 1">
-            <ng-container *ngFor="let bug of bugs">
+            <ng-container>
               <mat-slide-toggle
                 class="grid-item bug-toggle"
-                [id]="bug.id"
                 (change)="onToggleChange($event, user.id)"
-                [checked]="getToggleValue(bug.id, user.id)"
-                [title]="bug.title"
+                [checked]="getToggleValue(11, user.id)"
               >
-                <div class="bug-severity">{{ bug.severity }}</div>
-                <div class="bug-element">Bug: {{ bug.id }}</div>
+                <div class="bug-severity">Low</div>
+                <div class="bug-element">Bug: 11</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(12, user.id)"
+              >
+                <div class="bug-severity">Low</div>
+                <div class="bug-element">Bug: 12</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(13, user.id)"
+              >
+                <div class="bug-severity">Low</div>
+                <div class="bug-element">Bug: 13</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(14, user.id)"
+              >
+                <div class="bug-severity">Low</div>
+                <div class="bug-element">Bug: 14</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(21, user.id)"
+              >
+                <div class="bug-severity">Medium</div>
+                <div class="bug-element">Bug: 21</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(22, user.id)"
+              >
+                <div class="bug-severity">Medium</div>
+                <div class="bug-element">Bug: 22</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(23, user.id)"
+              >
+                <div class="bug-severity">Medium</div>
+                <div class="bug-element">Bug: 23</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(24, user.id)"
+              >
+                <div class="bug-severity">Medium</div>
+                <div class="bug-element">Bug: 24</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(31, user.id)"
+              >
+                <div class="bug-severity">High</div>
+                <div class="bug-element">Bug: 31</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(32, user.id)"
+              >
+                <div class="bug-severity">High</div>
+                <div class="bug-element">Bug: 32</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(33, user.id)"
+              >
+                <div class="bug-severity">High</div>
+                <div class="bug-element">Bug: 33</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(34, user.id)"
+              >
+                <div class="bug-severity">High</div>
+                <div class="bug-element">Bug: 34</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(41, user.id)"
+              >
+                <div class="bug-severity">Crititcal</div>
+                <div class="bug-element">Bug: 41</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(42, user.id)"
+              >
+                <div class="bug-severity">Crititcal</div>
+                <div class="bug-element">Bug: 42</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(43, user.id)"
+              >
+                <div class="bug-severity">Crititcal</div>
+                <div class="bug-element">Bug: 43</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
+            <ng-container>
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(44, user.id)"
+              >
+                <div class="bug-severity">Crititcal</div>
+                <div class="bug-element">Bug: 44</div>
                 <!-- <div class="bug-element">{{ bug.title }}</div> -->
               </mat-slide-toggle>
             </ng-container>

@@ -65,13 +65,6 @@ export class TeacherPanelComponent implements OnInit {
     if (this.isGood) {
       this.getUsers();
     }
-
-    this.http
-      .get<any[]>('http://localhost:8080/api/bugs/all')
-      .subscribe((data) => {
-        this.bugs = data;
-        this.initializeToggleValues();
-      });
   }
 
   checkUser() {
