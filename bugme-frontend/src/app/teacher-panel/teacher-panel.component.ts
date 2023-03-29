@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 
 interface ToggleValue {
   severity: string;
+  title: string;
   bugId: number;
   enabled: boolean;
   userId: number; // <-- add user ID property
@@ -42,9 +43,11 @@ export class TeacherPanelComponent implements OnInit {
     for (const bug of this.bugs) {
       const severity = bug.severity;
       const bugId = bug.id;
+      const title = bug.title;
       for (const user of this.users) {
         this.toggleValues.push({
           severity,
+          title,
           bugId,
           enabled: false,
           userId: user.id, // <-- add user ID property

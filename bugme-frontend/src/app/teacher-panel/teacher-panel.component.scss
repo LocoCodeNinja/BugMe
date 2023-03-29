@@ -10,9 +10,10 @@
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  max-width: 100%;
+  max-width: 60%;
   padding: 2rem;
   text-align: center;
+  margin: auto;
 
   img {
     width: 100px;
@@ -86,15 +87,28 @@ mat-expansion-panel {
     background-color: #f0f0f0;
     padding: 1rem;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    .bug-toggle:hover::before {
+      content: attr(title);
+      position: absolute;
+      background: #222;
+      color: #fff;
+      padding: 5px;
+      border-radius: 5px;
+      font-size: 14px;
+      white-space: nowrap;
+      z-index: 1;
+    }
     .bug-severity {
       font-weight: bold;
       margin-bottom: 0.5rem;
+      padding-left: 5px;
     }
 
     .bug-element {
       margin-bottom: 0.5rem;
+      padding-left: 5px;
     }
   }
 
@@ -109,3 +123,4 @@ mat-expansion-panel {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
