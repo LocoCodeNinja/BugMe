@@ -44,11 +44,11 @@
   input[type="number"],
   textarea {
     font-size: 16px;
-    padding: 10px;
+    //padding: 10px;
     border: none;
     border-radius: 5px;
     background-color: #f4f4f4;
-    width: 100%;
+    width: 99%;
     box-sizing: border-box;
     box-shadow: none;
     transition: all 0.2s ease-in-out;
@@ -72,13 +72,15 @@
     }
     
     .friend {
-      //width: 300px;
-      height: 400px;
+      //width: fit-content;
+      height: fit-content;
       background: #EEE;
-      display: flex;
+      //display: flex;
       align-items: center;
       border-bottom: 1px solid #DDD;
       cursor: pointer;
+      text-align: center;
+      padding: 20px;
   
       .friend-entry-left {
         width: 10%;
@@ -129,7 +131,7 @@
     }
   
     .inputSet{
-      width: 80%;
+      width: 100%;
       margin: auto;
       display: block;
   }

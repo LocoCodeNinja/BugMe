@@ -16,7 +16,7 @@ CREATE TABLE account (
     id INT IDENTITY(1,1) PRIMARY KEY,
     username NVARCHAR(50) NOT NULL UNIQUE,
     password NVARCHAR(255) NOT NULL,
-    role NVARCHAR(20) NOT NULL DEFAULT 'User'
+    role NVARCHAR(20) NOT NULL
 );
 END
 GO
@@ -39,7 +39,8 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[bu
 BEGIN
     CREATE TABLE bug (
         id INT PRIMARY KEY,
-        severity VARCHAR(10) NOT NULL
+        severity VARCHAR(10) NOT NULL,
+		title VARCHAR(100)
     );
 END
 GO
@@ -57,13 +58,6 @@ BEGIN
 END
 GO
 
-INSERT INTO account (username, password, role)
-VALUES
-    ('teacher', '!teacher123', 'Teacher'),
-    ('employee', 'employee123', 'Employee'),
-    ('customer', 'customer123', 'User');
-GO
-
 INSERT INTO product (name, path, price, description_plant, description_care, category)
 VALUES
     ('Succulent', 'assets/StockPhotos/Succulent.jpg', 14.99, 'Meet the succulent, the quirky plant that''s all the rage with millennials. With their plump leaves and spiky personalities, succulents add a fun touch of greenery to any space. Just be careful not to overwater them - they''re desert dwellers, after all.', 'Water your succulent every 2-3 weeks or when the soil is completely dry. Keep them in bright, indirect light and avoid exposing them to direct sunlight. Succulents prefer warmer temperatures but can survive in cooler conditions as well.', 'Tiny'),
@@ -78,19 +72,15 @@ INSERT INTO bug (id, severity) VALUES
     (12, 'Low'),
     (13, 'Low'),
     (14, 'Low'),
-    (15, 'Low'),
     (21, 'Medium'),
     (22, 'Medium'),
     (23, 'Medium'),
     (24, 'Medium'),
-    (25, 'Medium'),
     (31, 'High'),
     (32, 'High'),
     (33, 'High'),
     (34, 'High'),
-    (35, 'High'),
     (41, 'Critical'),
     (42, 'Critical'),
     (43, 'Critical'),
-    (44, 'Critical'),
-    (45, 'Critical');
+    (44, 'Critical');

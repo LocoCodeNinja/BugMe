@@ -80,17 +80,12 @@
 
   <div class="userSection">
     <ul class="friend-list">
-      <li><p>Click image to edit.</p></li>
       <li class="friend" *ngFor="let product of products">
-        <img
-          src="{{ product.path }}"
-          alt="icon Png"
-          (click)="toggleProductEditMode(product)"
-        />
-        <div class="product-entry-left">
-          <span *ngIf="!product.isEditMode">{{ product.name }}</span>
+        <div>
+          <label for="name">Product Name</label>
+          <br />
           <input
-            *ngIf="product.isEditMode"
+            id="name"
             [(ngModel)]="product.name"
             (keyup.enter)="saveProduct(product)"
             (keyup.esc)="cancelEditProduct(product)"
@@ -98,8 +93,11 @@
             class="form-input"
             style="margin: 5px;"
           />
+          <br />
+          <label for="path">Image Path</label>
+          <br />
           <input
-            *ngIf="product.isEditMode"
+            id="path"
             [(ngModel)]="product.path"
             (keyup.enter)="saveProduct(product)"
             (keyup.esc)="cancelEditProduct(product)"
@@ -107,8 +105,11 @@
             class="form-input"
             style="margin: 5px;"
           />
+          <br />
+          <label for="price">Product Price</label>
+          <br />
           <input
-            *ngIf="product.isEditMode"
+            id="price"
             [(ngModel)]="product.price"
             (keyup.enter)="saveProduct(product)"
             (keyup.esc)="cancelEditProduct(product)"
@@ -118,9 +119,12 @@
             pattern="^[0-9]+(\.[0-9]{1,2})?$"
             required
           />
+          <br />
+          <label for="category">Product Category</label>
+          <br />
           <select
+            id="category"
             [(ngModel)]="product.category"
-            *ngIf="product.isEditMode"
             class="form-select"
             style="margin: 5px;"
           >
@@ -129,8 +133,12 @@
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
           </select>
+          <br />
+          <br />
+          <label for="description-plant">Product Description</label>
+          <br />
           <textarea
-            *ngIf="product.isEditMode"
+            id="description-plant"
             [(ngModel)]="product.descriptionPlant"
             (keyup.enter)="saveProduct(product)"
             (keyup.esc)="cancelEditProduct(product)"
@@ -139,9 +147,11 @@
             style="margin: 5px; resize: none;"
             rows="4"
           ></textarea>
-
+          <br />
+          <label for="description-care">Care Instructions</label>
+          <br />
           <textarea
-            *ngIf="product.isEditMode"
+            id="description-care"
             [(ngModel)]="product.descriptionCare"
             (keyup.enter)="saveProduct(product)"
             (keyup.esc)="cancelEditProduct(product)"
@@ -150,22 +160,23 @@
             style="margin: 5px; resize: none;"
             rows="4"
           ></textarea>
-        </div>
-        <div *ngIf="product.isEditMode" class="product-edit-buttons">
-          <button
-            (click)="saveProduct(product)"
-            class="form-input"
-            style="margin: 5px;"
-          >
-            Save
-          </button>
-          <button
-            (click)="cancelEditProduct(product)"
-            class="form-input"
-            style="margin: 5px;"
-          >
-            Cancel
-          </button>
+          <img src="{{ product.path }}" alt="icon Png" />
+          <div class="product-edit-buttons">
+            <button
+              (click)="saveProduct(product)"
+              class="form-input"
+              style="margin: 5px;"
+            >
+              Save
+            </button>
+            <button
+              (click)="cancelEditProduct(product)"
+              class="form-input"
+              style="margin: 5px;"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </li>
     </ul>
