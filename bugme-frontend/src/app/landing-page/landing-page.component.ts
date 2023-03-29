@@ -16,6 +16,8 @@ export class LandingPageComponent implements OnInit {
   filteredProducts!: any[];
   searchPerformed: boolean = false;
 
+  expansionPanel: boolean = false;
+
   responseArray: Array<any>;
 
   // priceRange = {
@@ -43,6 +45,9 @@ export class LandingPageComponent implements OnInit {
 
   async ngOnInit() {
     this.getBugValues();
+    setTimeout(() => {
+      this.bug24();
+    }, 200);
   }
 
   async getBugValues(){
@@ -140,4 +145,17 @@ export class LandingPageComponent implements OnInit {
     localStorage.setItem('selectedProduct', JSON.stringify(item));
     this.appComponent.navigate('/product');
   }
+
+  bug24(){
+    if(this.responseArray[9] == null || this.responseArray[9] == false){
+      this.expansionPanel = false;
+      console.log(this.expansionPanel);
+    }
+
+    else if(this.responseArray[9] == true){
+      this.expansionPanel = true;
+      console.log(this.expansionPanel);
+    }
+  }
+
 }
