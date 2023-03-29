@@ -35,6 +35,10 @@
       }
     }
 
+    ::ng-deep mat-expansion-panel-header {
+      color: rgba(0,0,0,.87);
+    }
+
     .searchBox {
       background-color: #ffffff;
       border-radius: 5px;
