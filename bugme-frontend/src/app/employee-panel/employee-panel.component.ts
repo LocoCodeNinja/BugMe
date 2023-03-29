@@ -16,6 +16,8 @@ export class EmployeePanelComponent {
   newProduct: any = {};
   constructor(private router: Router, private appComponent: AppComponent) {}
 
+  renderBug13: boolean = true;
+
   ngOnInit(): void {
     this.checkUser();
     if (this.isGood) {

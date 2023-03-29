@@ -162,20 +162,44 @@
           ></textarea>
           <img src="{{ product.path }}" alt="icon Png" />
           <div class="product-edit-buttons">
-            <button
-              (click)="saveProduct(product)"
-              class="form-input"
-              style="margin: 5px;"
-            >
-              Save
-            </button>
-            <button
-              (click)="cancelEditProduct(product)"
-              class="form-input"
-              style="margin: 5px;"
-            >
-              Cancel
-            </button>
+            <section style="top: 50%;
+            height: 48px;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);" *ngIf="renderBug13 == true">
+              <button
+              mat-button
+                (click)="saveProduct(product)"
+                style=""
+              >
+                Save
+              </button>
+              <button
+              mat-stroked-button
+                (click)="cancelEditProduct(product)"
+                style="width: 200px; margin-right: 50px;"
+              >
+                Cancel
+              </button>
+            </section>
+            <section *ngIf="renderBug13 == false">
+              <button
+              mat-stroked-button
+                (click)="saveProduct(product)"
+                class="form-input"
+                style="margin: 5px;"
+              >
+                Save
+              </button>
+              <button
+              mat-stroked-button
+                (click)="cancelEditProduct(product)"
+                class="form-input"
+                style="margin: 5px;"
+              >
+                Cancel
+              </button>
+            </section>
           </div>
         </div>
       </li>
