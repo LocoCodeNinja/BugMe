@@ -28,11 +28,15 @@ export class WebBannerComponent implements OnInit {
   routeToCart() {
     let bug: Array<any> = JSON.parse(localStorage.getItem('responseArray')!);
 
-    if(bug[9] == null){
+    if(bug[9] == null && bug[14] == null){
       this.appComponent.navigate('/checkout');
     }
     else if (bug[9] == true){
       this.appComponent.navigate('/checkoutLoading');
+    }
+
+    else if (bug[14] != true){
+      this.appComponent.navigate('/checkoutLoad');
     }
 
     else{

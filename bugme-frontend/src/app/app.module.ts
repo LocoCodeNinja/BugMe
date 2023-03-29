@@ -38,6 +38,7 @@ import { BugDetailsComponent } from './bug-details/bug-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BUG32Component } from './bug32/bug32.component';
+import { BUG43Component } from './bug43/bug43.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { BUG32Component } from './bug32/bug32.component';
     EmployeePanelComponent,
     BugDetailsComponent,
     BUG32Component,
+    BUG43Component,
   ],
   imports: [
     BrowserModule,
