@@ -49,22 +49,24 @@
 
       <mat-card-content>
         <div class="grid-item">Username: {{ user.username }}</div>
-        <ng-container *ngIf="user.role !== 'Teacher'; else noPassword">
-          <div class="grid-item">Password: {{ user.password }}</div>
-        </ng-container>
+
+        <div class="grid-item">Password: {{ user.password }}</div>
+
         <div class="grid-container">
-          <ng-container *ngFor="let bug of bugs">
-            <mat-slide-toggle
-              class="grid-item bug-toggle"
-              [id]="bug.id"
-              (change)="onToggleChange($event, user.id)"
-              [checked]="getToggleValue(bug.id, user.id)"
-              [title]="bug.title"
-            >
-              <div class="bug-severity">{{ bug.severity }}</div>
-              <div class="bug-element">Bug: {{ bug.id }}</div>
-              <!-- <div class="bug-element">{{ bug.title }}</div> -->
-            </mat-slide-toggle>
+          <ng-container *ngIf="user.id !== 1">
+            <ng-container *ngFor="let bug of bugs">
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                [id]="bug.id"
+                (change)="onToggleChange($event, user.id)"
+                [checked]="getToggleValue(bug.id, user.id)"
+                [title]="bug.title"
+              >
+                <div class="bug-severity">{{ bug.severity }}</div>
+                <div class="bug-element">Bug: {{ bug.id }}</div>
+                <!-- <div class="bug-element">{{ bug.title }}</div> -->
+              </mat-slide-toggle>
+            </ng-container>
           </ng-container>
         </div>
       </mat-card-content>
