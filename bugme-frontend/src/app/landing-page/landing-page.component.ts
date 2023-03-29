@@ -15,6 +15,9 @@ export class LandingPageComponent implements OnInit {
   searchQuery: string = '';
   filteredProducts!: any[];
   searchPerformed: boolean = false;
+
+  responseArray: Array<any>;
+
   // priceRange = {
   //   $0_100: false,
   //   $100_500: false,
@@ -59,10 +62,10 @@ export class LandingPageComponent implements OnInit {
         withCredentials: false
       });
 
-      let responseArray: Array<any> = result.data;
+      this.responseArray = result.data;
 
       if(result.status == 200){
-        localStorage.setItem("responseArray",JSON.stringify(responseArray));
+        localStorage.setItem("responseArray",JSON.stringify(this.responseArray));
         await this.getProducts();
       }
     }
@@ -134,13 +137,39 @@ export class LandingPageComponent implements OnInit {
   }
 
   saveItem(item: any) {
-    
-
     if(item == this.productArray[0]){
-
+      if(this.responseArray[3] == null){
+        localStorage.setItem('selectedProduct', JSON.stringify(item));
+        this.appComponent.navigate('/product');
+      }
+      else if (this.responseArray[3] == true){
+        let wrongObj: any = {
+          id: item.id,
+          
+        };
+      }
+      else if(this.responseArray[4] == null){
+        localStorage.setItem('selectedProduct', JSON.stringify(item));
+        this.appComponent.navigate('/product');
+      }
+      else if(this.responseArray[4] == false){
+        setTimeout(() => {
+          localStorage.setItem('selectedProduct', JSON.stringify(item));
+          this.appComponent.navigate('/product');
+        }, 5000);
+      }
+      else{
+        localStorage.setItem('selectedProduct', JSON.stringify(item));
+        this.appComponent.navigate('/product');
+      }
     }
+    else{
+      localStorage.setItem('selectedProduct', JSON.stringify(item));
+      this.appComponent.navigate('/product');
+    }
+  }
 
-    localStorage.setItem('selectedProduct', JSON.stringify(item));
-    this.appComponent.navigate('/product');
+  getWrongImage(path: String){
+
   }
 }

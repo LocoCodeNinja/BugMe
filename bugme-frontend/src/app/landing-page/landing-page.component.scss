@@ -18,7 +18,7 @@
     //     border: 2px solid black;
     // }
     .filterCol {
-      width: 16%;
+      width: 16vw;
       height: auto;
       //border: 1px solid white;
 
@@ -33,6 +33,10 @@
           background-color: #fafafa;
         }
       }
+    }
+
+    ::ng-deep mat-expansion-panel-header {
+      color: rgba(0,0,0,.87);
     }
 
     .searchBox {
@@ -62,7 +66,7 @@
     }
     
     .productCol {
-      width: 80%;
+      width: 80vw;
       height: auto;
       //border: 2px solid red;
 
