@@ -17,7 +17,6 @@ export class ProductPageComponent {
   errors: Array<any> = [];
 
   //Bug variables
-  bugEnabled :boolean= true;
   shownDescription: any = "";
 
   constructor(private sanitizer: DomSanitizer,
@@ -30,12 +29,25 @@ export class ProductPageComponent {
     this.productsInCart = JSON.parse(localStorage.getItem("productsInCart") || "[]");
 
     //setting of displayed variable
-    this.shownDescription += this.selectedProduct.descriptionPlant;
+
 
     //checking if the bug is enabled
-    
-    this.showDescriptionBug(false);
+    this.checkDescriptionBug();
   } 
+
+  checkDescriptionBug(){
+    let bug: Array<any> = JSON.parse(localStorage.getItem('responseArray')!);
+
+    if(bug[1] == null){
+      this.shownDescription += this.selectedProduct.descriptionPlant;
+    }
+    else if (bug[1] == true){
+      this.shownDescription += this.selectedProduct.descriptionPlant + this.selectedProduct.descriptionPlant;
+    }
+    else{
+      this.shownDescription += this.selectedProduct.descriptionPlant;
+    }
+  }
 
   showDescriptionBug(isEnabled: boolean){
     if(isEnabled){
