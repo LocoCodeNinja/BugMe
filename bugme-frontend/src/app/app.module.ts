@@ -35,6 +35,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BugDetailsComponent } from './bug-details/bug-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSlideToggleModule,
     MatDialogModule,
     HttpClientModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

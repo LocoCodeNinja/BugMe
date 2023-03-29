@@ -12,6 +12,7 @@ interface ToggleValue {
   severity: string;
   bugId: number;
   enabled: boolean;
+  userId: number; // <-- add user ID property
 }
 
 @Component({
@@ -20,6 +21,7 @@ interface ToggleValue {
   styleUrls: ['./teacher-panel.component.scss'],
 })
 export class TeacherPanelComponent implements OnInit {
+  sqlFoundation: string = this.getSqlFoundation();
   errors: Array<any> = [];
   users: Array<any> = [];
   currentUser: any = {};
@@ -27,6 +29,7 @@ export class TeacherPanelComponent implements OnInit {
   newUsername: string = '';
   newPassword: string = '';
   bugs: any[] = [];
+  sqlStatements: string = '';
   constructor(
     private router: Router,
     private appComponent: AppComponent,
@@ -39,15 +42,17 @@ export class TeacherPanelComponent implements OnInit {
     for (const bug of this.bugs) {
       const severity = bug.severity;
       const bugId = bug.id;
-      this.toggleValues.push({
-        severity,
-        bugId,
-        enabled: false,
-      });
+      for (const user of this.users) {
+        this.toggleValues.push({
+          severity,
+          bugId,
+          enabled: false,
+          userId: user.id, // <-- add user ID property
+        });
+      }
     }
   }
 
-  //testing bugs
   toggleValues: ToggleValue[] = [];
 
   ngOnInit(): void {
@@ -77,7 +82,7 @@ export class TeacherPanelComponent implements OnInit {
     }
   }
 
-  async getUsers(): Promise<string> {
+  async getUsers() {
     try {
       const response = await axios.get('http://localhost:8080/api/users/all');
       let responseArray: Array<any> = response.data;
@@ -88,33 +93,14 @@ export class TeacherPanelComponent implements OnInit {
         this.users.push(user);
 
         if (user.role !== 'Teacher') {
-          sqlQuery += `\nINSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
+          sqlQuery += `INSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
         }
       }
-
-      return sqlQuery;
+      this.sqlFoundation += sqlQuery;
     } catch (error) {
       this.errors.push(error);
       console.log(this.errors);
-      return '';
     }
-  }
-
-  async checkUserExists(username: string): Promise<boolean> {
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/api/users?username=${username}`
-      );
-      const user = response.data;
-      return user !== null;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
-
-  isTeacher(userRole: string): boolean {
-    return userRole === 'Teacher';
   }
 
   createNewUser() {
@@ -140,10 +126,62 @@ export class TeacherPanelComponent implements OnInit {
     }
   }
 
-  async generateScript(userId: number) {
-    let sqlFoundation = `USE master;
+  async generateScript() {
+    let sqlScript = '';
+
+    // this.sqlFoundation += await this.getUsers();
+    this.sqlFoundation += this.sqlStatements; // append local variable to global variable
+    this.downloadSQLScript(
+      this.sqlFoundation,
+      `update_accountBugs_all_users.sql`
+    );
+  }
+
+  onToggleChange(event: MatSlideToggleChange, userId: number) {
+    const bugId = Number(event.source.id);
+    const toggleValue = this.toggleValues.find(
+      (value) => value.bugId === bugId && value.userId === userId
+    );
+    if (toggleValue) {
+      toggleValue.enabled = event.checked;
+      const enabledValue = event.checked ? 1 : 0;
+      const user = this.users.find((user) => user.id === userId);
+      if (user) {
+        let localSqlStatements = '';
+        if (event.checked) {
+          const sqlStatement = `INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (${bugId}, ${user.id}, ${enabledValue});\n`;
+          localSqlStatements = sqlStatement; // append to local variable
+        } else {
+          const sqlStatement = `UPDATE accountBug SET bug_enabled = 0 WHERE bug_id = ${bugId} AND account_id = ${user.id};\n`;
+          localSqlStatements = sqlStatement; // update local variable
+        }
+        this.sqlStatements += localSqlStatements;
+        console.log(this.sqlStatements);
+      }
+    }
+    //console.log(this.sqlFoundation);
+  }
+
+  getToggleValue(bugId: number, userId: number): boolean | undefined {
+    const toggleValue = this.toggleValues.find(
+      (value) => value.bugId === bugId && value.userId === userId
+    );
+    return toggleValue?.enabled;
+  }
+
+  downloadSQLScript(script: string, fileName: string) {
+    const blob = new Blob([script], { type: 'text/plain;charset=utf-8' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    link.click();
+    window.URL.revokeObjectURL(url);
+  }
+  getSqlFoundation() {
+    return `USE master;
     GO
-    
+
     IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'Team13_BugMe')
     BEGIN
         CREATE DATABASE Team13_BugMe;
@@ -231,46 +269,5 @@ export class TeacherPanelComponent implements OnInit {
         (43, 'Critical'),
         (44, 'Critical'),
         (45, 'Critical');\n\n`;
-
-    let sqlScript = '';
-    let sqlQuery = await this.getUsers();
-
-    for (const bug of this.bugs) {
-      const toggleValue = this.toggleValues.find(
-        (value) => value.bugId === bug.id
-      );
-      const enabledValue = toggleValue?.enabled ? 1 : 0;
-      sqlScript += `\nINSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (${bug.id}, ${userId}, ${enabledValue});\n`;
-    }
-    sqlFoundation += sqlQuery;
-    sqlFoundation += sqlScript;
-    this.downloadSQLScript(
-      sqlFoundation,
-      `update_accountBugs_user${userId}.sql`
-    );
-  }
-
-  onToggleChange(event: MatSlideToggleChange) {
-    const bugId = Number(event.source.id);
-    const toggleValue = this.toggleValues.find(
-      (value) => value.bugId === bugId
-    );
-    if (toggleValue) {
-      toggleValue.enabled = event.checked;
-    }
-  }
-
-  updateToggleValue(event: MatSlideToggleChange, toggleValue: ToggleValue) {
-    toggleValue.enabled = event.checked;
-  }
-
-  downloadSQLScript(script: string, fileName: string) {
-    const blob = new Blob([script], { type: 'text/plain;charset=utf-8' });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = fileName;
-    link.click();
-    window.URL.revokeObjectURL(url);
   }
 }
