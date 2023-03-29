@@ -3,9 +3,13 @@ package team13.bugme.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 import team13.bugme.entity.AccountBug;
 import team13.bugme.repository.AccountBugRepository;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +22,24 @@ public class AccountBugServiceImpl implements AccountBugService {
     @Override
     public List<AccountBug> getAllAccountBugs() {
         return accountBugRepository.findAll();
+    }
+
+    public List<Boolean> getAllAccountBugById(int userId) {
+        List<Boolean> result = new ArrayList<Boolean>();
+        List<AccountBug> queryResults;
+
+        try{
+            queryResults = accountBugRepository.getAllByAccountIdOrderByBugId(userId);
+
+            for (int i = 0; i < queryResults.size(); i++) {
+                //System.out.println(queryResults.get(i).getBugId());
+                result.add(queryResults.get(i).getBugEnabled());
+            }
+        }
+        catch (Exception ex){
+            System.out.println(ex);
+        }
+        return result;
     }
 
     @Override

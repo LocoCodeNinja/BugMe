@@ -50,4 +50,5 @@ public class AccountBug {
     public void setBugEnabled(Boolean bugEnabled) {
         this.bugEnabled = bugEnabled;
     }
+
 }

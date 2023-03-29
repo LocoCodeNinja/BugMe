@@ -20,5 +20,7 @@ public interface AccountBugService {
 
     ResponseEntity<?> deleteAccountBug(int id);
 
+    List<Boolean> getAllAccountBugById(int userId);
+
 }
 

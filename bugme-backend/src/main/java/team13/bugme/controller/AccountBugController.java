@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import team13.bugme.entity.AccountBug;
 import team13.bugme.service.AccountBugService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,8 +28,12 @@ public class AccountBugController {
 
     @PostMapping("/add")
     public AccountBug addAccountBug(@RequestBody AccountBug accountBug) {
-
         return accountBugService.addAccountBug(accountBug);
+    }
+
+    @PostMapping("/getAllById")
+    public List<Boolean> getAllAccountBugById(@RequestBody int userId) {
+        return accountBugService.getAllAccountBugById(userId);
     }
 
     @PutMapping("/{id}")
