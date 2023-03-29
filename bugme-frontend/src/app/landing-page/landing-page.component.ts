@@ -142,8 +142,40 @@ export class LandingPageComponent implements OnInit {
   }
 
   saveItem(item: any) {
-    localStorage.setItem('selectedProduct', JSON.stringify(item));
-    this.appComponent.navigate('/product');
+    if(item == this.productArray[0]){
+      if(this.responseArray[3] == null){
+        localStorage.setItem('selectedProduct', JSON.stringify(item));
+        this.appComponent.navigate('/product');
+      }
+      else if (this.responseArray[3] == true){
+        let wrongObj: any = {
+          id: item.id,
+          
+        };
+      }
+      else if(this.responseArray[4] == null){
+        localStorage.setItem('selectedProduct', JSON.stringify(item));
+        this.appComponent.navigate('/product');
+      }
+      else if(this.responseArray[4] == false){
+        setTimeout(() => {
+          localStorage.setItem('selectedProduct', JSON.stringify(item));
+          this.appComponent.navigate('/product');
+        }, 5000);
+      }
+      else{
+        localStorage.setItem('selectedProduct', JSON.stringify(item));
+        this.appComponent.navigate('/product');
+      }
+    }
+    else{
+      localStorage.setItem('selectedProduct', JSON.stringify(item));
+      this.appComponent.navigate('/product');
+    }
+  }
+
+  getWrongImage(path: String){
+
   }
 
   bug24(){
