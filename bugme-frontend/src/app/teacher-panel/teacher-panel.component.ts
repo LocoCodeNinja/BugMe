@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
 import { AppComponent } from '../app.component';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {
+  MatSlideToggleChange,
+  MatSlideToggleModule,
+} from '@angular/material/slide-toggle';
 import { HttpClient } from '@angular/common/http';
 
 interface ToggleValue {
@@ -24,36 +27,41 @@ export class TeacherPanelComponent implements OnInit {
   newUsername: string = '';
   newPassword: string = '';
   bugs: any[] = [];
-  constructor(private router: Router, private appComponent: AppComponent, private http: HttpClient) {
+  constructor(
+    private router: Router,
+    private appComponent: AppComponent,
+    private http: HttpClient
+  ) {
     this.initializeToggleValues();
   }
 
   initializeToggleValues() {
-    for (const severity of this.severity) {
-      for (const bugId of this.bugId) {
-        this.toggleValues.push({
-          severity,
-          bugId,
-          enabled: false,
-        });
-      }
+    for (const bug of this.bugs) {
+      const severity = bug.severity;
+      const bugId = bug.id;
+      this.toggleValues.push({
+        severity,
+        bugId,
+        enabled: false,
+      });
     }
   }
 
   //testing bugs
-  severity = ['Critical', 'High', 'Medium', 'Low'];
-  bugId = [1, 2, 3, 4, 5];
   toggleValues: ToggleValue[] = [];
+
   ngOnInit(): void {
     this.checkUser();
     if (this.isGood) {
       this.getUsers();
     }
 
-    this.http.get<any[]>('http://localhost:8080/api/bugs/all')
-    .subscribe((data) => {
-      this.bugs = data;
-    });
+    this.http
+      .get<any[]>('http://localhost:8080/api/bugs/all')
+      .subscribe((data) => {
+        this.bugs = data;
+        this.initializeToggleValues();
+      });
   }
 
   checkUser() {
@@ -74,13 +82,16 @@ export class TeacherPanelComponent implements OnInit {
       const response = await axios.get('http://localhost:8080/api/users/all');
       let responseArray: Array<any> = response.data;
       let sqlQuery: string = '';
-  
+
       for (let i: number = 0; i < responseArray.length; i++) {
         const user = responseArray[i];
         this.users.push(user);
-        sqlQuery += `\nINSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
+
+        if (user.role !== 'Teacher') {
+          sqlQuery += `\nINSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
+        }
       }
-  
+
       return sqlQuery;
     } catch (error) {
       this.errors.push(error);
@@ -88,10 +99,12 @@ export class TeacherPanelComponent implements OnInit {
       return '';
     }
   }
-  
+
   async checkUserExists(username: string): Promise<boolean> {
     try {
-      const response = await axios.get(`http://localhost:8080/api/users?username=${username}`);
+      const response = await axios.get(
+        `http://localhost:8080/api/users?username=${username}`
+      );
       const user = response.data;
       return user !== null;
     } catch (error) {
@@ -99,7 +112,7 @@ export class TeacherPanelComponent implements OnInit {
       return false;
     }
   }
-  
+
   isTeacher(userRole: string): boolean {
     return userRole === 'Teacher';
   }
@@ -222,13 +235,33 @@ export class TeacherPanelComponent implements OnInit {
     let sqlScript = '';
     let sqlQuery = await this.getUsers();
 
-    for (const toggleValue of this.toggleValues) {
-      const enabledValue = toggleValue.enabled ? 1 : 0;
-      sqlScript += `\nINSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (${toggleValue.bugId}, ${userId}, ${enabledValue});\n`;
+    for (const bug of this.bugs) {
+      const toggleValue = this.toggleValues.find(
+        (value) => value.bugId === bug.id
+      );
+      const enabledValue = toggleValue?.enabled ? 1 : 0;
+      sqlScript += `\nINSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (${bug.id}, ${userId}, ${enabledValue});\n`;
     }
     sqlFoundation += sqlQuery;
     sqlFoundation += sqlScript;
-    this.downloadSQLScript(sqlFoundation, `update_accountBugs_user${userId}.sql`);
+    this.downloadSQLScript(
+      sqlFoundation,
+      `update_accountBugs_user${userId}.sql`
+    );
+  }
+
+  onToggleChange(event: MatSlideToggleChange) {
+    const bugId = Number(event.source.id);
+    const toggleValue = this.toggleValues.find(
+      (value) => value.bugId === bugId
+    );
+    if (toggleValue) {
+      toggleValue.enabled = event.checked;
+    }
+  }
+
+  updateToggleValue(event: MatSlideToggleChange, toggleValue: ToggleValue) {
+    toggleValue.enabled = event.checked;
   }
 
   downloadSQLScript(script: string, fileName: string) {

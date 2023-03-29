@@ -9,73 +9,72 @@
     Create New User
   </button>
   <div class="userSection">
+    <mat-expansion-panel *ngFor="let user of users">
+      <mat-expansion-panel-header
+        class="panel-head"
+        [ngStyle]="{
+          'background-color': isTeacher(user.role) ? 'lightgrey' : ''
+        }"
+      >
+        <ng-container *ngIf="user.role === 'User'; else notUser">
+          <img src="assets/images/profileUser.png" alt="icon Png" />
+        </ng-container>
+        <ng-template #notUser>
+          <ng-container *ngIf="user.role === 'Teacher'; else notTeacher">
+            <img src="assets/images/profileTeacher.png" alt="icon Png" />
+          </ng-container>
+        </ng-template>
+        <ng-template #notTeacher>
+          <ng-container *ngIf="user.role === 'Employee'; else notEmployee">
+            <img src="assets/images/profileEmployee.png" alt="icon Png" />
+          </ng-container>
+        </ng-template>
+        <ng-template #notEmployee>
+          <img src="assets/images/profileUser.png" alt="icon Png" />
+        </ng-template>
+        <div>
+          <h2>User ID: {{ user.id }}</h2>
+        </div>
+      </mat-expansion-panel-header>
 
-        <mat-expansion-panel *ngFor="let user of users">
-          <mat-expansion-panel-header
-            class="panel-head"
-            [ngStyle]="{
-              'background-color': isTeacher(user.role) ? 'lightgrey' : ''
-            }"
-          >
-            <ng-container *ngIf="user.role === 'User'; else notUser">
-              <img src="assets/images/profileUser.png" alt="icon Png" />
-            </ng-container>
-            <ng-template #notUser>
-              <ng-container *ngIf="user.role === 'Teacher'; else notTeacher">
-                <img src="assets/images/profileTeacher.png" alt="icon Png" />
-              </ng-container>
-            </ng-template>
-            <ng-template #notTeacher>
-              <ng-container *ngIf="user.role === 'Employee'; else notEmployee">
-                <img src="assets/images/profileEmployee.png" alt="icon Png" />
-              </ng-container>
-            </ng-template>
-            <ng-template #notEmployee>
-              <img src="assets/images/profileUser.png" alt="icon Png" />
-            </ng-template>
-            <div>
-              <h2>User ID: {{ user.id }}</h2>
-            </div>
-          </mat-expansion-panel-header>
-
-          <mat-card-header style="text-align: left;">
-            <mat-card-title>
-              <p>Role: {{ user.role }}</p>
-            </mat-card-title>
-            <mat-card-title>
-              <p>Username: {{ user.username }}</p>
-            </mat-card-title>
-            <ng-container *ngIf="user.role !== 'Teacher'; else noPassword">
-              <mat-card-title>
-                <p>Password: {{ user.password }}</p>
-              </mat-card-title>
-            </ng-container>
-            <ng-template #noPassword></ng-template>
-          </mat-card-header>
-          <mat-card-content>
-            <div class="grid-container">
-              <div class="grid-row" *ngFor="let bug of bugs">
-                <mat-slide-toggle class="grid-item bug-toggle" [id]="bug.id">
-                  <div class="bug-severity">{{ bug.severity }}</div>
-                  <div class="bug-element">Bug: {{ bug.id }}</div>
-                </mat-slide-toggle>
-              </div>
-            </div>
-          </mat-card-content>
-          <div>
-            <button mat-icon-button (click)="generateScript(user.id)">
-              <mat-icon>get_app</mat-icon>
-            </button>
+      <mat-card-header style="text-align: left;">
+        <mat-card-title>
+          <p>Role: {{ user.role }}</p>
+        </mat-card-title>
+        <mat-card-title>
+          <p>Username: {{ user.username }}</p>
+        </mat-card-title>
+        <ng-container *ngIf="user.role !== 'Teacher'; else noPassword">
+          <mat-card-title>
+            <p>Password: {{ user.password }}</p>
+          </mat-card-title>
+        </ng-container>
+        <ng-template #noPassword></ng-template>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="grid-container">
+          <div class="grid-row" *ngFor="let bug of bugs">
+            <mat-slide-toggle
+              class="grid-item bug-toggle"
+              [id]="bug.id"
+              (change)="onToggleChange($event)"
+            >
+              <div class="bug-severity">{{ bug.severity }}</div>
+              <div class="bug-element">Bug: {{ bug.id }}</div>
+            </mat-slide-toggle>
           </div>
-          <div
-            class="delete-button"
-            style="margin-left: auto;"
-            *ngIf="user.id > 3"
-          >
-            <button mat-icon-button (click)="deleteUser(user.id)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </mat-expansion-panel>
+        </div>
+      </mat-card-content>
+      <div>
+        <button mat-icon-button (click)="generateScript(user.id)">
+          <mat-icon>get_app</mat-icon>
+        </button>
+      </div>
+      <div class="delete-button" style="margin-left: auto;" *ngIf="user.id > 3">
+        <button mat-icon-button (click)="deleteUser(user.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-expansion-panel>
   </div>
 </div>
