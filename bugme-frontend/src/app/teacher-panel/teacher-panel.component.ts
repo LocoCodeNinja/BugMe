@@ -160,7 +160,8 @@ export class TeacherPanelComponent implements OnInit {
   }
 
   async generateScript(userId: number) {
-    let sqlFoundation = this.getSqlFoundation();
+    //let sqlFoundation = this.getSqlFoundation();
+    let sqlFoundation = '';
     let sqlScript = '';
     let sqlQuery = await this.getUsers();
 
@@ -173,7 +174,7 @@ export class TeacherPanelComponent implements OnInit {
 
     sqlFoundation += sqlQuery;
     sqlFoundation += sqlScript;
-    this.downloadSQLScript(sqlFoundation, `script_user_${userId - 1}.sql`);
+    this.downloadSQLScript(sqlFoundation, `script_user_id${userId - 1}.sql`);
     window.location.reload();
   }
 
