@@ -15,6 +15,7 @@ export class LandingPageComponent implements OnInit {
   searchQuery: string = '';
   filteredProducts!: any[];
   searchPerformed: boolean = false;
+  allProducts: Array<any>;
 
   expansionPanel: boolean = false;
 
@@ -48,6 +49,9 @@ export class LandingPageComponent implements OnInit {
     setTimeout(() => {
       this.bug24();
     }, 200);
+    setTimeout(() => {
+      this.getAllProducts();
+    }, 100);
   }
 
   async getBugValues(){
@@ -77,6 +81,16 @@ export class LandingPageComponent implements OnInit {
     catch(exeption){
       console.error(exeption);
     }
+  }
+
+  async getAllProducts(){
+    let result = await axios({
+      method: 'GET',
+      url: "http://localhost:8080/api/products/all",
+      withCredentials: false
+    });
+
+    this.allProducts = result.data;
   }
 
   productArray: Array<any> = [];
@@ -147,17 +161,37 @@ export class LandingPageComponent implements OnInit {
         localStorage.setItem('selectedProduct', JSON.stringify(item));
         this.appComponent.navigate('/product');
       }
-      else if (this.responseArray[3] == true){
+      else if (this.responseArray[3] == false){
+        let goodNum: boolean = false;
+        let randomPic: number = 0;
+        while(goodNum == false){
+          randomPic = Math.floor(Math.random() * (this.allProducts.length));
+          if(this.allProducts[randomPic].path != item.path){
+            goodNum = true;
+          }
+        }
+
+        console.log(randomPic);
+
+
         let wrongObj: any = {
           id: item.id,
-          
+          name: item.name,
+          path: this.allProducts[randomPic].path,
+          price: item.price,
+          descriptionPlant: item.descriptionPlant,
+          descriptionCare: item.descriptionCare,
+          category: item.category
         };
+
+        localStorage.setItem('selectedProduct', JSON.stringify(wrongObj));
+        this.appComponent.navigate('/product');
       }
       else if(this.responseArray[4] == null){
         localStorage.setItem('selectedProduct', JSON.stringify(item));
         this.appComponent.navigate('/product');
       }
-      else if(this.responseArray[4] == false){
+      else if(this.responseArray[4] == true){
         setTimeout(() => {
           localStorage.setItem('selectedProduct', JSON.stringify(item));
           this.appComponent.navigate('/product');
@@ -181,12 +215,10 @@ export class LandingPageComponent implements OnInit {
   bug24(){
     if(this.responseArray[9] == null || this.responseArray[9] == false){
       this.expansionPanel = false;
-      console.log(this.expansionPanel);
     }
 
     else if(this.responseArray[9] == true){
       this.expansionPanel = true;
-      console.log(this.expansionPanel);
     }
   }
 
