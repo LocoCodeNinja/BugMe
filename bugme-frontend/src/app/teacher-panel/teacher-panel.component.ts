@@ -10,10 +10,8 @@ import { HttpClient } from '@angular/common/http';
 
 interface ToggleValue {
   severity: string;
-  title: string;
   bugId: number;
   enabled: boolean;
-  userId: number;
 }
 
 @Component({
@@ -22,17 +20,31 @@ interface ToggleValue {
   styleUrls: ['./teacher-panel.component.scss'],
 })
 export class TeacherPanelComponent implements OnInit {
-  sqlFoundation: string = this.getSqlFoundation();
-  sqlUsers: string = '';
-  sqlAccountBugs: string = '';
   errors: Array<any> = [];
   users: Array<any> = [];
   currentUser: any = {};
   isGood: boolean = false;
   newUsername: string = '';
   newPassword: string = '';
-  bugs: any[] = [];
-  sqlStatements: string = '';
+
+  bugs = [
+    { id: 11, severity: 'low' },
+    { id: 12, severity: 'low' },
+    { id: 13, severity: 'low' },
+    { id: 14, severity: 'low' },
+    { id: 21, severity: 'medium' },
+    { id: 22, severity: 'medium' },
+    { id: 23, severity: 'medium' },
+    { id: 24, severity: 'medium' },
+    { id: 31, severity: 'high' },
+    { id: 32, severity: 'high' },
+    { id: 33, severity: 'high' },
+    { id: 34, severity: 'high' },
+    { id: 41, severity: 'critical' },
+    { id: 42, severity: 'critical' },
+    { id: 43, severity: 'critical' },
+    { id: 44, severity: 'critical' },
+  ];
   constructor(
     private router: Router,
     private appComponent: AppComponent,
@@ -43,28 +55,28 @@ export class TeacherPanelComponent implements OnInit {
 
   initializeToggleValues() {
     for (const bug of this.bugs) {
-      const severity = bug.severity;
-      const bugId = bug.id;
-      const title = bug.title;
-      for (const user of this.users) {
-        this.toggleValues.push({
-          severity,
-          title,
-          bugId,
-          enabled: false,
-          userId: user.id,
-        });
-      }
+      this.toggleValues.push({
+        severity: bug.severity,
+        bugId: bug.id,
+        enabled: false,
+      });
     }
   }
 
-  toggleValues: ToggleValue[] = [];
+  //testing bugs
 
+  toggleValues: ToggleValue[] = [];
   ngOnInit(): void {
     this.checkUser();
     if (this.isGood) {
       this.getUsers();
     }
+
+    this.http
+      .get<any[]>('http://localhost:8080/api/bugs/all')
+      .subscribe((data) => {
+        this.bugs = data;
+      });
   }
 
   checkUser() {
@@ -80,7 +92,7 @@ export class TeacherPanelComponent implements OnInit {
     }
   }
 
-  async getUsers() {
+  async getUsers(): Promise<string> {
     try {
       const response = await axios.get('http://localhost:8080/api/users/all');
       let responseArray: Array<any> = response.data;
@@ -89,16 +101,32 @@ export class TeacherPanelComponent implements OnInit {
       for (let i: number = 0; i < responseArray.length; i++) {
         const user = responseArray[i];
         this.users.push(user);
-
-        if (user.role !== 'Teacher') {
-          sqlQuery += `INSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
-        }
+        sqlQuery += `\nINSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
       }
-      this.sqlUsers += sqlQuery;
+
+      return sqlQuery;
     } catch (error) {
       this.errors.push(error);
       console.log(this.errors);
+      return '';
     }
+  }
+
+  async checkUserExists(username: string): Promise<boolean> {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/users?username=${username}`
+      );
+      const user = response.data;
+      return user !== null;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  isTeacher(userRole: string): boolean {
+    return userRole === 'Teacher';
   }
 
   createNewUser() {
@@ -116,6 +144,7 @@ export class TeacherPanelComponent implements OnInit {
           `http://localhost:8080/api/users/${userId}`
         );
         console.log('User deleted:', response.data);
+        // Remove the deleted user from the users array
         this.users = this.users.filter((user) => user.id !== userId);
       } catch (error) {
         console.error('Error deleting user:', error);
@@ -123,49 +152,29 @@ export class TeacherPanelComponent implements OnInit {
     }
   }
 
-  async generateScript() {
-    this.sqlFoundation += this.sqlUsers;
-    this.sqlFoundation += this.sqlAccountBugs;
-
-    this.downloadSQLScript(
-      this.sqlFoundation,
-      `update_accountBugs_all_users.sql`
-    );
-  }
-
-  onToggleChange(event: MatSlideToggleChange, userId: number) {
-    const bugId = Number(event.source.id);
-    const toggleValue = this.toggleValues.find(
-      (value) => value.bugId === bugId && value.userId === userId
-    );
+  toggleBug(checked: boolean, bugId: number) {
+    const toggleValue = this.toggleValues.find((tv) => tv.bugId === bugId);
     if (toggleValue) {
-      toggleValue.enabled = event.checked;
-      const enabledValue = event.checked ? 1 : 0;
-      const user = this.users.find((user) => user.id === userId);
-      if (user) {
-        let localSqlStatements = '';
-        if (event.checked) {
-          const sqlStatement = `INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (${bugId}, ${
-            user.id - 1
-          }, ${enabledValue});\n`;
-          localSqlStatements = sqlStatement; // append to local variable
-        } else {
-          const sqlStatement = `DELETE FROM accountBug WHERE bug_id = ${bugId} AND account_id = ${
-            user.id - 1
-          };\n`;
-          localSqlStatements = sqlStatement; // update local variable
-        }
-        this.sqlAccountBugs += localSqlStatements;
-        console.log(this.sqlAccountBugs);
-      }
+      toggleValue.enabled = checked;
     }
   }
 
-  getToggleValue(bugId: number, userId: number): boolean | undefined {
-    const toggleValue = this.toggleValues.find(
-      (value) => value.bugId === bugId && value.userId === userId
-    );
-    return toggleValue?.enabled;
+  async generateScript(userId: number) {
+    let sqlFoundation = this.getSqlFoundation();
+    let sqlScript = '';
+    let sqlQuery = await this.getUsers();
+
+    for (const toggleValue of this.toggleValues) {
+      const enabledValue = toggleValue.enabled ? 1 : 0;
+      sqlScript += `\nINSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (${
+        toggleValue.bugId
+      }, ${userId - 1}, ${enabledValue});\n`;
+    }
+
+    sqlFoundation += sqlQuery;
+    sqlFoundation += sqlScript;
+    this.downloadSQLScript(sqlFoundation, `script_user_${userId - 1}.sql`);
+    window.location.reload();
   }
 
   downloadSQLScript(script: string, fileName: string) {
@@ -177,6 +186,7 @@ export class TeacherPanelComponent implements OnInit {
     link.click();
     window.URL.revokeObjectURL(url);
   }
+
   getSqlFoundation() {
     return `USE master;
     GO
