@@ -2,7 +2,7 @@
 <div class="mainPanelBody">
   <h1>Employee Panel</h1>
   <br />
-  <p style="color: red; margin-left: 10%;" *ngFor="let error of errors">
+  <p style="color: red; margin-left: 10%" *ngFor="let error of errors">
     {{ error }}
   </p>
   <mat-expansion-panel>
@@ -11,33 +11,33 @@
     </mat-expansion-panel-header>
     <mat-form-field>
       <mat-label>Name</mat-label>
-      <input
-        matInput
-        type="text"
-        [(ngModel)]="newProduct.name"
-        name="name"
-        required
-      />
+      <input matInput [(ngModel)]="newProduct.name" name="name" required />
     </mat-form-field>
-    <mat-form-field>
+    <!-- <mat-form-field>
       <mat-label>Path</mat-label>
       <input
         matInput
-        type="text"
         [(ngModel)]="newProduct.path"
         name="path"
         required
-      />
+      /> 
+    </mat-form-field> --->
+
+    <h4>mat-select</h4>
+    <mat-form-field appearance="fill">
+      <mat-label>Image Path</mat-label>
+      <mat-select [(ngModel)]="newProduct.path">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let product of availableImages" [value]="product">
+          <img src="{{product}}" alt="product" style="max-height: 150px; max-width: 150px; margin-left: 23vw;">
+          <p style="margin-left: 20vw;">{{product}}</p>
+        </mat-option>
+      </mat-select>
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>Price</mat-label>
-      <input
-        matInput
-        type="number"
-        [(ngModel)]="newProduct.price"
-        name="price"
-        required
-      />
+      <input matInput [(ngModel)]="newProduct.price" name="price" required />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Description (Plant)</mat-label>
@@ -76,6 +76,8 @@
         Create Product
       </button>
     </div>
+    <br>
+    <h2 style="text-align: center; color:green;" *ngIf="showCreated">Product created!</h2>
   </mat-expansion-panel>
 
   <div class="userSection">
@@ -91,10 +93,10 @@
             (keyup.esc)="cancelEditProduct(product)"
             aria-label="Name"
             class="form-input"
-            style="margin: 5px;"
+            style="margin: 5px"
           />
           <br />
-          <label for="path">Image Path</label>
+          <label for="path">Image</label>
           <br />
           <input
             id="path"
@@ -103,7 +105,7 @@
             (keyup.esc)="cancelEditProduct(product)"
             aria-label="Path"
             class="form-input"
-            style="margin: 5px;"
+            style="margin: 5px"
           />
           <br />
           <label for="price">Product Price</label>
@@ -115,7 +117,7 @@
             (keyup.esc)="cancelEditProduct(product)"
             aria-label="Price"
             class="form-input"
-            style="margin: 5px;"
+            style="margin: 5px"
             pattern="^[0-9]+(\.[0-9]{1,2})?$"
             required
           />
@@ -126,7 +128,7 @@
             id="category"
             [(ngModel)]="product.category"
             class="form-select"
-            style="margin: 5px;"
+            style="margin: 5px"
           >
             <option value="Tiny">Tiny</option>
             <option value="Small">Small</option>
@@ -144,7 +146,7 @@
             (keyup.esc)="cancelEditProduct(product)"
             aria-label="Description (Plant)"
             class="form-input"
-            style="margin: 5px; resize: none;"
+            style="margin: 5px; resize: none"
             rows="4"
           ></textarea>
           <br />
@@ -157,45 +159,46 @@
             (keyup.esc)="cancelEditProduct(product)"
             aria-label="Description (Care)"
             class="form-input"
-            style="margin: 5px; resize: none;"
+            style="margin: 5px; resize: none"
             rows="4"
-          ></textarea>
+          ></textarea><br>
           <img src="{{ product.path }}" alt="icon Png" />
           <div class="product-edit-buttons">
-            <section style="top: 50%;
-            height: 48px;
-            left: 0;
-            right: 0;
-            transform: translateY(-50%);" *ngIf="renderBug13 == true">
-              <button
-              mat-button
-                (click)="saveProduct(product)"
-                style=""
-              >
+            <section
+              style="
+                top: 50%;
+                height: 48px;
+                left: 0;
+                right: 0;
+                transform: translateY(-50%);
+              "
+              *ngIf="renderBug13 == true"
+            >
+              <button mat-button (click)="saveProduct(product)" style="">
                 Save
               </button>
               <button
-              mat-stroked-button
+                mat-stroked-button
                 (click)="cancelEditProduct(product)"
-                style="width: 200px; margin-right: 50px;"
+                style="width: 200px; margin-right: 50px"
               >
                 Cancel
               </button>
             </section>
             <section *ngIf="renderBug13 == false">
               <button
-              mat-stroked-button
+                mat-stroked-button
                 (click)="saveProduct(product)"
                 class="form-input"
-                style="margin: 5px;"
+                style="margin: 5px"
               >
                 Save
               </button>
               <button
-              mat-stroked-button
+                mat-stroked-button
                 (click)="cancelEditProduct(product)"
                 class="form-input"
-                style="margin: 5px;"
+                style="margin: 5px"
               >
                 Cancel
               </button>

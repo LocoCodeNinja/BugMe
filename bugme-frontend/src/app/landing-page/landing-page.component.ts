@@ -62,8 +62,6 @@ export class LandingPageComponent implements OnInit {
       userId = this.currentUser.id;
     }
 
-    
-
     try{
       let result = await axios({
         method: 'POST',
@@ -161,7 +159,7 @@ export class LandingPageComponent implements OnInit {
         localStorage.setItem('selectedProduct', JSON.stringify(item));
         this.appComponent.navigate('/product');
       }
-      else if (this.responseArray[3] == false){
+      else if (this.responseArray[3] == true){
         let goodNum: boolean = false;
         let randomPic: number = 0;
         while(goodNum == false){

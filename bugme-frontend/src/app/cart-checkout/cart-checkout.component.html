@@ -57,7 +57,7 @@
 
     <div class="inputSection">
       <form [formGroup]="cardGroup">
-        <mat-form-field appearance="fill" class="inputSet">
+        <mat-form-field appearance="fill" >
           <mat-label>Card Number</mat-label>
           <input [formControl]="creditCardNumCtrl" matInput />
           <mat-error *ngIf="creditCardNumCtrl.hasError('required')">
@@ -67,7 +67,8 @@
             Please check your credit card
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill" class="inputSet">
+        <br>
+        <mat-form-field appearance="fill" >
           <mat-label>Expiration Date</mat-label>
           <input [formControl]="expiryCtrl" matInput />
           <mat-hint>Format must be MM/YY</mat-hint>
@@ -78,7 +79,8 @@
             Please check your expiry
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill" class="inputSet">
+        <br>
+        <mat-form-field appearance="fill" >
           <mat-label>CVC Number</mat-label>
           <input matInput [formControl]="cvcCtrl" />
           <mat-error *ngIf="cvcCtrl.hasError('required')">

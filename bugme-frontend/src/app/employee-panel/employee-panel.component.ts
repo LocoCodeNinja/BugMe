@@ -13,10 +13,36 @@ export class EmployeePanelComponent {
   products: Array<any> = [];
   currentUser: any = {};
   isGood: boolean = false;
+
+  showCreated: boolean = false;
+
   newProduct: any = {};
   constructor(private router: Router, private appComponent: AppComponent) {}
 
   renderBug13: boolean;
+
+  availableImages: Array<any> = [
+    'assets/StockPhotos/AloeVera.jpg',
+    'assets/StockPhotos/Caradonna.jpg',
+    'assets/StockPhotos/Cosmos.jpg',
+    'assets/StockPhotos/Dahlia.jpg',
+    'assets/StockPhotos/Daisy.jpg',
+    'assets/StockPhotos/Daylily.jpg',
+    'assets/StockPhotos/ForgetMeNot.jpg',
+    'assets/StockPhotos/Geranium.jpg',
+    'assets/StockPhotos/Hosta.jpg',
+    'assets/StockPhotos/Hydrangea.jpg',
+    'assets/StockPhotos/Lavender.jpg',
+    'assets/StockPhotos/Moonfire.jpg',
+    'assets/StockPhotos/Orchid.jpg',
+    'assets/StockPhotos/ParrotFlower.jpg',
+    'assets/StockPhotos/Rose.jpg',
+    'assets/StockPhotos/Strawflower.jpg',
+    'assets/StockPhotos/Succulent.jpg',
+    'assets/StockPhotos/Sunflower.jpg',
+    'assets/StockPhotos/Tulip.jpg',
+    'assets/StockPhotos/Windflower.jpg',
+  ];
 
   ngOnInit(): void {
     this.checkBug13();
@@ -24,6 +50,21 @@ export class EmployeePanelComponent {
     if (this.isGood) {
       this.getProducts();
     }
+
+    // setTimeout(() => {
+    //   this.getAllProducts();
+    // }, 100);
+  }
+
+  
+  async getAllProducts(){
+    let result = await axios({
+      method: 'GET',
+      url: "http://localhost:8080/api/products/all",
+      withCredentials: false
+    });
+
+    this.allProducts = result.data;
   }
 
   checkBug13(){
@@ -100,7 +141,10 @@ export class EmployeePanelComponent {
         this.newProduct
       );
       this.products.push(response.data);
-      this.newProduct = {}; // clear form
+      this.showCreated = true;
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
@@ -108,4 +152,8 @@ export class EmployeePanelComponent {
   cancelEditProduct(product: any) {
     product.isEditMode = false;
   }
+
+  allProducts: Array<any>;
+
+
 }
