@@ -1,51 +1,103 @@
-.mainCheckoutBody{
-    height: auto;
-    width: 30vw;
-    margin: 2vh auto;
-
-    padding-top: 1%;
-
-    .example-radio-group {
-        display: flex;
-        flex-direction: column;
-        margin: 15px 0;
-        align-items: flex-start;
+.mainCheckoutBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    
+    h1 {
+      text-align: center; 
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    
+    h2 {
+      text-align: center; 
+      font-weight: bold; 
+      
+      &.empty-cart {
+        color: red;
       }
       
-      .example-radio-button {
-        margin: 5px;
+      &.success {
+        color: green;
       }
-
-        .inputSection{
-            margin: 0 auto;
-            
-            .inputSet {
-                width: 100%;
-                margin: auto;
-                display: block;
-            }
-        }
+      
+      &.error {
+        color: red;
+      }
+    }
     
-        .buttonStyle {
-            width: 50%;
-            margin: auto;
-            display: block;
+    .inputSection {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+      
+      .inputSet {
+        margin: 10px 0;
+        
+        mat-label {
+          color: #888;
         }
+      }
+      
+      input {
+        width: 100%;
+      }
+    }
     
-        .imgStyle {
-            display: block;
-            margin: 0 auto;
-            margin-bottom: 2%;
-            margin-top: 2%;
-            height: 151px !important;
-            width: auto !important;
-            object-fit: contain;
+    .example-radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+      
+      .example-radio-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+        text-align: center;
+        
+        p {
+          margin: 5px;
         }
-    
-        .buttonStyle {
-            width: 50%;
-            margin: 0 auto;
-            display: block;
-    
+        
+        img {
+          max-width: 100%;
+          height: auto;
         }
-}
+      }
+    }
+    
+    .buttonSection {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+      
+      button {
+        margin: 0 10px;
+        flex: 1;
+      }
+    }
+    
+    .buttonStyle {
+      background-color: #fff;
+      color: #2196f3;
+      border-color: #2196f3;
+      font-size: 14px;
+      font-weight: bold;
+      
+      &:hover {
+        background-color: #2196f3;
+        color: #fff;
+      }
+    }
+  }
+  

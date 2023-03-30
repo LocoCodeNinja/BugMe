@@ -51,6 +51,7 @@ export class CartCheckoutComponent implements OnInit {
   clearCart() {
     this.cartCleared = true;
     localStorage.removeItem('productsInCart');
+    window.location.reload();
     setTimeout(() => {
       this.appComponent.navigate('/landing');
     }, 3000);
