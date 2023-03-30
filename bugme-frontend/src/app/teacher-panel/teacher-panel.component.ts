@@ -26,25 +26,28 @@ export class TeacherPanelComponent implements OnInit {
   isGood: boolean = false;
   newUsername: string = '';
   newPassword: string = '';
-
+  sqlRoot: string = '';
+  sqlUsers: string = '';
+  sqlUserBugs: string = '';
   bugs = [
-    { id: 11, severity: 'low' },
-    { id: 12, severity: 'low' },
-    { id: 13, severity: 'low' },
-    { id: 14, severity: 'low' },
-    { id: 21, severity: 'medium' },
-    { id: 22, severity: 'medium' },
-    { id: 23, severity: 'medium' },
-    { id: 24, severity: 'medium' },
-    { id: 31, severity: 'high' },
-    { id: 32, severity: 'high' },
-    { id: 33, severity: 'high' },
-    { id: 34, severity: 'high' },
-    { id: 41, severity: 'critical' },
-    { id: 42, severity: 'critical' },
-    { id: 43, severity: 'critical' },
-    { id: 44, severity: 'critical' },
+    { id: 11, severity: 'Low', title: 'Wrong Store Hours' },
+    { id: 12, severity: 'Low', title: 'Description Loads Twice' },
+    { id: 13, severity: 'Low', title: 'Employee Buttons Overlap' },
+    { id: 14, severity: 'Low', title: 'Wrong Product Image' },
+    { id: 21, severity: 'Medium', title: 'One Product Slow Load' },
+    { id: 22, severity: 'Medium', title: 'No Hover Interaction' },
+    { id: 23, severity: 'Medium', title: 'Search Malfunction' },
+    { id: 24, severity: 'Medium', title: 'Category Tab Wont Open' },
+    { id: 31, severity: 'High', title: 'Null Names' },
+    { id: 32, severity: 'High', title: 'Cart Slow Load' },
+    { id: 33, severity: 'High', title: 'Null Icons' },
+    { id: 34, severity: 'High', title: 'Same Image All Products' },
+    { id: 41, severity: 'Critical', title: 'Dead Links' },
+    { id: 42, severity: 'Critical', title: 'Employee Panel Bad Gateway' },
+    { id: 43, severity: 'Critical', title: 'Cart Infinite Load' },
+    { id: 44, severity: 'Critical', title: 'Subscribe Unloads All Products' },
   ];
+
   constructor(
     private router: Router,
     private appComponent: AppComponent,
@@ -63,20 +66,12 @@ export class TeacherPanelComponent implements OnInit {
     }
   }
 
-  //testing bugs
-
   toggleValues: ToggleValue[] = [];
   ngOnInit(): void {
     this.checkUser();
     if (this.isGood) {
       this.getUsers();
     }
-
-    this.http
-      .get<any[]>('http://localhost:8080/api/bugs/all')
-      .subscribe((data) => {
-        this.bugs = data;
-      });
   }
 
   checkUser() {
@@ -103,6 +98,8 @@ export class TeacherPanelComponent implements OnInit {
         this.users.push(user);
         sqlQuery += `\nINSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
       }
+
+      this.sqlUsers = sqlQuery;
 
       return sqlQuery;
     } catch (error) {
@@ -160,7 +157,7 @@ export class TeacherPanelComponent implements OnInit {
   }
 
   async generateScript(userId: number) {
-    //let sqlFoundation = this.getSqlFoundation();
+    //let sqlFoundation = this.getSqlFoundation(); <-- this to include database setup
     let sqlFoundation = '';
     let sqlScript = '';
     let sqlQuery = await this.getUsers();
@@ -172,9 +169,15 @@ export class TeacherPanelComponent implements OnInit {
       }, ${userId - 1}, ${enabledValue});\n`;
     }
 
-    sqlFoundation += sqlQuery;
-    sqlFoundation += sqlScript;
-    this.downloadSQLScript(sqlFoundation, `script_user_id${userId - 1}.sql`);
+    this.sqlUserBugs += sqlScript;
+    console.log(this.sqlUserBugs);
+  }
+
+  downloadRootScript() {
+    this.sqlRoot = this.getSqlFoundation();
+    this.sqlRoot += this.sqlUsers;
+    this.sqlRoot += this.sqlUserBugs;
+    this.downloadSQLScript(this.sqlRoot, `student_script.sql`);
     window.location.reload();
   }
 

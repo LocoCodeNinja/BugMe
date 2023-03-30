@@ -5,15 +5,23 @@
     style="text-align: center; font-weight: bold; color: red;"
     *ngIf="productsInCart.length == 0"
   >
-    No products in cart!
+    Cart Empty
   </h2>
+
+  <div
+    style="display: flex; justify-content: center;"
+    *ngIf="productsInCart.length == 0"
+  >
+    <button style="margin: auto;" mat-button routerLink="/landing">Home</button>
+  </div>
   <section *ngIf="productsInCart.length != 0">
     <h2
       style="text-align: center; font-weight: bold; color: green;"
       *ngIf="productsPurchased"
     >
-      Products successfully purchased!
+      Your Order #{{ orderNumber }} will be ready for pickup soon!
     </h2>
+
     <h2
       style="text-align: center; font-weight: bold; color: green;"
       *ngIf="cartCleared"
@@ -26,42 +34,26 @@
     >
       Errors in payment inputs
     </h2>
-    <br />
 
+    <br />
     <h2>Selected Products:</h2>
 
     <div class="example-radio-group">
       <div class="example-radio-button" *ngFor="let product of productsInCart">
-        {{ product.name }} x1
+        {{ product.name }}
         <p></p>
         <img style="width: 100px;" src="{{ product.path }}" />
+        ${{ product.price }}
       </div>
     </div>
-    <br />
-    <br />
-    <h4>Subtotal: ${{ cartCost }}</h4>
-
-    <h4>Tax: ${{ taxCost }}</h4>
-
-    <h4>Full Cost: ${{ fullCost }}</h4>
 
     <br />
-
-    <!-- <mat-grid-list cols="4" rowHeight="2:1" style="margin-right: 2%;">
-    <mat-grid-tile *ngFor="let item of productsInCart" class="productTile">
-        <img alt="{{game.productName}}" (click)="routeToDetails(game)" src="{{game.coverImgUrl}}"
-            class="imgStyle">
-    </mat-grid-tile>
-</mat-grid-list> -->
-
+    <br />
+    <h4>Subtotal: ${{ cartCost.toFixed(2) }}</h4>
+    <h4>Tax: ${{ taxCost.toFixed(2) }}</h4>
+    <h4>Full Cost: ${{ fullCost.toFixed(2) }}</h4>
+    <br />
     <h2>Payment Method:</h2>
-
-    <!-- <mat-error *ngIf="currentCards.length == 0">No payment methods saved! Please save one to complete checkout
-</mat-error>
-
-<mat-radio-button [color]="'primary'" class="radioStyle" value="i" (click)="setCurrentCard(card)"
-    *ngFor="let card of currentCards; let i = index;">Payment Option {{i + 1}}</mat-radio-button>
--->
 
     <div class="inputSection">
       <form [formGroup]="cardGroup">

@@ -9,7 +9,7 @@ import { AppComponent } from '../app.component';
 })
 export class CartCheckoutComponent implements OnInit {
   productsInCart: Array<any> = [];
-
+  orderNumber = Math.floor(Math.random() * 9000000000) + 1000000000;
   cartCost: number = 0;
   taxCost: number = 0;
   fullCost: number = 0;
@@ -51,6 +51,7 @@ export class CartCheckoutComponent implements OnInit {
   clearCart() {
     this.cartCleared = true;
     localStorage.removeItem('productsInCart');
+    window.location.reload();
     setTimeout(() => {
       this.appComponent.navigate('/landing');
     }, 3000);
