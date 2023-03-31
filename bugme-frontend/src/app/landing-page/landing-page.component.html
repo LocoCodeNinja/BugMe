@@ -112,7 +112,7 @@
         <!-- Show when search is used or size filter is used -->
         <ng-container *ngIf="searchPerformed || isSizeFiltered()">
           <div
-            class="grid-item"
+            class="grid-item-bad"
             *ngFor="let item of filteredProducts"
             (click)="saveItem(item)"
           >
