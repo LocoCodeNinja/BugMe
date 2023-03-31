@@ -10,6 +10,9 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
+  isZoomable(): boolean {
+    return Math.random() >= 0.5;
+  }
   constructor(private router: Router, private appComponent: AppComponent) {}
   category = { Tiny: false, Small: false, Medium: false, Large: false };
   searchQuery: string = '';
@@ -54,7 +57,7 @@ export class LandingPageComponent implements OnInit {
     }, 100);
   }
 
-  async getBugValues(){
+  async getBugValues() {
     let userId: string = '';
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
@@ -62,30 +65,32 @@ export class LandingPageComponent implements OnInit {
       userId = this.currentUser.id;
     }
 
-    try{
+    try {
       let result = await axios({
         method: 'POST',
-        url: "http://localhost:8080/api/account-bugs/getAllById/" + userId,
-        withCredentials: false
+        url: 'http://localhost:8080/api/account-bugs/getAllById/' + userId,
+        withCredentials: false,
       });
 
       this.responseArray = result.data;
 
-      if(result.status == 200){
-        localStorage.setItem("responseArray",JSON.stringify(this.responseArray));
+      if (result.status == 200) {
+        localStorage.setItem(
+          'responseArray',
+          JSON.stringify(this.responseArray)
+        );
         await this.getProducts();
       }
-    }
-    catch(exeption){
+    } catch (exeption) {
       console.error(exeption);
     }
   }
 
-  async getAllProducts(){
+  async getAllProducts() {
     let result = await axios({
       method: 'GET',
-      url: "http://localhost:8080/api/products/all",
-      withCredentials: false
+      url: 'http://localhost:8080/api/products/all',
+      withCredentials: false,
     });
 
     this.allProducts = result.data;
@@ -115,6 +120,12 @@ export class LandingPageComponent implements OnInit {
       this.searchPerformed = false;
       return products;
     }
+  }
+
+  searchForSunflower() {
+    // Set the searchQuery to "Sunflower"
+    this.searchQuery = 'Sunflower';
+    this.applyFilters();
   }
 
   filterBySize(products: any[]) {
@@ -154,23 +165,21 @@ export class LandingPageComponent implements OnInit {
   }
 
   saveItem(item: any) {
-    if(item == this.productArray[0]){
-      if(this.responseArray[3] == null){
+    if (item == this.productArray[0]) {
+      if (this.responseArray[3] == null) {
         localStorage.setItem('selectedProduct', JSON.stringify(item));
         this.appComponent.navigate('/product');
-      }
-      else if (this.responseArray[3] == true){
+      } else if (this.responseArray[3] == true) {
         let goodNum: boolean = false;
         let randomPic: number = 0;
-        while(goodNum == false){
-          randomPic = Math.floor(Math.random() * (this.allProducts.length));
-          if(this.allProducts[randomPic].path != item.path){
+        while (goodNum == false) {
+          randomPic = Math.floor(Math.random() * this.allProducts.length);
+          if (this.allProducts[randomPic].path != item.path) {
             goodNum = true;
           }
         }
 
         console.log(randomPic);
-
 
         let wrongObj: any = {
           id: item.id,
@@ -179,45 +188,36 @@ export class LandingPageComponent implements OnInit {
           price: item.price,
           descriptionPlant: item.descriptionPlant,
           descriptionCare: item.descriptionCare,
-          category: item.category
+          category: item.category,
         };
 
         localStorage.setItem('selectedProduct', JSON.stringify(wrongObj));
         this.appComponent.navigate('/product');
-      }
-      else if(this.responseArray[4] == null){
+      } else if (this.responseArray[4] == null) {
         localStorage.setItem('selectedProduct', JSON.stringify(item));
         this.appComponent.navigate('/product');
-      }
-      else if(this.responseArray[4] == true){
+      } else if (this.responseArray[4] == true) {
         setTimeout(() => {
           localStorage.setItem('selectedProduct', JSON.stringify(item));
           this.appComponent.navigate('/product');
         }, 5000);
-      }
-      else{
+      } else {
         localStorage.setItem('selectedProduct', JSON.stringify(item));
         this.appComponent.navigate('/product');
       }
-    }
-    else{
+    } else {
       localStorage.setItem('selectedProduct', JSON.stringify(item));
       this.appComponent.navigate('/product');
     }
   }
 
-  getWrongImage(path: String){
+  getWrongImage(path: String) {}
 
-  }
-
-  bug24(){
-    if(this.responseArray[9] == null || this.responseArray[9] == false){
+  bug24() {
+    if (this.responseArray[9] == null || this.responseArray[9] == false) {
       this.expansionPanel = false;
-    }
-
-    else if(this.responseArray[9] == true){
+    } else if (this.responseArray[9] == true) {
       this.expansionPanel = true;
     }
   }
-
 }
