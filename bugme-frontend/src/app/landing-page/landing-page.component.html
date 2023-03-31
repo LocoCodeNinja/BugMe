@@ -4,7 +4,7 @@
   <div class="filterCol">
     <div class="innerFilterCol">
       <div class="searchBox">
-        <mat-form-field appearance="fill" class="searchBoxInput">
+        <mat-form-field appearance="fill" class="searchBoxInput" *ngIf="showBadSearchBox == false">
           <mat-label>Search</mat-label>
           <input
             matInput
@@ -12,18 +12,15 @@
             (input)="applyFilters()"
           />
         </mat-form-field>
+
+        <mat-form-field appearance="fill" class="searchBoxInput" *ngIf="showBadSearchBox == true">
+          <mat-label>Search</mat-label>
+          <input
+            matInput
+          />
+        </mat-form-field>
       </div>
 
-      <!--bug 23 START-->
-      <!-- SHOW THIS ONLY WHEN BUG 23 is active for current user -->
-
-      <!-- <div class="searchBox">
-        <p>
-          <input placeholder="Search" (input)="searchForSunflower()" />
-        </p>
-      </div> -->
-
-      <!--bug 23 END-->
       <mat-divider></mat-divider>
       <ng-container>
         <mat-expansion-panel

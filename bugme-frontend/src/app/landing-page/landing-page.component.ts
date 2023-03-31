@@ -20,6 +20,8 @@ export class LandingPageComponent implements OnInit {
   searchPerformed: boolean = false;
   allProducts: Array<any>;
 
+  showBadSearchBox: boolean = false;
+
   expansionPanel: boolean = false;
   bug11Enabled: boolean;
   responseArray: Array<any>;
@@ -58,6 +60,18 @@ export class LandingPageComponent implements OnInit {
     setTimeout(() => {
       this.checkBug11();
     }, 300);
+    setTimeout(() => {
+      this.setBug23();
+    }, 250);
+  }
+
+  setBug23(){
+    if(this.responseArray[5] == null || this.responseArray[5] == false){
+      this.showBadSearchBox = false;
+    }
+    else if(this.responseArray[5] == true){
+      this.showBadSearchBox = true;
+    }
   }
 
   async getBugValues() {
