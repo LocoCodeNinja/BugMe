@@ -20,7 +20,13 @@
           <h2>Teacher Panel</h2>
         </div>
       </mat-expansion-panel-header>
-
+      <div style="margin: auto;" *ngIf="user.id !== 1">
+        <h2>
+          Username: {{ user.username }}
+          <br />
+          Password: {{ user.password }}
+        </h2>
+      </div>
       <mat-card-content>
         <button
           style="margin-top: 10px;"
@@ -36,6 +42,16 @@
           <textarea class="sqlUserBugs" readonly>{{
             this.sqlUserBugs
           }}</textarea>
+          <div>
+            <button
+              matTooltip="Download Root Script"
+              mat-icon-button
+              class="hover-effect"
+              (click)="downloadRootScript()"
+            >
+              <mat-icon>save_alt</mat-icon>
+            </button>
+          </div>
         </div>
         <div *ngIf="user.id !== 1" class="grid-container">
           <div class="grid-row" *ngFor="let bug of bugs">
@@ -59,14 +75,6 @@
           (click)="generateScript(user.id)"
         >
           <mat-icon>save</mat-icon>
-        </button>
-        <button
-          matTooltip="Download Root Script"
-          mat-icon-button
-          class="hover-effect"
-          (click)="downloadRootScript()"
-        >
-          <mat-icon>save_alt</mat-icon>
         </button>
         <div *ngIf="user.id > 3">
           <button
