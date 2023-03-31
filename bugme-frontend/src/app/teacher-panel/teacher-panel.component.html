@@ -31,6 +31,13 @@
         >
           Create New User
         </button>
+
+        <div *ngIf="user.id === 1">
+          <h2 style="padding-top: 10px;">Script View</h2>
+          <textarea class="sqlUserBugs" readonly>{{
+            this.sqlUserBugs
+          }}</textarea>
+        </div>
         <div *ngIf="user.id !== 1" class="grid-container">
           <div class="grid-row" *ngFor="let bug of bugs">
             <mat-slide-toggle
@@ -74,38 +81,6 @@
         </div>
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <h2 style="margin: auto;">Script View</h2>
-      </mat-expansion-panel-header>
-      <mat-card-content>
-        <!-- New div for displaying this.sqlUserBugs -->
-        <textarea class="sqlUserBugs" readonly>{{ this.sqlUserBugs }}</textarea>
-
-        <style>
-          .sqlUserBugs {
-            width: 50%;
-            height: 200px;
-            resize: none;
-            overflow-y: auto;
-            margin: auto;
-            font-size: 11px;
-          }
-        </style>
-      </mat-card-content>
-    </mat-expansion-panel>
   </div>
 </div>
 <app-footer-trademark></app-footer-trademark>
-<!-- New div for displaying this.sqlUserBugs -->
-<!-- <textarea class="sqlUserBugs" readonly>{{ this.sqlUserBugs }}</textarea>
-
-<style>
-  .sqlUserBugs {
-    width: 50%;
-    height: 200px;
-    resize: none;
-    overflow-y: auto;
-    margin: auto;
-  }
-</style> -->

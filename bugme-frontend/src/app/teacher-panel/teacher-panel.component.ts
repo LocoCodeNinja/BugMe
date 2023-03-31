@@ -167,6 +167,22 @@ export class TeacherPanelComponent implements OnInit {
       (line) => line.includes(`VALUES (`) && line.includes(`, ${userId - 1},`)
     );
 
+    // If existing lines were found, remove them
+    if (existingLines.length > 0) {
+      const indicesToRemove = [];
+
+      // Find the indices of the existing lines
+      for (const existingLine of existingLines) {
+        const existingIndex = sqlUserBugsArray.indexOf(existingLine);
+        indicesToRemove.push(existingIndex);
+      }
+
+      // Remove the existing lines starting from the last index
+      for (let i = indicesToRemove.length - 1; i >= 0; i--) {
+        sqlUserBugsArray.splice(indicesToRemove[i], 1);
+      }
+    }
+
     // Append any new insert values for the given userId
     for (const toggleValue of this.toggleValues) {
       const enabledValue = toggleValue.enabled ? 1 : 0;
@@ -176,21 +192,8 @@ export class TeacherPanelComponent implements OnInit {
       }, ${userId - 1}, ${enabledValue});\n`;
     }
 
-    // If existing lines were found, remove them
-    if (existingLines.length > 0) {
-      const existingIndex = sqlUserBugsArray.indexOf(existingLines[0]);
-      sqlUserBugsArray.splice(existingIndex, existingLines.length);
-    }
-
-    // Insert the new script values at the appropriate index
-    const insertIndex = sqlUserBugsArray.findIndex(
-      (line) => line.includes(`VALUES (`) && line.includes(`, ${userId},`)
-    );
-
-    sqlUserBugsArray.splice(insertIndex + 1, 0, sqlScript);
-
     // Join the updated SQL script array back into a string
-    this.sqlUserBugs = sqlUserBugsArray.join('\n');
+    this.sqlUserBugs = sqlUserBugsArray.join('\n') + sqlScript;
     console.log(this.sqlUserBugs);
   }
 
