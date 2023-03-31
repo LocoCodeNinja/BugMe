@@ -60,8 +60,6 @@ GO
 
 INSERT INTO product (name, path, price, description_plant, description_care, category)
 VALUES
-   INSERT INTO product (name, path, price, description_plant, description_care, category)
-VALUES
     ('Succulent', 'assets/StockPhotos/Succulent.jpg', 14.99, 'A quirky plant that''s all the rage with millennials. With plump leaves and spiky personalities, succulents add a fun touch of greenery to any space.', 'Water every 2-3 weeks when the soil is completely dry. Keep in bright, indirect light and avoid direct sunlight. Prefer warmer temperatures.', 'Tiny'),
     ('Sunflower', 'assets/StockPhotos/Sunflower.jpg', 19.99, 'A symbol of optimism and sunshine. They turn their heads to follow the sun throughout the day, making them the ultimate plant-based sun worshippers.', 'Require at least 6-8 hours of direct sunlight per day. Keep the soil moist but not waterlogged. Deadhead spent blooms regularly to encourage new growth.', 'Large'),
     ('Aloe Vera', 'assets/StockPhotos/AloeVera.jpg', 14.99, 'A plant that doubles as a skincare secret weapon. With its cooling, soothing gel that can help heal sunburns and other skin irritations, this spiky succulent is a must-have for any green-thumbed beauty enthusiast.', 'Thrive in bright, indirect sunlight. Allow the soil to dry out completely between waterings. Sensitive to cold temperatures.', 'Small'),
