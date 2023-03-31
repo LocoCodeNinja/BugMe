@@ -159,14 +159,38 @@ export class TeacherPanelComponent implements OnInit {
   async generateScript(userId: number) {
     let sqlScript = '';
 
+    // Split existing SQL script by newlines
+    const sqlUserBugsArray = this.sqlUserBugs.split('\n');
+
+    // Filter out existing lines for the given userId
+    const existingLines = sqlUserBugsArray.filter(
+      (line) => line.includes(`VALUES (`) && line.includes(`, ${userId - 1},`)
+    );
+
+    // Append any new insert values for the given userId
     for (const toggleValue of this.toggleValues) {
       const enabledValue = toggleValue.enabled ? 1 : 0;
+
       sqlScript += `\nINSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (${
         toggleValue.bugId
       }, ${userId - 1}, ${enabledValue});\n`;
     }
 
-    this.sqlUserBugs += sqlScript;
+    // If existing lines were found, remove them
+    if (existingLines.length > 0) {
+      const existingIndex = sqlUserBugsArray.indexOf(existingLines[0]);
+      sqlUserBugsArray.splice(existingIndex, existingLines.length);
+    }
+
+    // Insert the new script values at the appropriate index
+    const insertIndex = sqlUserBugsArray.findIndex(
+      (line) => line.includes(`VALUES (`) && line.includes(`, ${userId},`)
+    );
+
+    sqlUserBugsArray.splice(insertIndex + 1, 0, sqlScript);
+
+    // Join the updated SQL script array back into a string
+    this.sqlUserBugs = sqlUserBugsArray.join('\n');
     console.log(this.sqlUserBugs);
   }
 
