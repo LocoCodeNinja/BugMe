@@ -45,12 +45,11 @@ export class EmployeePanelComponent {
   ];
 
   ngOnInit(): void {
-    this.checkBug13();
     this.checkUser();
     if (this.isGood) {
       this.getProducts();
     }
-
+    this.checkBug13();
     // setTimeout(() => {
     //   this.getAllProducts();
     // }, 100);

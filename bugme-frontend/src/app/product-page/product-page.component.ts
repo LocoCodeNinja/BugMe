@@ -61,9 +61,12 @@ export class ProductPageComponent {
     } else {
       this.productsInCart = [this.selectedProduct];
     }
-
     this.productAddedToCart = true;
+    setTimeout(() => {
+      this.productAddedToCart = false;
+    }, 2000);
     localStorage.setItem('productsInCart', JSON.stringify(this.productsInCart));
-    window.location.reload();
+
+    //window.location.reload();
   }
 }

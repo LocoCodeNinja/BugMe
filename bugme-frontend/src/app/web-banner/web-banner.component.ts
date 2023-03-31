@@ -27,7 +27,13 @@ export class WebBannerComponent implements OnInit {
   cartSize: number = 0;
 
   navigateStore() {
-    this.appComponent.navigate('/landing');
+    let bug: Array<any> = JSON.parse(localStorage.getItem('responseArray')!);
+
+    if (bug[12] == null || bug[12] == false) {
+      this.appComponent.navigate('/landing');
+    } else if (bug[12] == true) {
+      this.appComponent.navigate('/?');
+    }
   }
 
   routeToCart() {
@@ -54,6 +60,12 @@ export class WebBannerComponent implements OnInit {
   }
 
   navigateEmployee() {
-    this.appComponent.navigate('/employee');
+    let bug: Array<any> = JSON.parse(localStorage.getItem('responseArray')!);
+
+    if (bug[13] == null || bug[13] == false) {
+      this.appComponent.navigate('/employee');
+    } else if (bug[13] == true) {
+      this.appComponent.navigate('/badGateway');
+    }
   }
 }

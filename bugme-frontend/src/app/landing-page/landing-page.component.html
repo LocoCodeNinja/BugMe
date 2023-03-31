@@ -4,13 +4,14 @@
   <div class="filterCol">
     <div class="innerFilterCol">
       <div class="searchBox">
-        <p>
+        <mat-form-field appearance="fill" class="searchBoxInput">
+          <mat-label>Search</mat-label>
           <input
+            matInput
             [(ngModel)]="searchQuery"
-            placeholder="Search"
             (input)="applyFilters()"
           />
-        </p>
+        </mat-form-field>
       </div>
 
       <!--bug 23 START-->
@@ -143,7 +144,7 @@
 <!-- <app-footer></app-footer> -->
 
 <!--App Subscribe Panel Content-->
-<div class="subscribe" style="align-self: flex-start;">
+<div class="subscribe" style="align-self: flex-start">
   <h4>Subscribe to Our Newsletter</h4>
   <p>Sign up to receive the latest news and promotions</p>
 
@@ -155,31 +156,31 @@
   />
   <button (click)="showSuccessMessage()">Subscribe</button>
 
-  <p *ngIf="showSuccess" style="color: green;">Register success!</p>
-  <p *ngIf="showError" style="color: red;">Email is required!</p>
+  <p *ngIf="showSuccess" style="color: green">Register success!</p>
+  <p *ngIf="showError" style="color: red">Email is required!</p>
 </div>
 
 <!--App Footer copied code-->
 <div
   class="footer-container"
-  style="justify-content: center; display: flex; height: 150px;"
+  style="justify-content: center; display: flex; height: 150px"
 >
-  <div class="logo" style="align-self: flex-start;">
+  <div class="logo" style="align-self: flex-start">
     <img
       class="logo"
       src="../assets/StockPhotos/sunflowerLogo.png"
-      style="padding-left: 10px;"
+      style="padding-left: 10px"
       alt="Logo"
     />
   </div>
-  <div class="contact-info" style="align-self: flex-start;">
+  <div class="contact-info" style="align-self: flex-start">
     <h4>The Plant Shop</h4>
     <p>Unit #69, 123 Forest St.</p>
     <p>Waterloo, Ontario N2N 2N2</p>
     <p>Phone: 555-555-5555</p>
     <p>Email: info@theplantstore.com</p>
   </div>
-  <div class="store-hours" style="align-self: flex-start;">
+  <div class="store-hours" style="align-self: flex-start">
     <section *ngIf="bug11Enabled == false">
       <h4>Store Hours</h4>
       <p>Mon - Fri: 9am - 6pm</p>
@@ -193,7 +194,7 @@
       <p>Sun: Sat</p>
     </section>
   </div>
-  <div class="links" style="align-self: flex-start;">
+  <div class="links" style="align-self: flex-start">
     <h4>Links</h4>
     <ul>
       <li><a>Shipping Policy</a></li>

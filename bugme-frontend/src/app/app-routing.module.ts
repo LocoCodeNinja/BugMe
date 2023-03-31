@@ -9,6 +9,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { RegisterComponent } from './register/register.component';
 import { TeacherPanelComponent } from './teacher-panel/teacher-panel.component';
+import { Bug42Component } from './bug42/bug42.component';
+import { Bug41Component } from './bug41/bug41.component';
 
 const routes: Routes = [
   {
@@ -47,6 +49,14 @@ const routes: Routes = [
     path: 'checkoutLoad',
     component: BUG43Component,
   },
+  {
+    path: 'badGateway',
+    component: Bug42Component
+  },
+  {
+    path: '?',
+    component: Bug41Component
+  }
 ];
 
 @NgModule({

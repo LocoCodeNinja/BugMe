@@ -38,6 +38,8 @@ import { BUG32Component } from './bug32/bug32.component';
 import { BUG43Component } from './bug43/bug43.component';
 import { SubscribePanelComponent } from './subscribe-panel/subscribe-panel.component';
 import { FooterTrademarkComponent } from './footer-trademark/footer-trademark.component';
+import { Bug42Component } from './bug42/bug42.component';
+import { Bug41Component } from './bug41/bug41.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { FooterTrademarkComponent } from './footer-trademark/footer-trademark.co
     BUG43Component,
     SubscribePanelComponent,
     FooterTrademarkComponent,
+    Bug42Component,
+    Bug41Component,
   ],
   imports: [
     BrowserModule,
