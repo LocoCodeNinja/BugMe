@@ -157,10 +157,7 @@ export class TeacherPanelComponent implements OnInit {
   }
 
   async generateScript(userId: number) {
-    //let sqlFoundation = this.getSqlFoundation(); <-- this to include database setup
-    let sqlFoundation = '';
     let sqlScript = '';
-    let sqlQuery = await this.getUsers();
 
     for (const toggleValue of this.toggleValues) {
       const enabledValue = toggleValue.enabled ? 1 : 0;
