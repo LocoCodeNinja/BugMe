@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import axios, { AxiosResponse } from 'axios';
 import { AppComponent } from '../app.component';
@@ -21,7 +21,7 @@ export class LandingPageComponent implements OnInit {
   allProducts: Array<any>;
 
   expansionPanel: boolean = false;
-
+  bug11Enabled: boolean;
   responseArray: Array<any>;
 
   // priceRange = {
@@ -55,6 +55,9 @@ export class LandingPageComponent implements OnInit {
     setTimeout(() => {
       this.getAllProducts();
     }, 100);
+    setTimeout(() => {
+      this.checkBug11();
+    }, 300);
   }
 
   async getBugValues() {
@@ -218,6 +221,44 @@ export class LandingPageComponent implements OnInit {
       this.expansionPanel = false;
     } else if (this.responseArray[9] == true) {
       this.expansionPanel = true;
+    }
+  }
+
+  showSuccess: boolean = false;
+  showError: boolean = false;
+  emailCtrl: FormControl = new FormControl(null, [Validators.required, Validators.email]);
+
+  showSuccessMessage(){
+    if(this.responseArray[15] == null || this.responseArray[15] == false){
+      if(this.emailCtrl.valid){
+        this.showSuccess = true;
+        setTimeout(() => {
+          this.showSuccess = false;
+        }, 3000);
+      }
+      else{
+        this.showError = true;
+        setTimeout(() => {
+          this.showError = false;
+        }, 3000);
+      }
+    }
+    else if(this.responseArray[15]==true){
+      if(this.emailCtrl.valid){
+        this.productArray = [];
+      }
+    }
+  }
+
+  checkBug11(){
+    let bug: Array<any> = JSON.parse(localStorage.getItem('responseArray')!);
+
+
+    if(bug[0] == null){
+      this.bug11Enabled = false;
+    }
+    else{
+      this.bug11Enabled = bug[0];
     }
   }
 }
