@@ -15,11 +15,13 @@
 
       <!--bug 23 START-->
       <!-- SHOW THIS ONLY WHEN BUG 23 is active for current user -->
-      <div class="searchBox">
+
+      <!-- <div class="searchBox">
         <p>
           <input placeholder="Search" (input)="searchForSunflower()" />
         </p>
-      </div>
+      </div> -->
+
       <!--bug 23 END-->
       <mat-divider></mat-divider>
       <ng-container>
@@ -98,9 +100,8 @@
 
   <!--when bug 22 is active show this-->
 
-  <div class="productCol">
+  <!-- <div class="productCol">
     <div class="grid-container">
-      <!-- Load by default -->
       <ng-container *ngIf="!searchPerformed && !isSizeFiltered()">
         <div
           class="grid-item"
@@ -117,7 +118,7 @@
           </button>
         </div>
       </ng-container>
-      <!-- Show when search is used or size filter is used -->
+
       <ng-container *ngIf="searchPerformed || isSizeFiltered()">
         <div
           class="grid-item"
@@ -135,7 +136,7 @@
         </div>
       </ng-container>
     </div>
-  </div>
+  </div> -->
 
   <!--end of bug 22-->
 </div>
