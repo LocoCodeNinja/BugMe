@@ -39,6 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BUG32Component } from './bug32/bug32.component';
 import { BUG43Component } from './bug43/bug43.component';
+import { SubscribePanelComponent } from './subscribe-panel/subscribe-panel.component';
+import { FooterTrademarkComponent } from './footer-trademark/footer-trademark.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { BUG43Component } from './bug43/bug43.component';
     BugDetailsComponent,
     BUG32Component,
     BUG43Component,
+    SubscribePanelComponent,
+    FooterTrademarkComponent,
   ],
   imports: [
     BrowserModule,

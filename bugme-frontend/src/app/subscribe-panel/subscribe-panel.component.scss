@@ -1,0 +1,39 @@
+.subscribe {
+    flex: 1;
+    text-align: center;
+    height: 110px;
+    background-color: #f1f1f1;
+    padding: 10px;
+  }
+  
+  .subscribe h4 {
+    margin-bottom: 10px;
+  }
+  
+  .subscribe form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .subscribe input[type="email"] {
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 10px;
+  }
+  
+  .subscribe button[type="submit"] {
+    background-color: rgba(221, 248, 221, 0.562);
+    color: black;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .subscribe button[type="submit"]:hover {
+    background-color: rgb(151, 206, 151);
+  }
