@@ -20,11 +20,16 @@ export class WebBannerComponent implements OnInit {
     );
 
     this.cartSize = cartItems.length;
+    setTimeout(() => {
+      this.checkBug33();
+    }, 100);
   }
 
   currentUser: any = {};
 
   cartSize: number = 0;
+
+  bug33: boolean = false;
 
   navigateStore() {
     let bug: Array<any> = JSON.parse(localStorage.getItem('responseArray')!);
@@ -33,6 +38,16 @@ export class WebBannerComponent implements OnInit {
       this.appComponent.navigate('/landing');
     } else if (bug[12] == true) {
       this.appComponent.navigate('/?');
+    }
+  }
+
+  checkBug33(){
+    let bug: Array<any> = JSON.parse(localStorage.getItem('responseArray')!);
+
+    if (bug[10] == null || bug[10] == false) {
+      this.bug33 = false;
+    } else if (bug[10] == true) {
+      this.bug33 = true;
     }
   }
 

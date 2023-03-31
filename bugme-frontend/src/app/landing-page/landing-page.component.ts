@@ -127,12 +127,40 @@ export class LandingPageComponent implements OnInit {
         'http://localhost:8080/api/products/all'
       );
 
-      if(this.responseArray[11] == true){
+      if(this.responseArray[11] == true && this.responseArray[8] == true){
+        for(let i: number = 0; i < response.data.length; i++){
+          let tempObj: object = {
+            id: response.data[i].id,
+            name: '',
+            path: 'assets/StockPhotos/Orchid.jpg',
+            price: response.data[i].price,
+            descriptionPlant: response.data[i].descriptionPlant,
+            descriptionCare: response.data[i].descriptionCare,
+            category: response.data[i].category
+          }
+          this.productArray[i] = tempObj;
+        }
+      }
+      else if(this.responseArray[11] == true){
         for(let i: number = 0; i < response.data.length; i++){
           let tempObj: object = {
             id: response.data[i].id,
             name: response.data[i].name,
             path: 'assets/StockPhotos/Orchid.jpg',
+            price: response.data[i].price,
+            descriptionPlant: response.data[i].descriptionPlant,
+            descriptionCare: response.data[i].descriptionCare,
+            category: response.data[i].category
+          }
+          this.productArray[i] = tempObj;
+        }
+      }
+      else if(this.responseArray[8] == true){
+        for(let i: number = 0; i < response.data.length; i++){
+          let tempObj: object = {
+            id: response.data[i].id,
+            name: '',
+            path: response.data[i].path,
             price: response.data[i].price,
             descriptionPlant: response.data[i].descriptionPlant,
             descriptionCare: response.data[i].descriptionCare,
