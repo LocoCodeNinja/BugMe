@@ -92,15 +92,19 @@ export class TeacherPanelComponent implements OnInit {
       const response = await axios.get('http://localhost:8080/api/users/all');
       let responseArray: Array<any> = response.data;
       let sqlQuery: string = '';
-
+  
       for (let i: number = 0; i < responseArray.length; i++) {
         const user = responseArray[i];
+  
+        // Check if the user ID is not 1 before creating the insert query
         this.users.push(user);
-        sqlQuery += `\nINSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
+        if (user.role !== 'Teacher') {
+          sqlQuery += `\nINSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
+        }
       }
-
+  
       this.sqlUsers = sqlQuery;
-
+  
       return sqlQuery;
     } catch (error) {
       this.errors.push(error);
@@ -219,10 +223,13 @@ export class TeacherPanelComponent implements OnInit {
     return `USE master;
     GO
 
-    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'Team13_BugMe')
+    IF EXISTS (SELECT name FROM sys.databases WHERE name = 'Team13_BugMe')
     BEGIN
-    CREATE DATABASE Team13_BugMe;
+        ALTER DATABASE [Team13_BugMe] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+        DROP DATABASE [Team13_BugMe];
     END
+
+    CREATE DATABASE Team13_BugMe;
     GO
 
     USE Team13_BugMe;
@@ -315,6 +322,8 @@ export class TeacherPanelComponent implements OnInit {
     (41, 'Critical'),
     (42, 'Critical'),
     (43, 'Critical'),
-    (44, 'Critical');\n\n`;
+    (44, 'Critical');
+
+    \n\n`;
   }
 }

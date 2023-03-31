@@ -13,14 +13,14 @@
           'background-color': isTeacher(user.role) ? 'lightgrey' : ''
         }"
       >
-        <div style="margin: auto;" *ngIf="user.id !== 1">
-          <h2>{{ user.role }} ID:{{ user.id - 1 }}</h2>
+        <div style="margin: auto;" *ngIf="user.role !== 'Teacher'">
+          <h2>{{ user.role }} ID:{{ user.id }}</h2>
         </div>
-        <div style="margin: auto;" *ngIf="user.id === 1">
+        <div style="margin: auto;" *ngIf="user.role === 'Teacher'">
           <h2>Teacher Panel</h2>
         </div>
       </mat-expansion-panel-header>
-      <div style="margin: auto;" *ngIf="user.id !== 1">
+      <div style="margin: auto;" *ngIf="user.role !== 'Teacher'">
         <h2>
           Username: {{ user.username }}
           <br />
@@ -31,13 +31,13 @@
         <button
           style="margin-top: 10px;"
           mat-raised-button
-          *ngIf="user.id === 1"
+          *ngIf="user.role === 'Teacher'"
           (click)="createNewUser()"
         >
           Create New User
         </button>
 
-        <div *ngIf="user.id === 1">
+        <div *ngIf="user.role === 'Teacher'">
           <h2 style="padding-top: 10px;">Script View</h2>
           <textarea class="sqlUserBugs" readonly>{{
             this.sqlUserBugs
@@ -53,7 +53,7 @@
             </button>
           </div>
         </div>
-        <div *ngIf="user.id !== 1" class="grid-container">
+        <div *ngIf="user.role !== 'Teacher'" class="grid-container">
           <div class="grid-row" *ngFor="let bug of bugs">
             <mat-slide-toggle
               class="grid-item bug-toggle"
@@ -67,7 +67,7 @@
           </div>
         </div>
       </mat-card-content>
-      <div class="buttons" *ngIf="user.id !== 1">
+      <div class="buttons" *ngIf="user.role !== 'Teacher'">
         <button
           matTooltip="Add To Script"
           mat-icon-button

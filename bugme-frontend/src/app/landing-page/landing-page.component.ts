@@ -275,9 +275,9 @@ export class LandingPageComponent implements OnInit {
   getWrongImage(path: String) {}
 
   bug24() {
-    if (this.responseArray[9] == null || this.responseArray[9] == false) {
+    if (this.responseArray[7] == null || this.responseArray[7] == false) {
       this.expansionPanel = false;
-    } else if (this.responseArray[9] == true) {
+    } else if (this.responseArray[7] == true) {
       this.expansionPanel = true;
     }
   }
