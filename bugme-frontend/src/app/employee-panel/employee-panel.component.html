@@ -6,8 +6,10 @@
     {{ error }}
   </p>
   <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>Create a New Product</mat-panel-title>
+    <mat-expansion-panel-header style="display: flex; justify-content: center;">
+      <mat-panel-title style="text-align: center;">
+        Create a New Product
+      </mat-panel-title>
     </mat-expansion-panel-header>
     <mat-form-field>
       <mat-label>Name</mat-label>
@@ -16,7 +18,6 @@
     <mat-form-field appearance="fill">
       <mat-label>Image Path</mat-label>
       <mat-select [(ngModel)]="newProduct.path" required>
-        <mat-option>None</mat-option>
         <mat-option *ngFor="let product of availableImages" [value]="product">
           <img
             src="{{ product }}"
