@@ -14,7 +14,7 @@
         }"
       >
         <div style="margin: auto;" *ngIf="user.role !== 'Teacher'">
-          <h2>{{ user.role }} ID:{{ user.id }}</h2>
+          <h2>{{ user.role }} ID:{{ user.id - 1 }}</h2>
         </div>
         <div style="margin: auto;" *ngIf="user.role === 'Teacher'">
           <h2>Teacher Panel</h2>
