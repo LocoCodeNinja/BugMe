@@ -22,9 +22,8 @@
       </mat-expansion-panel-header>
 
       <mat-card-content>
-        <h3>Username: {{ user.username }}</h3>
-        <h3>Password: {{ user.password }}</h3>
         <button
+          style="margin-top: 10px;"
           mat-raised-button
           *ngIf="user.id === 1"
           (click)="createNewUser()"

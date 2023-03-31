@@ -282,6 +282,10 @@
   margin: auto;
   font-size: 11px;
 }
+
+mat-expansion-panel {
+  margin-bottom: 10px;
+}
 @media (max-width: 768px) {
   .grid-container {
     grid-template-columns: repeat(3, 1fr);
