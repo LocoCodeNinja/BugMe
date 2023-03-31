@@ -13,20 +13,9 @@
       <mat-label>Name</mat-label>
       <input matInput [(ngModel)]="newProduct.name" name="name" required />
     </mat-form-field>
-    <!-- <mat-form-field>
-      <mat-label>Path</mat-label>
-      <input
-        matInput
-        [(ngModel)]="newProduct.path"
-        name="path"
-        required
-      /> 
-    </mat-form-field> --->
-
-    <h4>mat-select</h4>
     <mat-form-field appearance="fill">
       <mat-label>Image Path</mat-label>
-      <mat-select [(ngModel)]="newProduct.path">
+      <mat-select [(ngModel)]="newProduct.path" required>
         <mat-option>None</mat-option>
         <mat-option *ngFor="let product of availableImages" [value]="product">
           <img
@@ -38,7 +27,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
     <mat-form-field>
       <mat-label>Price</mat-label>
       <input matInput [(ngModel)]="newProduct.price" name="price" required />
