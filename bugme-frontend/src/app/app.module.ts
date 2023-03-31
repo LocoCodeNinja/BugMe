@@ -23,18 +23,15 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { WebBannerComponent } from './web-banner/web-banner.component';
-import { ProfileComponent } from './UNUSEDxx/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { CartCheckoutComponent } from './cart-checkout/cart-checkout.component';
 import { TeacherPanelComponent } from './teacher-panel/teacher-panel.component';
-import { ModifyProductPageComponent } from './UNUSED/modify-product-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { FooterComponent } from './footer/footer.component';
 import { EmployeePanelComponent } from './employee-panel/employee-panel.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
-import { BugDetailsComponent } from './UNUSEDx/bug-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BUG32Component } from './bug32/bug32.component';
@@ -48,16 +45,13 @@ import { FooterTrademarkComponent } from './footer-trademark/footer-trademark.co
     LoginPageComponent,
     LandingPageComponent,
     WebBannerComponent,
-    ProfileComponent,
     RegisterComponent,
     ProductPageComponent,
     CartCheckoutComponent,
     TeacherPanelComponent,
-    ModifyProductPageComponent,
     AboutPageComponent,
     FooterComponent,
     EmployeePanelComponent,
-    BugDetailsComponent,
     BUG32Component,
     BUG43Component,
     SubscribePanelComponent,
