@@ -1,58 +1,49 @@
-<div class="banner-wrapper">
-  <app-web-banner></app-web-banner>
+<app-web-banner></app-web-banner>
+<h3 class="product-added-message" *ngIf="productAddedToCart">
+  Product added to cart!
+</h3>
+
+<div class="error-messages">
+  <h3 *ngFor="let error of errors">{{ error }}</h3>
 </div>
 
-<div class="product-details-wrapper">
-  <h3 class="product-added-message" *ngIf="productAddedToCart">
-    Product added to cart!
-  </h3>
+<mat-grid-list cols="2" class="product-details">
+  <mat-grid-tile class="product-image-tile">
+    <div class="product-image">
+      <img src="{{ selectedProduct.path }}" alt="" class="product-main-image" />
+    </div>
+  </mat-grid-tile>
 
-  <div class="error-messages">
-    <h3 *ngFor="let error of errors">{{ error }}</h3>
-  </div>
-
-  <mat-grid-list cols="2" class="product-details">
-    <mat-grid-tile class="product-image-tile">
-      <div class="product-image">
-        <img
-          src="{{ selectedProduct.path }}"
-          alt=""
-          class="product-main-image"
-        />
+  <mat-grid-tile class="product-details-tile">
+    <div class="product-details-content">
+      <h2 class="product-title">{{ selectedProduct.name }}</h2>
+      <div class="product-description">
+        <h3 class="description-title">Description</h3>
+        <p class="description-content">
+          {{ shownDescription }}
+        </p>
       </div>
-    </mat-grid-tile>
-
-    <mat-grid-tile class="product-details-tile">
-      <div class="product-details-content">
-        <h2 class="product-title">{{ selectedProduct.name }}</h2>
-        <div class="product-price">
-          <span class="offer-price">${{ selectedProduct.price }}</span>
-        </div>
-        <div class="product-description">
-          <h3 class="description-title">Description</h3>
-          <p class="description-content">
-            {{ shownDescription }}
-          </p>
-        </div>
-        <div class="product-description">
-          <h3 class="description-title">Care</h3>
-          <p class="description-content">
-            {{ selectedProduct.descriptionCare }}
-          </p>
-        </div>
-        <div class="product-btn-group">
-          <button
-            class="add-to-cart-button"
-            (click)="addToCart()"
-            mat-stroked-button
-          >
-            Add to cart
-          </button>
-        </div>
+      <div class="product-description">
+        <h3 class="description-title">Care</h3>
+        <p class="description-content">
+          {{ selectedProduct.descriptionCare }}
+        </p>
       </div>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
+      <div class="product-price">
+        <span class="offer-price">${{ selectedProduct.price }}</span>
+      </div>
+      <div class="product-btn-group">
+        <button
+          class="add-to-cart-button"
+          (click)="addToCart()"
+          mat-stroked-button
+        >
+          Add to cart
+        </button>
+      </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
 
 <app-footer></app-footer>
 <app-footer-trademark></app-footer-trademark>
