@@ -41,7 +41,10 @@
       </mat-expansion-panel> -->
       <mat-divider></mat-divider>
       <ng-container>
-        <mat-expansion-panel class="filterPanel mat-elevation-z0" disabled="{{expansionPanel}}">
+        <mat-expansion-panel
+          class="filterPanel mat-elevation-z0"
+          disabled="{{ expansionPanel }}"
+        >
           <mat-expansion-panel-header>Size</mat-expansion-panel-header>
           <p>
             <mat-checkbox [(ngModel)]="category.Tiny" (change)="applyFilters()">
@@ -49,17 +52,26 @@
             </mat-checkbox>
           </p>
           <p>
-            <mat-checkbox [(ngModel)]="category.Small" (change)="applyFilters()">
+            <mat-checkbox
+              [(ngModel)]="category.Small"
+              (change)="applyFilters()"
+            >
               Small / 3"-4"
             </mat-checkbox>
           </p>
           <p>
-            <mat-checkbox [(ngModel)]="category.Medium" (change)="applyFilters()">
+            <mat-checkbox
+              [(ngModel)]="category.Medium"
+              (change)="applyFilters()"
+            >
               Medium / 5"-6"
             </mat-checkbox>
           </p>
           <p>
-            <mat-checkbox [(ngModel)]="category.Large" (change)="applyFilters()">
+            <mat-checkbox
+              [(ngModel)]="category.Large"
+              (change)="applyFilters()"
+            >
               Large / 8"-10"
             </mat-checkbox>
           </p>
