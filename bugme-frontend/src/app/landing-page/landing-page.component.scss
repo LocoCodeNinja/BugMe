@@ -66,9 +66,7 @@
       .zoomable {
         transition: transform 0.2s ease-out;
       }
-      .zoomable:hover {
-        transform: scale(1.05);
-      }
+      
       .grid-container {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -101,6 +99,10 @@
           background-color: #fff;
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
           border-radius: 5px;
+        }
+
+        .grid-item:hover {
+          transform: scale(1.05);
         }
       }
     }
