@@ -1,283 +1,65 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import axios from 'axios';
-import { AppComponent } from '../app.component';
-import {
-  MatSlideToggleChange,
-  MatSlideToggleModule,
-} from '@angular/material/slide-toggle';
-import { HttpClient } from '@angular/common/http';
+USE master;
+GO
 
-interface ToggleValue {
-  severity: string;
-  bugId: number;
-  enabled: boolean;
-}
-
-@Component({
-  selector: 'app-teacher-panel',
-  templateUrl: './teacher-panel.component.html',
-  styleUrls: ['./teacher-panel.component.scss'],
-})
-export class TeacherPanelComponent implements OnInit {
-  errors: Array<any> = [];
-  users: Array<any> = [];
-  currentUser: any = {};
-  isGood: boolean = false;
-  newUsername: string = '';
-  newPassword: string = '';
-  sqlRoot: string = '';
-  sqlUsers: string = '';
-  sqlUserBugs: string = '';
-  bugs = [
-    { id: 11, severity: 'Low', title: 'Wrong Store Hours' },
-    { id: 12, severity: 'Low', title: 'Description Loads Twice' },
-    { id: 13, severity: 'Low', title: 'Employee Buttons Overlap' },
-    { id: 14, severity: 'Low', title: 'Wrong Product Image' },
-    { id: 21, severity: 'Medium', title: 'One Product Slow Load' },
-    { id: 22, severity: 'Medium', title: 'No Hover Interaction' },
-    { id: 23, severity: 'Medium', title: 'Search Malfunction' },
-    { id: 24, severity: 'Medium', title: 'Category Tab Wont Open' },
-    { id: 31, severity: 'High', title: 'Null Names' },
-    { id: 32, severity: 'High', title: 'Cart Slow Load' },
-    { id: 33, severity: 'High', title: 'Null Icons' },
-    { id: 34, severity: 'High', title: 'Same Image All Products' },
-    { id: 41, severity: 'Critical', title: 'Dead Links' },
-    { id: 42, severity: 'Critical', title: 'Employee Panel Bad Gateway' },
-    { id: 43, severity: 'Critical', title: 'Cart Infinite Load' },
-    { id: 44, severity: 'Critical', title: 'Subscribe Unloads All Products' },
-  ];
-
-  constructor(
-    private router: Router,
-    private appComponent: AppComponent,
-    private http: HttpClient
-  ) {
-    this.initializeToggleValues();
-  }
-
-  initializeToggleValues() {
-    for (const bug of this.bugs) {
-      this.toggleValues.push({
-        severity: bug.severity,
-        bugId: bug.id,
-        enabled: false,
-      });
-    }
-  }
-
-  toggleValues: ToggleValue[] = [];
-  ngOnInit(): void {
-    this.checkUser();
-    if (this.isGood) {
-      this.getUsers();
-    }
-  }
-
-  checkUser() {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
-    if (this.currentUser != null) {
-      if (this.currentUser.role != 'Teacher') {
-        this.appComponent.navigate('/landing');
-      } else {
-        this.isGood = true;
-      }
-    } else {
-      this.appComponent.navigate('');
-    }
-  }
-
-  async getUsers(): Promise<string> {
-    try {
-      const response = await axios.get('http://localhost:8080/api/users/all');
-      let responseArray: Array<any> = response.data;
-      let sqlQuery: string = '';
-
-      for (let i: number = 0; i < responseArray.length; i++) {
-        const user = responseArray[i];
-        this.users.push(user);
-        sqlQuery += `\nINSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
-      }
-
-      this.sqlUsers = sqlQuery;
-
-      return sqlQuery;
-    } catch (error) {
-      this.errors.push(error);
-      console.log(this.errors);
-      return '';
-    }
-  }
-
-  async checkUserExists(username: string): Promise<boolean> {
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/api/users?username=${username}`
-      );
-      const user = response.data;
-      return user !== null;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
-
-  isTeacher(userRole: string): boolean {
-    return userRole === 'Teacher';
-  }
-
-  createNewUser() {
-    this.router.navigate(['/register']);
-  }
-
-  async deleteUser(userId: number) {
-    const confirmation = window.confirm(
-      'Are you sure you want to delete this user?'
-    );
-
-    if (confirmation) {
-      try {
-        const response = await axios.delete(
-          `http://localhost:8080/api/users/${userId}`
-        );
-        console.log('User deleted:', response.data);
-        // Remove the deleted user from the users array
-        this.users = this.users.filter((user) => user.id !== userId);
-      } catch (error) {
-        console.error('Error deleting user:', error);
-      }
-    }
-  }
-
-  toggleBug(checked: boolean, bugId: number) {
-    const toggleValue = this.toggleValues.find((tv) => tv.bugId === bugId);
-    if (toggleValue) {
-      toggleValue.enabled = checked;
-    }
-  }
-
-  async generateScript(userId: number) {
-    let sqlScript = '';
-
-    // Split existing SQL script by newlines
-    const sqlUserBugsArray = this.sqlUserBugs.split('\n');
-
-    // Filter out existing lines for the given userId
-    const existingLines = sqlUserBugsArray.filter(
-      (line) => line.includes(`VALUES (`) && line.includes(`, ${userId - 1},`)
-    );
-
-    // If existing lines were found, remove them
-    if (existingLines.length > 0) {
-      const indicesToRemove = [];
-
-      // Find the indices of the existing lines
-      for (const existingLine of existingLines) {
-        const existingIndex = sqlUserBugsArray.indexOf(existingLine);
-        indicesToRemove.push(existingIndex);
-      }
-
-      // Remove the existing lines starting from the last index
-      for (let i = indicesToRemove.length - 1; i >= 0; i--) {
-        sqlUserBugsArray.splice(indicesToRemove[i], 1);
-      }
-    }
-
-    // Append any new insert values for the given userId
-    for (const toggleValue of this.toggleValues) {
-      const enabledValue = toggleValue.enabled ? 1 : 0;
-
-      sqlScript += `\nINSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (${
-        toggleValue.bugId
-      }, ${userId - 1}, ${enabledValue});\n`;
-    }
-
-    // Join the updated SQL script array back into a string
-    this.sqlUserBugs = sqlUserBugsArray.join('\n') + sqlScript;
-    console.log(this.sqlUserBugs);
-  }
-
-  downloadRootScript() {
-    this.sqlRoot = this.getSqlFoundation();
-    this.sqlRoot += this.sqlUsers;
-    this.sqlRoot += this.sqlUserBugs;
-    this.downloadSQLScript(this.sqlRoot, `student_script.sql`);
-    window.location.reload();
-  }
-
-  downloadSQLScript(script: string, fileName: string) {
-    const blob = new Blob([script], { type: 'text/plain;charset=utf-8' });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = fileName;
-    link.click();
-    window.URL.revokeObjectURL(url);
-  }
-
-  getSqlFoundation() {
-    return `USE master;
-    GO
-
-    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'Team13_BugMe')
-    BEGIN
+IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'Team13_BugMe')
+BEGIN
     CREATE DATABASE Team13_BugMe;
-    END
-    GO
+END
+GO
 
-    USE Team13_BugMe;
-    GO
+USE Team13_BugMe;
+GO
 
-    IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[account]') AND type in (N'U'))
-    BEGIN
-    CREATE TABLE account (
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[account]') AND type in (N'U'))
+BEGIN
+CREATE TABLE account (
     id INT IDENTITY(1,1) PRIMARY KEY,
     username NVARCHAR(50) NOT NULL UNIQUE,
     password NVARCHAR(255) NOT NULL,
     role NVARCHAR(20) NOT NULL
-    );
-    END
-    GO
+);
+END
+GO
 
-    IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[product]') AND type in (N'U'))
-    BEGIN
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[product]') AND type in (N'U'))
+BEGIN
     CREATE TABLE product (
-    id INT IDENTITY(1,1) PRIMARY KEY,
-    name NVARCHAR(100) NOT NULL,
-    path NVARCHAR(255) NOT NULL,
-    price DECIMAL(10,2) NOT NULL,
-    description_plant NVARCHAR(MAX) NULL,
-    description_care NVARCHAR(MAX) NULL,
-    category NVARCHAR(20) NOT NULL
+        id INT IDENTITY(1,1) PRIMARY KEY,
+        name NVARCHAR(100) NOT NULL,
+        path NVARCHAR(255) NOT NULL,
+        price DECIMAL(10,2) NOT NULL,
+        description_plant NVARCHAR(MAX) NULL,
+        description_care NVARCHAR(MAX) NULL,
+        category NVARCHAR(20) NOT NULL
     );
-    END
-    GO
+END
+GO
 
-    IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[bug]') AND type in (N'U'))
-    BEGIN
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[bug]') AND type in (N'U'))
+BEGIN
     CREATE TABLE bug (
-    id INT PRIMARY KEY,
-    severity VARCHAR(10) NOT NULL,
-    title VARCHAR(100)
+        id INT PRIMARY KEY,
+        severity VARCHAR(10) NOT NULL,
+		title VARCHAR(100)
     );
-    END
-    GO
+END
+GO
 
-    IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[accountBug]') AND type in (N'U'))
-    BEGIN
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[accountBug]') AND type in (N'U'))
+BEGIN
     CREATE TABLE accountBug (
-    id INT IDENTITY(1,1) PRIMARY KEY,
-    bug_id INT NOT NULL,
-    account_id INT NOT NULL,
-    bug_enabled BIT,
-    FOREIGN KEY (bug_id) REFERENCES bug(id),
-    FOREIGN KEY (account_id) REFERENCES account(id)
+        id INT IDENTITY(1,1) PRIMARY KEY,
+        bug_id INT NOT NULL,
+        account_id INT NOT NULL,
+        bug_enabled BIT,
+        FOREIGN KEY (bug_id) REFERENCES bug(id),
+        FOREIGN KEY (account_id) REFERENCES account(id)
     );
-    END
-    GO
+END
+GO
 
-    INSERT INTO product (name, path, price, description_plant, description_care, category)
-    VALUES
+INSERT INTO product (name, path, price, description_plant, description_care, category)
+VALUES
     ('Succulent', 'assets/StockPhotos/Succulent.jpg', 14.99, 'A quirky plant that''s all the rage with millennials. With plump leaves and spiky personalities, succulents add a fun touch of greenery to any space.', 'Water every 2-3 weeks when the soil is completely dry. Keep in bright, indirect light and avoid direct sunlight. Prefer warmer temperatures.', 'Tiny'),
     ('Sunflower', 'assets/StockPhotos/Sunflower.jpg', 19.99, 'A symbol of optimism and sunshine. They turn their heads to follow the sun throughout the day, making them the ultimate plant-based sun worshippers.', 'Require at least 6-8 hours of direct sunlight per day. Keep the soil moist but not waterlogged. Deadhead spent blooms regularly to encourage new growth.', 'Large'),
     ('Aloe Vera', 'assets/StockPhotos/AloeVera.jpg', 14.99, 'A plant that doubles as a skincare secret weapon. With its cooling, soothing gel that can help heal sunburns and other skin irritations, this spiky succulent is a must-have for any green-thumbed beauty enthusiast.', 'Thrive in bright, indirect sunlight. Allow the soil to dry out completely between waterings. Sensitive to cold temperatures.', 'Small'),
@@ -299,7 +81,7 @@ export class TeacherPanelComponent implements OnInit {
     ('Day Lily', 'assets/StockPhotos/Daylily.jpg', 14.99, 'Daylilies are perennial plants that bloom in a wide range of colors, from yellow and orange to pink and red. They are easy to grow and can add a pop of color to any garden.', 'Daylilies prefer full sun to partial shade and well-drained soil. Water them deeply once a week and avoid letting the soil dry out completely. Deadhead spent blooms regularly to encourage new growth.', 'Medium'),
     ('Forget Me Not', 'assets/StockPhotos/ForgetMeNot.jpg', 7.99, 'Forget-me-nots are charming little plants that produce small blue or pink flowers in the spring. They are great for adding a touch of whimsy to any garden.', 'Forget-me-nots prefer partial shade and moist, well-drained soil. Water them deeply once a week and avoid letting the soil dry out completely. Deadhead spent blooms regularly to encourage new growth.', 'Tiny');
 
-    INSERT INTO bug (id, severity) VALUES
+INSERT INTO bug (id, severity) VALUES
     (11, 'Low'),
     (12, 'Low'),
     (13, 'Low'),
@@ -315,6 +97,4 @@ export class TeacherPanelComponent implements OnInit {
     (41, 'Critical'),
     (42, 'Critical'),
     (43, 'Critical'),
-    (44, 'Critical');\n\n`;
-  }
-}
+    (44, 'Critical');
