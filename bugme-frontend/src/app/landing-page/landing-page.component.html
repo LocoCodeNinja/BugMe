@@ -66,32 +66,63 @@
   <div class="productCol">
     <div class="grid-container">
       <!-- Load by default -->
-      <ng-container *ngIf="!searchPerformed && !isSizeFiltered()">
-        <div
-          class="grid-item"
-          *ngFor="let item of productArray"
-          (click)="saveItem(item)"
-        >
-          <button mat-button class="zoomable">
-            <img src="{{ item.path }}" />
-            <h2>{{ item.name }}</h2>
-            <p>From ${{ item.price }}</p>
-          </button>
-        </div>
+      <ng-container *ngIf="bug22Enabled == false">
+        <ng-container *ngIf="!searchPerformed && !isSizeFiltered()">
+          <div
+            class="grid-item"
+            *ngFor="let item of productArray"
+            (click)="saveItem(item)"
+          >
+            <button mat-button class="zoomable">
+              <img src="{{ item.path }}" />
+              <h2>{{ item.name }}</h2>
+              <p>From ${{ item.price }}</p>
+            </button>
+          </div>
+        </ng-container>
+        <!-- Show when search is used or size filter is used -->
+        <ng-container *ngIf="searchPerformed || isSizeFiltered()">
+          <div
+            class="grid-item"
+            *ngFor="let item of filteredProducts"
+            (click)="saveItem(item)"
+          >
+            <button mat-button class="zoomable">
+              <img src="{{ item.path }}" />
+              <h2>{{ item.name }}</h2>
+              <p>From ${{ item.price }}</p>
+            </button>
+          </div>
+        </ng-container>
       </ng-container>
-      <!-- Show when search is used or size filter is used -->
-      <ng-container *ngIf="searchPerformed || isSizeFiltered()">
-        <div
-          class="grid-item"
-          *ngFor="let item of filteredProducts"
-          (click)="saveItem(item)"
-        >
-          <button mat-button class="zoomable">
-            <img src="{{ item.path }}" />
-            <h2>{{ item.name }}</h2>
-            <p>From ${{ item.price }}</p>
-          </button>
-        </div>
+      <ng-container *ngIf="bug22Enabled == true">
+        <ng-container *ngIf="!searchPerformed && !isSizeFiltered()">
+          <div
+            class="grid-item-bad"
+            *ngFor="let item of productArray"
+            (click)="saveItem(item)"
+          >
+            <button mat-button class="zoomable">
+              <img src="{{ item.path }}" />
+              <h2>{{ item.name }}</h2>
+              <p>From ${{ item.price }}</p>
+            </button>
+          </div>
+        </ng-container>
+        <!-- Show when search is used or size filter is used -->
+        <ng-container *ngIf="searchPerformed || isSizeFiltered()">
+          <div
+            class="grid-item"
+            *ngFor="let item of filteredProducts"
+            (click)="saveItem(item)"
+          >
+            <button mat-button class="zoomable">
+              <img src="{{ item.path }}" />
+              <h2>{{ item.name }}</h2>
+              <p>From ${{ item.price }}</p>
+            </button>
+          </div>
+        </ng-container>
       </ng-container>
     </div>
   </div>
@@ -200,21 +231,6 @@
       <li><a>Privacy Policy</a></li>
     </ul>
   </div>
-  <!-- <div class="subscribe" style="align-self: flex-start;">
-    <h4>Subscribe to Our Newsletter</h4>
-    <p>Sign up to receive the latest news and promotions</p>
-
-    <input
-      matInput
-      [formControl]="emailCtrl"
-      type="email"
-      placeholder="Enter your email"
-    />
-    <button (click)="showSuccessMessage()">Subscribe</button>
-
-    <p *ngIf="showSuccess" style="color: green;">Register success!</p>
-    <p *ngIf="showError" style="color: red;">Email is required!</p>
-  </div> -->
 </div>
 
 <app-footer-trademark></app-footer-trademark>

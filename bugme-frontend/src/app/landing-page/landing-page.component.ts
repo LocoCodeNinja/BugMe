@@ -26,11 +26,7 @@ export class LandingPageComponent implements OnInit {
   bug11Enabled: boolean;
   responseArray: Array<any>;
 
-  // priceRange = {
-  //   $0_100: false,
-  //   $100_500: false,
-  //   $500_1000: false,
-  // };
+  bug22Enabled: boolean = false;
 
   currentUser: any = {};
 
@@ -61,15 +57,25 @@ export class LandingPageComponent implements OnInit {
       this.checkBug11();
     }, 300);
     setTimeout(() => {
+      this.setBug22();
       this.setBug23();
     }, 250);
   }
 
-  setBug23(){
+  setBug22(){
     if(this.responseArray[5] == null || this.responseArray[5] == false){
-      this.showBadSearchBox = false;
+      this.bug22Enabled = false;
     }
     else if(this.responseArray[5] == true){
+      this.bug22Enabled = true;
+    }
+  }
+
+  setBug23(){
+    if(this.responseArray[6] == null || this.responseArray[6] == false){
+      this.showBadSearchBox = false;
+    }
+    else if(this.responseArray[6] == true){
       this.showBadSearchBox = true;
     }
   }
@@ -137,12 +143,6 @@ export class LandingPageComponent implements OnInit {
       this.searchPerformed = false;
       return products;
     }
-  }
-
-  searchForSunflower() {
-    // Set the searchQuery to "Sunflower"
-    this.searchQuery = 'Sunflower';
-    this.applyFilters();
   }
 
   filterBySize(products: any[]) {

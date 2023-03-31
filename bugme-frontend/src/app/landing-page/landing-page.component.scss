@@ -104,6 +104,17 @@
         .grid-item:hover {
           transform: scale(1.05);
         }
+
+        .grid-item-bad {
+          padding: 12px;
+          background-color: #fff;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
+        }
+
+        .grid-item-bad:nth-child(-n+2):hover {
+          transform: scale(1.05);
+        }
       }
     }
   }
