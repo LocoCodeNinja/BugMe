@@ -3,7 +3,6 @@
     height: auto;
     color: white;
     display: flex;
-    
     padding-top: 1%;
     background-color: #fafafa;
 
@@ -14,10 +13,6 @@
       .innerFilterCol {
         color: black;
         padding: 1%;
-
-        .filterPanel {
-        }
-
         mat-expansion-panel {
           background-color: #fafafa;
         }
@@ -77,11 +72,10 @@
         }
 
         img {
-          max-width: 225px;
-          max-height: 225px;
-          min-width: 50px;
-          min-height: 50px;
-          align-items: center;
+          width: 100%;
+          height: 225px;
+          object-fit: cover;
+          border-radius: 5px;
         }
       }
 
@@ -91,31 +85,33 @@
       .zoomable:hover {
         transform: scale(1.05);
       }
-
       .grid-container {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         grid-gap: 20px;
-
+    
         button {
           height: auto;
+          width: 100%;
+        
           h2 {
             color: black;
             text-align: left;
           }
-
+        
           p {
             color: black;
             text-align: left;
           }
-
+        
           img {
-            width: 100%;
-            height: auto;
+            width: 250px;
+            height: 250px;
             align-items: center;
             border-radius: 5px;
           }
         }
+        
         .grid-item {
           padding: 12px;
           background-color: #fff;
@@ -125,8 +121,6 @@
       }
     }
   }
-
 }
-
 
 
