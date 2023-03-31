@@ -303,7 +303,17 @@ export class LandingPageComponent implements OnInit {
     }
     else if(this.responseArray[15]==true){
       if(this.emailCtrl.valid){
+        this.showSuccess = true;
+        setTimeout(() => {
+          this.showSuccess = false;
+        }, 3000);
         this.productArray = [];
+      }
+      else{
+        this.showError = true;
+        setTimeout(() => {
+          this.showError = false;
+        }, 3000);
       }
     }
   }

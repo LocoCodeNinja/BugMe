@@ -127,47 +127,7 @@
     </div>
   </div>
 
-  <!--when bug 22 is active show this-->
 
-  <!-- <div class="productCol">
-    <div class="grid-container">
-      <ng-container *ngIf="!searchPerformed && !isSizeFiltered()">
-        <div
-          class="grid-item"
-          *ngFor="let item of productArray"
-          (click)="saveItem(item)"
-        >
-          <button
-            mat-button
-            [class.zoomable]="item.id !== 2 && item.id !== 5 && item.id !== 12"
-          >
-            <img src="{{ item.path }}" />
-            <h2>{{ item.name }}</h2>
-            <p>From ${{ item.price }}</p>
-          </button>
-        </div>
-      </ng-container>
-
-      <ng-container *ngIf="searchPerformed || isSizeFiltered()">
-        <div
-          class="grid-item"
-          *ngFor="let item of filteredProducts"
-          (click)="saveItem(item)"
-        >
-          <button
-            mat-button
-            [class.zoomable]="item.id !== 2 && item.id !== 5 && item.id !== 12"
-          >
-            <img src="{{ item.path }}" />
-            <h2>{{ item.name }}</h2>
-            <p>From ${{ item.price }}</p>
-          </button>
-        </div>
-      </ng-container>
-    </div>
-  </div> -->
-
-  <!--end of bug 22-->
 </div>
 <!-- <app-footer></app-footer> -->
 
@@ -196,7 +156,7 @@
   <div class="logo" style="align-self: flex-start">
     <img
       class="logo"
-      src="../assets/StockPhotos/sunflowerLogo.png"
+      src="assets/StockPhotos/sunflowerLogo.jpg"
       style="padding-left: 10px"
       alt="Logo"
     />
