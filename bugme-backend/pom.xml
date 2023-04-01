@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>team13</groupId>
 	<artifactId>bugme</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.13</version>
 	<name>bugme</name>
 	<description>BugMe Capstone</description>
 	<properties>

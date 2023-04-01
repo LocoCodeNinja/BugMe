@@ -64,6 +64,7 @@ GO
 INSERT INTO account (username, password, role)
 VALUES
     ('teacher', '!teacher123', 'Teacher'),
+    ('cleanDemo', 'cleanDemo123', 'Employee'),
     ('employee', 'employee123', 'Employee'),
     ('customer', 'customer123', 'User');
 GO
@@ -91,11 +92,6 @@ VALUES
     ('Day Lily', 'assets/StockPhotos/Daylily.jpg', 14.99, 'Daylilies are perennial plants that bloom in a wide range of colors, from yellow and orange to pink and red. They are easy to grow and can add a pop of color to any garden.', 'Daylilies prefer full sun to partial shade and well-drained soil. Water them deeply once a week and avoid letting the soil dry out completely. Deadhead spent blooms regularly to encourage new growth.', 'Medium'),
     ('Forget Me Not', 'assets/StockPhotos/ForgetMeNot.jpg', 7.99, 'Forget-me-nots are charming little plants that produce small blue or pink flowers in the spring. They are great for adding a touch of whimsy to any garden.', 'Forget-me-nots prefer partial shade and moist, well-drained soil. Water them deeply once a week and avoid letting the soil dry out completely. Deadhead spent blooms regularly to encourage new growth.', 'Tiny');
 
-    INSERT INTO account (username, password, role)
-    VALUES
-        ('cleanDemo', 'cleanDemo123', 'Employee');
-    GO
-
 INSERT INTO bug (id, severity, title) VALUES
     (11, 'Low', 'Wrong Store Hours'),
     (12, 'Low', 'Description Loads Twice'),
@@ -113,35 +109,3 @@ INSERT INTO bug (id, severity, title) VALUES
     (42, 'Critical', 'Employee Panel Bad Gateway'),
     (43, 'Critical', 'Cart Infinite Load'),
     (44, 'Critical', 'Subscribe Unloads All Products');
-
-        INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (11, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (12, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (13, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (14, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (21, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (22, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (23, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (24, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (31, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (32, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (33, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (34, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (41, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (42, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (43, 4, 0);
-
-INSERT INTO accountBug (bug_id, account_id, bug_enabled) VALUES (44, 4, 0);
