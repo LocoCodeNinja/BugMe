@@ -14,7 +14,10 @@ export class EmployeePanelComponent {
   currentUser: any = {};
   isGood: boolean = false;
 
+  editedProductName: string;
+
   showCreated: boolean = false;
+  success: boolean = false;
 
   newProduct: any = {};
   constructor(private router: Router, private appComponent: AppComponent) {}
@@ -117,6 +120,12 @@ export class EmployeePanelComponent {
         }
       );
       product.isEditMode = false; // cancel edit mode
+      this.editedProductName = product.name;
+      this.success = true;
+
+      setTimeout(() => {
+        this.success = false;
+      }, 3000);
     } catch (error) {
       this.errors.push(error);
       console.log(this.errors);

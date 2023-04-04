@@ -78,6 +78,12 @@
   <div class="userSection">
     <ul class="friend-list">
       <li class="friend" *ngFor="let product of products">
+        <p style="color: red; text-align: center;" *ngFor="let error of errors">
+          {{ error }}
+        </p>
+        <p style="color: green; text-align: center;" *ngIf="success == true && product.name == editedProductName">
+          Product Successfully Edited!
+        </p>
         <div>
           <label for="name">Product Name</label>
           <br />
