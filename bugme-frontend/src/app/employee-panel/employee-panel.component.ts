@@ -55,17 +55,6 @@ export class EmployeePanelComponent {
     // }, 100);
   }
 
-  
-  async getAllProducts(){
-    let result = await axios({
-      method: 'GET',
-      url: "http://localhost:8080/api/products/all",
-      withCredentials: false
-    });
-
-    this.allProducts = result.data;
-  }
-
   checkBug13(){
     let bug: Array<any> = JSON.parse(localStorage.getItem('responseArray')!);
 
@@ -122,8 +111,8 @@ export class EmployeePanelComponent {
           name: product.name,
           path: product.path,
           price: product.price,
-          descriptionPlant: product.description_plant,
-          descriptionCare: product.description_care,
+          descriptionPlant: product.descriptionPlant,
+          descriptionCare: product.descriptionCare,
           category: product.category,
         }
       );
@@ -133,6 +122,7 @@ export class EmployeePanelComponent {
       console.log(this.errors);
     }
   }
+
   async createProduct() {
     try {
       const response = await axios.post(

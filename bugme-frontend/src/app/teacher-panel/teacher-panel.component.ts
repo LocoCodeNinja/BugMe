@@ -86,6 +86,8 @@ export class TeacherPanelComponent implements OnInit {
       this.appComponent.navigate('');
     }
   }
+
+  //change colour here
   getBugColor(severity: string): string {
     switch (severity) {
       case 'Low':

@@ -20,10 +20,10 @@ public class Product {
     private BigDecimal price;
     @Basic
     @Column(name = "description_plant", nullable = true, length = 2147483647)
-    private String descriptionPlant;
+    private String description_plant;
     @Basic
     @Column(name = "description_care", nullable = true, length = 2147483647)
-    private String descriptionCare;
+    private String description_care;
     @Basic
     @Column(name = "category", nullable = false, length = 20)
     private String category;
@@ -61,19 +61,19 @@ public class Product {
     }
 
     public String getDescriptionPlant() {
-        return descriptionPlant;
+        return description_plant;
     }
 
     public void setDescriptionPlant(String descriptionPlant) {
-        this.descriptionPlant = descriptionPlant;
+        this.description_plant = descriptionPlant;
     }
 
     public String getDescriptionCare() {
-        return descriptionCare;
+        return description_care;
     }
 
     public void setDescriptionCare(String descriptionCare) {
-        this.descriptionCare = descriptionCare;
+        this.description_care = descriptionCare;
     }
 
     public String getCategory() {
