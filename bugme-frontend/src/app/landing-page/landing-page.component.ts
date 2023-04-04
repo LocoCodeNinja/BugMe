@@ -227,7 +227,32 @@ export class LandingPageComponent implements OnInit {
 
   saveItem(item: any) {
     if (item == this.productArray[0]) {
-      if (this.responseArray[3] == null) {
+      if(this.responseArray[3] == true && this.responseArray[4] == true){
+        let goodNum: boolean = false;
+        let randomPic: number = 0;
+        while (goodNum == false) {
+          randomPic = Math.floor(Math.random() * this.allProducts.length);
+          if (this.allProducts[randomPic].path != item.path) {
+            goodNum = true;
+          }
+        }
+
+        let wrongObj: any = {
+          id: item.id,
+          name: item.name,
+          path: this.allProducts[randomPic].path,
+          price: item.price,
+          descriptionPlant: item.descriptionPlant,
+          descriptionCare: item.descriptionCare,
+          category: item.category,
+        };
+
+        setTimeout(() => {
+          localStorage.setItem('selectedProduct', JSON.stringify(wrongObj));
+          this.appComponent.navigate('/product');
+        }, 5000);
+      }
+      else if (this.responseArray[3] == null) {
         localStorage.setItem('selectedProduct', JSON.stringify(item));
         this.appComponent.navigate('/product');
       } else if (this.responseArray[3] == true) {
@@ -239,8 +264,6 @@ export class LandingPageComponent implements OnInit {
             goodNum = true;
           }
         }
-
-        console.log(randomPic);
 
         let wrongObj: any = {
           id: item.id,
