@@ -86,25 +86,39 @@ export class TeacherPanelComponent implements OnInit {
       this.appComponent.navigate('');
     }
   }
+  getBugColor(severity: string): string {
+    switch (severity) {
+      case 'Low':
+        return '#e6ffe6'; // light green
+      case 'Medium':
+        return '#fff2cc'; // light yellow
+      case 'High':
+        return '#ffe6e6'; // light red
+      case 'Critical':
+        return '#ffcccc'; // light pink
+      default:
+        return 'transparent';
+    }
+  }
 
   async getUsers(): Promise<string> {
     try {
       const response = await axios.get('http://localhost:8080/api/users/all');
       let responseArray: Array<any> = response.data;
       let sqlQuery: string = '';
-  
+
       for (let i: number = 0; i < responseArray.length; i++) {
         const user = responseArray[i];
-  
+
         // Check if the user ID is not 1 before creating the insert query
         this.users.push(user);
         if (user.role !== 'Teacher') {
           sqlQuery += `\nINSERT INTO account (username, password, role) VALUES ('${user.username}', '${user.password}', '${user.role}');\n`;
         }
       }
-  
+
       this.sqlUsers = sqlQuery;
-  
+
       return sqlQuery;
     } catch (error) {
       this.errors.push(error);
