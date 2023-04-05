@@ -47,7 +47,7 @@ export class TeacherPanelComponent implements OnInit {
     { id: 43, severity: 'Critical', title: 'Cart Infinite Load' },
     { id: 44, severity: 'Critical', title: 'Subscribe Unloads All Products' },
   ];
-
+  toggleValuesReset = false;
   constructor(
     private router: Router,
     private appComponent: AppComponent,
@@ -175,6 +175,38 @@ export class TeacherPanelComponent implements OnInit {
       toggleValue.enabled = checked;
     }
   }
+  resetToggleValues() {
+    // Check if any slide toggles are enabled (true) in toggleValues
+    const anyTogglesEnabled = this.toggleValues.some(
+      (toggleValue) => toggleValue.enabled
+    );
+
+    if (anyTogglesEnabled) {
+      // Ask the user to confirm before resetting the toggle values
+      const confirmReset = confirm(
+        'There are enabled bug toggles. Do you want to reset them?'
+      );
+
+      if (confirmReset) {
+        // Reset toggle values and slide toggles for each userId
+        for (const user of this.users) {
+          const userId = user.id;
+
+          for (const toggleValue of this.toggleValues) {
+            toggleValue.enabled = false;
+          }
+
+          const matSlideToggles = document.querySelectorAll(
+            `#account-bugs-grid-${userId} mat-slide-toggle`
+          );
+          matSlideToggles.forEach((matSlideToggle) => {
+            const matSlideToggleElement = matSlideToggle as HTMLInputElement;
+            matSlideToggleElement.checked = false;
+          });
+        }
+      }
+    }
+  }
 
   async generateScript(userId: number) {
     let sqlScript = '';
@@ -214,10 +246,21 @@ export class TeacherPanelComponent implements OnInit {
 
     // Join the updated SQL script array back into a string
     this.sqlUserBugs = sqlUserBugsArray.join('\n') + sqlScript;
-    console.log(this.sqlUserBugs); // Reset toggle values to 0
+    console.log(this.sqlUserBugs);
+
+    // Reset toggle values to 0
     for (const toggleValue of this.toggleValues) {
       toggleValue.enabled = false;
     }
+
+    // Turn all enabled slide toggles to the disabled state (left side) for the given userId
+    // const matSlideToggles = document.querySelectorAll(
+    //   `#account-bugs-grid-${userId} mat-slide-toggle`
+    // );
+    // matSlideToggles.forEach((matSlideToggle) => {
+    //   const matSlideToggleElement = matSlideToggle as HTMLInputElement;
+    //   matSlideToggleElement.checked = false;
+    // });
   }
 
   downloadRootScript() {

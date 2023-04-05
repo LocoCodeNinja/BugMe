@@ -38,6 +38,10 @@
         </button>
 
         <div *ngIf="user.role === 'Teacher'">
+          <h2>
+            Please refresh when wishing to make changes to the script if user is
+            already included
+          </h2>
           <h2 style="padding-top: 10px;">Script View</h2>
           <textarea class="sqlUserBugs" readonly>{{
             this.sqlUserBugs
@@ -54,17 +58,20 @@
           </div>
         </div>
         <div *ngIf="user.role !== 'Teacher'" class="grid-container">
-          <div class="grid-row" *ngFor="let bug of bugs">
-            <mat-slide-toggle
-              class="grid-item bug-toggle"
-              [id]="bug.id.toString()"
-              [matTooltip]="bug.title"
-              (change)="toggleBug($event.checked, bug.id)"
-              [style.background-color]="getBugColor(bug.severity)"
-            >
-              <div class="bug-severity">{{ bug.severity }}</div>
-              <div class="bug-element">Bug: {{ bug.id }}</div>
-            </mat-slide-toggle>
+          <div id="account-bugs-grid-{{ user.id }}" class="grid-container">
+            <div class="grid-row" *ngFor="let bug of bugs">
+              <mat-slide-toggle
+                class="grid-item bug-toggle"
+                [id]="'user-' + user.id + '-bug-' + bug.id"
+                [matTooltip]="bug.title"
+                (change)="toggleBug($event.checked, bug.id)"
+                [style.background-color]="getBugColor(bug.severity)"
+                [checked]="toggleValuesReset ? false : undefined"
+              >
+                <div class="bug-severity">{{ bug.severity }}</div>
+                <div class="bug-element">Bug: {{ bug.id }}</div>
+              </mat-slide-toggle>
+            </div>
           </div>
         </div>
       </mat-card-content>
