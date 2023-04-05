@@ -214,7 +214,10 @@ export class TeacherPanelComponent implements OnInit {
 
     // Join the updated SQL script array back into a string
     this.sqlUserBugs = sqlUserBugsArray.join('\n') + sqlScript;
-    console.log(this.sqlUserBugs);
+    console.log(this.sqlUserBugs); // Reset toggle values to 0
+    for (const toggleValue of this.toggleValues) {
+      toggleValue.enabled = false;
+    }
   }
 
   downloadRootScript() {
