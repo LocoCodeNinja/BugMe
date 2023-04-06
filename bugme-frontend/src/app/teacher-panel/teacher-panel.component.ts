@@ -20,6 +20,8 @@ interface ToggleValue {
   styleUrls: ['./teacher-panel.component.scss'],
 })
 export class TeacherPanelComponent implements OnInit {
+  resetCheck: any;
+
   errors: Array<any> = [];
   users: Array<any> = [];
   currentUser: any = {};
@@ -251,6 +253,13 @@ export class TeacherPanelComponent implements OnInit {
     // Reset toggle values to 0
     for (const toggleValue of this.toggleValues) {
       toggleValue.enabled = false;
+    }
+
+    if(this.resetCheck == false){
+      this.resetCheck = null;
+    }
+    else{
+      this.resetCheck = false;
     }
 
     // Turn all enabled slide toggles to the disabled state (left side) for the given userId

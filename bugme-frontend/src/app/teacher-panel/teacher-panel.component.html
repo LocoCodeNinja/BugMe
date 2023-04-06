@@ -46,7 +46,7 @@
                 [matTooltip]="bug.title"
                 (change)="toggleBug($event.checked, bug.id)"
                 [style.background-color]="getBugColor(bug.severity)"
-                [checked]="toggleValuesReset ? false : undefined"
+                [checked]="resetCheck"
               >
                 <div class="bug-severity">{{ bug.severity }}</div>
                 <div class="bug-element">Bug: {{ bug.id }}</div>
