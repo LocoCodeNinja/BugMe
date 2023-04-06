@@ -37,27 +37,7 @@
           Create New User
         </button>
 
-        <div *ngIf="user.role === 'Teacher'">
-          <h2>
-            Please refresh when wishing to make changes to the script if user is
-            already included
-          </h2>
-          <h2 style="padding-top: 10px;">Script View</h2>
-          <textarea class="sqlUserBugs" readonly>{{
-            this.sqlUserBugs
-          }}</textarea>
-          <div>
-            <button
-              matTooltip="Download Root Script"
-              mat-icon-button
-              class="hover-effect"
-              (click)="downloadRootScript()"
-            >
-              <mat-icon>save_alt</mat-icon>
-            </button>
-          </div>
-        </div>
-        <div *ngIf="user.role !== 'Teacher'" class="grid-container">
+        <div *ngIf="user.role !== 'Teacher'">
           <div id="account-bugs-grid-{{ user.id }}" class="grid-container">
             <div class="grid-row" *ngFor="let bug of bugs">
               <mat-slide-toggle
@@ -96,6 +76,22 @@
         </div>
       </div>
     </mat-expansion-panel>
+    <h2>
+      Please refresh when wishing to make changes to the script if user is
+      already included
+    </h2>
+    <h2 style="padding-top: 10px;">Script View</h2>
+    <textarea class="sqlUserBugs" readonly>{{ this.sqlUserBugs }}</textarea>
+    <div>
+      <button
+        matTooltip="Download Root Script"
+        mat-icon-button
+        class="hover-effect"
+        (click)="downloadRootScript()"
+      >
+        <mat-icon>save_alt</mat-icon>
+      </button>
+    </div>
   </div>
 </div>
 <app-footer-trademark></app-footer-trademark>
